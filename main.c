@@ -6,13 +6,13 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/04/30 16:08:11 by mechane          ###   ########.fr       */
+/*   Updated: 2023/04/30 21:19:45 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishel.h"
 
-char whitespace[] = " ";
+char whitespace[] = " \t\r\n\v";
 char symbols[] = "|()&<>";
 
 int check_quoting(char *s)
@@ -45,37 +45,71 @@ int	gettoken(char **ps, char *es, char **q, char **eq)
   
   s = *ps;
   es = s + ft_strlen(s);
-  while(s < es  && ft_strchr(whitespace, *s))
-    s++;
-  if(q)
+ 		if(q)
     *q = s;
   	ret = *s;
 	if (!*s || *s == '\n')
 		ret = 0;
-	if (ft_strchr("|()&<>", *s))
+	if (ft_strchr(symbols, *s))
 	{
-			s++;
-		if (*s == '>')
+		if (*s == '>' && *(s+1) == '>')
 		{
-			ret = '+';
-			s++;
+			ret = APPEND;
+			s+=2;
 		}	
+		else if (*s == '<'&& *(s+1) == '<')
+		{
+			ret = HEREDOC;
+			s+=2;
+		}	
+		else if (*s == '|' && *(s+1) == '|')
+		{
+			ret = OR;
+			s+=2;
+		}	
+		else if (*s == '&' && *(s+1) == '&')
+		{
+			ret = AND;
+			s+=2;
+		}
+		else
+			s++;
+		while(s < es  && ft_strchr(whitespace, *s))
+    		s++;
+	}
+	else if (ft_strchr("\"", *s))
+		{
+			ret = DQ,s++;
+			while(s < es && *s != '"')
+      			s++;
+			s++;
+		}
+	else if (ft_strchr("'", *s))
+		{
+			ret = SQ,s++;
+			while(s < es && *s != '\'')
+      			s++;
+			s++;
+		}
+	else if (ft_strchr(whitespace, *s))
+	{
+		ret = SPACE;
+		while(s < es  && ft_strchr(whitespace, *s))
+    		s++;
 	}
 	else
     {
-		ret = 'a';
+		ret = WORD;
     	while(s < es  && !ft_strchr(whitespace, *s) && !ft_strchr(symbols, *s))
       		s++;
 	}
   if(eq)
     *eq = s;
-  while(s < es && *s != '\n' && ft_strchr(whitespace, *s))
-    s++;
   *ps = s;
   return ret;  
 }
 
-t_token	*ft_new(int type, char *s)
+t_token	*ft_new(t_flag type, char *s)
 {
 	t_token	*new;
 
@@ -125,14 +159,12 @@ int	main(int ac ,char **av, char **env)
 		{
 			tok = ft_strndup(q,eq);
 			check_quoting(tok);
-			tok = ft_strtrim(tok);
 			add_back(&token,ft_new(ret, tok));
-			// printf("%s\n",tok);
 		}
 	while(token)
 	{
 		printf("type : %d\n",token->type);
-		printf("token : : %s\n",token->s);
+		printf("token :/%s/\n",token->s);
 		token = token->next;
 	}
 
