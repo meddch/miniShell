@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouzyt <mbouzyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/04/30 15:53:25 by mbouzyt          ###   ########.fr       */
+/*   Updated: 2023/04/30 16:02:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishel.h"
-//hello world
+
 char whitespace[] = " ";
 char symbols[] = "|()&<>";
 
