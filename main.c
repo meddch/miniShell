@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/04/30 15:36:54 by mechane          ###   ########.fr       */
+/*   Updated: 2023/04/30 16:08:11 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	main(int ac ,char **av, char **env)
 		}
 	while(token)
 	{
-		// printf("type : %d\n",token->type);
+		printf("type : %d\n",token->type);
 		printf("token : : %s\n",token->s);
 		token = token->next;
 	}
