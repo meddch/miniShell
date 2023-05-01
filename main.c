@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/01 10:40:02 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/01 10:45:04 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ int	main(int ac ,char **av, char **env)
 		lineptr = readline(prompt);
 		if (!lineptr || !ft_strcmp(lineptr, "exit"))
     		return(free(lineptr), 0);
+		add_history(lineptr);
 		lexicalyzer(&token, lineptr);
 		while(token)
 		{
