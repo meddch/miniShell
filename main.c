@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/01 09:46:09 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/01 10:03:47 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,38 +138,44 @@ void	add_back(t_token **lst, t_token *new)
 	count->next = new;
 }
 
-
-
-int	main(int ac ,char **av, char **env)
-{	
-	char *prompt = "(miniShell) $ ";
-	char *lineptr;
+void lexicalyzer(t_token **token, char *line)
+{
 	char *q;
 	char *es;
 	char *eq;
 	char *tok;
 	int ret;
-	
-	(void)ac; (void)av;
-    t_token *token = NULL;
-	while (1)
-	{
-		lineptr = readline(prompt);
-		if (!lineptr || !ft_strcmp(lineptr, "exit"))
-    		return(free(lineptr), 0);
-		while((ret = (gettoken(&lineptr, es,&q,&eq))) != 0)
+
+	while((ret = (gettoken(&line, es,&q,&eq))) != 0)
 		{
 			tok = ft_strndup(q,eq);
 			check_quoting(tok);
 			add_back(&token,ft_new(ret, tok));
 		}
-	while(token)
-	{
-		printf("type : %d\n",token->type);
-		printf("token :/%s/\n",token->s);
-		token = token->next;
-	}
+}
 
+int	main(int ac ,char **av, char **env)
+{	
+	char *prompt = "(miniShell) $ ";
+	char *lineptr;
+    t_token *token = NULL;
+	
+	
+	(void)av;
+	if (ac != 1)
+		return ;
+	while (1)
+	{
+		lineptr = readline(prompt);
+		if (!lineptr || !ft_strcmp(lineptr, "exit"))
+    		return(free(lineptr), 0);
+		lexicalyzer(&token, lineptr);
+		while(token)
+		{
+			printf("type : %d\n",token->type);
+			printf("token :/%s/\n",token->s);
+			token = token->next;
+		}
     }
 }
 
