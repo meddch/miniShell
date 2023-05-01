@@ -6,14 +6,11 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/01 10:03:47 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/01 10:40:02 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishel.h"
-
-char whitespace[] = " \t\r\n\v";
-char symbols[] = "|()&<>";
 
 int check_quoting(char *s)
 {
@@ -38,6 +35,54 @@ int check_quoting(char *s)
 		return (0);
 }
 
+void check_symbols(char **ps, int *ret, char *es)
+{
+	char *s;
+	
+	s = *ps;
+	if (*s == '>' && *(s+1) == '>')
+		*ret = APPEND, s+= 2;
+	else if (*s == '<'&& *(s+1) == '<')
+		*ret = HEREDOC, s+= 2;
+	else if (*s == '|' && *(s+1) == '|')
+		*ret = OR, s+= 2;
+	else if (*s == '&' && *(s+1) == '&')
+		*ret = AND,s+= 2;
+	else
+		s++;
+	while(s < es  && ft_strchr(whitespace, *s))
+		s++;
+	*ps = s;
+}
+
+void check_other(char **ps, int *ret, char *es)
+{
+	char *s;
+	
+	s = *ps;
+	if (ft_strchr("\"", *s))
+		{
+			*ret = DQ, s++;
+			while(s < es && *s != '"')
+      			s++;
+			s++;
+		}
+	else if (ft_strchr("'", *s))
+		{
+			*ret = SQ,s++;
+			while(s < es && *s != '\'')
+      			s++;
+			s++;
+		}
+	else if (ft_strchr(whitespace, *s))
+	{
+		*ret = SPACE;
+		while(s < es  && ft_strchr(whitespace, *s))
+    		s++;
+	}
+	*ps = s;
+}
+
 int	gettoken(char **ps, char *es, char **q, char **eq)
 {
   char *s;
@@ -46,57 +91,13 @@ int	gettoken(char **ps, char *es, char **q, char **eq)
   s = *ps;
   es = s + ft_strlen(s);
  		if(q)
-    *q = s;
-  	ret = *s;
+    *q = s, ret = *s;
 	if (!*s || *s == '\n')
 		ret = 0;
 	if (ft_strchr(symbols, *s))
-	{
-		if (*s == '>' && *(s+1) == '>')
-		{
-			ret = APPEND;
-			s+=2;
-		}	
-		else if (*s == '<'&& *(s+1) == '<')
-		{
-			ret = HEREDOC;
-			s+=2;
-		}	
-		else if (*s == '|' && *(s+1) == '|')
-		{
-			ret = OR;
-			s+=2;
-		}	
-		else if (*s == '&' && *(s+1) == '&')
-		{
-			ret = AND;
-			s+=2;
-		}
-		else
-			s++;
-		while(s < es  && ft_strchr(whitespace, *s))
-    		s++;
-	}
-	else if (ft_strchr("\"", *s))
-		{
-			ret = DQ,s++;
-			while(s < es && *s != '"')
-      			s++;
-			s++;
-		}
-	else if (ft_strchr("'", *s))
-		{
-			ret = SQ,s++;
-			while(s < es && *s != '\'')
-      			s++;
-			s++;
-		}
-	else if (ft_strchr(whitespace, *s))
-	{
-		ret = SPACE;
-		while(s < es  && ft_strchr(whitespace, *s))
-    		s++;
-	}
+		check_symbols(&s, &ret, es);
+	else if (ft_strchr("\"", *s) || ft_strchr("'", *s) || ft_strchr(whitespace, *s))
+		check_other(&s, &ret, es);
 	else
     {
 		ret = WORD;
@@ -150,8 +151,9 @@ void lexicalyzer(t_token **token, char *line)
 		{
 			tok = ft_strndup(q,eq);
 			check_quoting(tok);
-			add_back(&token,ft_new(ret, tok));
+			add_back(token,ft_new(ret, tok));
 		}
+		add_back(token,ft_new(ret, NULL));
 }
 
 int	main(int ac ,char **av, char **env)
@@ -163,7 +165,7 @@ int	main(int ac ,char **av, char **env)
 	
 	(void)av;
 	if (ac != 1)
-		return ;
+		return (1);
 	while (1)
 	{
 		lineptr = readline(prompt);
@@ -172,8 +174,8 @@ int	main(int ac ,char **av, char **env)
 		lexicalyzer(&token, lineptr);
 		while(token)
 		{
-			printf("type : %d\n",token->type);
 			printf("token :/%s/\n",token->s);
+			printf("type : %d\n",token->type);
 			token = token->next;
 		}
     }

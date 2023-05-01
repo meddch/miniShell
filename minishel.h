@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/01 09:51:01 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/01 10:19:37 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <unistd.h>
 #include <stdbool.h>
 
+#define whitespace " \t\r\n\v"
+#define symbols "|()&<>"
 typedef enum s_flag
 {
 	WORD = 97,
@@ -36,6 +38,7 @@ typedef enum s_flag
 	OR = 33,
 	HEREDOC = 45,
 	APPEND = 43,
+	END = 0,
 }	t_flag;
 
 typedef struct s_token{
