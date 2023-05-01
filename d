@@ -1,4 +1,0 @@
-$USER
-$HOME
-$USER
-$HOME

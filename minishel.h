@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/04/30 20:42:00 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/01 09:51:01 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ typedef struct s_token{
 	char*			s;
 	struct s_token 	*next;
 }t_token;
+
+typedef struct s_pipecmd {
+  int type;
+  t_token *left;
+  t_token *right;
+}t_pipecmd;
+
 
 
 

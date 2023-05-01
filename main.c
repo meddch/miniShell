@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/04/30 21:19:45 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/01 09:46:09 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void	add_back(t_token **lst, t_token *new)
 		count = count->next;
 	count->next = new;
 }
+
+
 
 int	main(int ac ,char **av, char **env)
 {	
