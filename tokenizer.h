@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/02 10:11:04 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/02 18:41:32 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <unistd.h>
 #include <stdbool.h>
 
-#define whitespace " \t\r\n\v"
-#define symbols "|()&<>"
+#define WHITESPACE " \t\r\n\v"
+#define SYMBOLS "|()&<>"
 typedef enum s_flag
 {
 	WORD = 97,

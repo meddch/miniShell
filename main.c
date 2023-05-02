@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/02 10:29:27 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/02 18:41:21 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	check_symbols(char **ps, int *ret, char *es)
 		*ret = AND,s+= 2;
 	else
 		s++;
-	while (s < es && ft_strchr(whitespace, *s))
+	while (s < es && ft_strchr(WHITESPACE, *s))
 		s++;
 	*ps = s;
 }
@@ -75,10 +75,10 @@ void	check_other(char **ps, int *ret, char *es)
 			s++;
 		s++;
 	}
-	else if (ft_strchr(whitespace, *s))
+	else if (ft_strchr(WHITESPACE, *s))
 	{
 		*ret = SPACE;
-		while (s < es  && ft_strchr(whitespace, *s))
+		while (s < es  && ft_strchr(WHITESPACE, *s))
 			s++;
 	}
 	*ps = s;
@@ -95,14 +95,14 @@ int	gettoken(char **ps, char *es, char **q, char **eq)
     *q = s, ret = *s;
 	if (!*s || *s == '\n')
 		ret = 0;
-	if (ft_strchr(symbols, *s))
+	if (ft_strchr(SYMBOLS, *s))
 		check_symbols(&s, &ret, es);
-	else if (ft_strchr("\"", *s) || ft_strchr("'", *s) || ft_strchr(whitespace, *s))
+	else if (ft_strchr("\"", *s) || ft_strchr("'", *s) || ft_strchr(WHITESPACE, *s))
 		check_other(&s, &ret, es);
 	else
     {
 		ret = WORD;
-    	while(s < es  && !ft_strchr(whitespace, *s) && !ft_strchr(symbols, *s))
+    	while(s < es  && !ft_strchr(WHITESPACE, *s) && !ft_strchr(SYMBOLS, *s))
       		s++;
 	}
   if(eq)
