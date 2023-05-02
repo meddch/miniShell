@@ -6,11 +6,11 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/01 16:52:36 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/02 10:29:27 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "tokenizer.h"
 
 int	check_quoting(char *s)
 {
@@ -64,8 +64,9 @@ void	check_other(char **ps, int *ret, char *es)
 	if (ft_strchr("\"", *s))
 	{
 		*ret = DQ, s++;
-		while(s < es && *s != '"')      			s++;
+		while(s < es && *s != '"')
 			s++;
+		s++;
 	}
 	else if (ft_strchr("'", *s))
 	{
