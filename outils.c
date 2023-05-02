@@ -1,6 +1,6 @@
 #include "minishel.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	size_t		i;
 
@@ -11,11 +11,11 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, int start, int len)
 {
-	char			*sbr;
-	unsigned int	i;
-	unsigned int	j;
+	char	*sbr;
+	int		i;
+	int		j;
 
 	j = len;
 	if (!s)
@@ -171,7 +171,7 @@ char	*ft_strtrim(char const *s1)
 	int				i;
 
 	i = 0;
-	if (!s1 || !set)
+	if (!s1)
 		return (NULL);
 	if (!ft_strchr(s1,'"'))
 		set = "'";

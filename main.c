@@ -6,91 +6,91 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/01 10:45:04 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/01 16:52:36 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishel.h"
 
-int check_quoting(char *s)
+int	check_quoting(char *s)
 {
-	int flag;
-	int count;
-	
+	int	flag;
+	int	count;
+
 	count = 0;
 	flag = 0;
-	while(*s)
+	while (*s)
 	{
-		if (!flag && *s =='"')
+		if (!flag && *s == '"')
 			flag = 1;
-		if (!flag && *s =='\'')
+		if (!flag && *s == '\'')
 			flag = 2;
-		if ((*s == '"' && (!flag || flag == 1)) || ((*s == '\'' && (!flag || flag == 2))))
+		if ((*s == '"' && (!flag || flag == 1)) || ((*s == '\''
+					&& (!flag || flag == 2))))
 			count++;
 		s++;
 	}
 	if (count % 2)
 		return (printf(" syntax error \n"));
-	else 
+	else
 		return (0);
 }
 
-void check_symbols(char **ps, int *ret, char *es)
+void	check_symbols(char **ps, int *ret, char *es)
 {
-	char *s;
-	
+	char	*s;
+
 	s = *ps;
-	if (*s == '>' && *(s+1) == '>')
+	if (*s == '>' && *(s + 1) == '>')
 		*ret = APPEND, s+= 2;
-	else if (*s == '<'&& *(s+1) == '<')
+	else if (*s == '<' && *(s + 1) == '<')
 		*ret = HEREDOC, s+= 2;
-	else if (*s == '|' && *(s+1) == '|')
+	else if (*s == '|' && *(s + 1) == '|')
 		*ret = OR, s+= 2;
-	else if (*s == '&' && *(s+1) == '&')
+	else if (*s == '&' && *(s + 1) == '&')
 		*ret = AND,s+= 2;
 	else
 		s++;
-	while(s < es  && ft_strchr(whitespace, *s))
+	while (s < es && ft_strchr(whitespace, *s))
 		s++;
 	*ps = s;
 }
 
-void check_other(char **ps, int *ret, char *es)
+void	check_other(char **ps, int *ret, char *es)
 {
-	char *s;
-	
+	char	*s;
+
 	s = *ps;
 	if (ft_strchr("\"", *s))
-		{
-			*ret = DQ, s++;
-			while(s < es && *s != '"')
-      			s++;
+	{
+		*ret = DQ, s++;
+		while(s < es && *s != '"')      			s++;
 			s++;
-		}
+	}
 	else if (ft_strchr("'", *s))
-		{
-			*ret = SQ,s++;
-			while(s < es && *s != '\'')
-      			s++;
+	{
+		*ret = SQ,s++;
+		while (s < es && *s != '\'')
 			s++;
-		}
+		s++;
+	}
 	else if (ft_strchr(whitespace, *s))
 	{
 		*ret = SPACE;
-		while(s < es  && ft_strchr(whitespace, *s))
-    		s++;
+		while (s < es  && ft_strchr(whitespace, *s))
+			s++;
 	}
 	*ps = s;
 }
 
 int	gettoken(char **ps, char *es, char **q, char **eq)
 {
-  char *s;
-  int ret;
-  
+	char	*s;
+	int	ret;
+
   s = *ps;
   es = s + ft_strlen(s);
- 		if(q)
+ 	if(q)
     *q = s, ret = *s;
 	if (!*s || *s == '\n')
 		ret = 0;
@@ -139,7 +139,7 @@ void	add_back(t_token **lst, t_token *new)
 	count->next = new;
 }
 
-void lexicalyzer(t_token **token, char *line)
+void lexer(t_token **token, char *line)
 {
 	char *q;
 	char *es;
@@ -147,6 +147,7 @@ void lexicalyzer(t_token **token, char *line)
 	char *tok;
 	int ret;
 
+	es = NULL;
 	while((ret = (gettoken(&line, es,&q,&eq))) != 0)
 		{
 			tok = ft_strndup(q,eq);
@@ -163,7 +164,7 @@ int	main(int ac ,char **av, char **env)
     t_token *token = NULL;
 	
 	
-	(void)av;
+	(void)av,(void)env;
 	if (ac != 1)
 		return (1);
 	while (1)
@@ -171,8 +172,9 @@ int	main(int ac ,char **av, char **env)
 		lineptr = readline(prompt);
 		if (!lineptr || !ft_strcmp(lineptr, "exit"))
     		return(free(lineptr), 0);
-		add_history(lineptr);
-		lexicalyzer(&token, lineptr);
+		if (*lineptr)
+			add_history(lineptr);
+		lexer(&token, lineptr);
 		while(token)
 		{
 			printf("token :/%s/\n",token->s);
@@ -181,6 +183,3 @@ int	main(int ac ,char **av, char **env)
 		}
     }
 }
-
-
-

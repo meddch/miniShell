@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/01 10:19:37 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/01 15:07:54 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ struct pipecmd {
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup( const char *source );
 char	*ft_strndup(char *start, char *end);
-size_t	ft_strlen(const char *s);
+int		ft_strlen(const char *s);
 int		ft_strcmp(char *s11, char *s22);
 char	*ft_strtrim(char const *s1);
 char	**ft_split(const char *str, char c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, int start, int len);
 #endif
