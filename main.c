@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/03 10:30:28 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/03 10:43:55 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	add_back(t_token **lst, t_token *new)
 	count->next = new;
 }
 
-void lexer(t_token **token, char *line)
+void tokenizer(t_token **token, char *line)
 {
 	char *q;
 	char *es;
@@ -175,7 +175,7 @@ int	main(int ac ,char **av, char **env)
     		return(free(lineptr), 0);
 		if (*lineptr)
 			add_history(lineptr);
-		lexer(&token, lineptr);
+		tokenizer(&token, lineptr);
 		while(token)
 		{
 			printf("token :/%s/\n",token->s);

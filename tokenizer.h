@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/02 18:41:32 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/03 10:40:05 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 #define WHITESPACE " \t\r\n\v"
 #define SYMBOLS "|()&<>"
+
 typedef enum s_flag
 {
 	WORD = 97,
