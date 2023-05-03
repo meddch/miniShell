@@ -6,7 +6,7 @@
 #    By: mechane <mechane@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 10:35:42 by mechane           #+#    #+#              #
-#    Updated: 2022/10/25 09:54:40 by mechane          ###   ########.fr        #
+#    Updated: 2023/05/03 20:32:43 by mechane          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ FILES_M = ft_memset \
 		ft_strchr \
 		ft_strrchr \
 		ft_strnstr \
+		ft_strcmp \
 		ft_strncmp \
+		ft_strndup \
 		ft_atoi \
 		ft_isalpha \
 		ft_isdigit \
