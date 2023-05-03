@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/03 10:40:05 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/03 13:41:34 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <stdbool.h>
 
 #define WHITESPACE " \t\r\n\v"
-#define SYMBOLS "|()&<>"
+#define SYMBOLS "|&<>"
 
 typedef enum s_flag
 {
@@ -43,25 +43,25 @@ typedef enum s_flag
 }	t_flag;
 
 typedef struct s_token{
-	t_flag			type;
-	char*			s;
 	struct s_token 	*next;
+	struct s_token	*sub;
+	char			*data;
+	t_flag			type;
+	bool			xpand;
+	bool			h_doc;
 }t_token;
 
-typedef struct s_pipecmd {
-  int type;
-  t_token *left;
-  t_token *right;
-}t_pipecmd;
-
-
-
-
-struct pipecmd {
-  int type;          
-  struct cmd *left;  
-  struct cmd *right; 
-};
+typedef	struct s_lex{
+	int 		i;
+	t_token		*token;
+	t_token		*sub;
+	bool		space;
+	bool		h_doc;
+	bool		dq;
+	bool		sq;
+	bool		op;
+	bool		cp;
+}	t_lex;
 
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup( const char *source );

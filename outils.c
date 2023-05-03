@@ -106,6 +106,8 @@ char	*ft_strndup(char *start, char *end)
 	int		len ;
 	int i;
 
+	if (!start || !end)
+		return (NULL);
 	len = i = ft_strlen(start) - ft_strlen(end);
 	ptr = (char *)malloc((len + 1) * sizeof(char));
 	if (ptr == NULL)

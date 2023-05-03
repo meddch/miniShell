@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/30 11:42:46 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/02 10:12:03 by mechane          ###   ########.fr       */
+/*   Created: 2022/10/09 11:37:11 by mechane           #+#    #+#             */
+/*   Updated: 2022/10/24 01:02:15 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "libft.h"
 
 static int	num_word(const char *str, char c)
 {
