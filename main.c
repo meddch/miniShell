@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/02 18:52:17 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/03 10:30:28 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_quoting(char *s)
 	else
 		return (0);
 }
-
+// refactor 
 void	check_symbols(char **ps, int *ret, char *es)
 {
 	char	*s;
@@ -55,7 +55,7 @@ void	check_symbols(char **ps, int *ret, char *es)
 		s++;
 	*ps = s;
 }
-
+// refactor 
 void	check_other(char **ps, int *ret, char *es)
 {
 	char	*s;
@@ -83,7 +83,7 @@ void	check_other(char **ps, int *ret, char *es)
 	}
 	*ps = s;
 }
-
+// refactor 
 int	gettoken(char **ps, char *es, char **q, char **eq)
 {
 	char	*s;
@@ -184,5 +184,3 @@ int	main(int ac ,char **av, char **env)
 		}
     }
 }
-
-// /
