@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/04 16:44:55 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:55:58 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_token	*tokenizer(char *line)
 	}
 	add_back_tok(&lex.token, new_tok(END, false, false, ft_strdup("END")));
 	(lex.sq || lex.dq) && printf("Syntax Error : Quotes ?\n");
-	(lex.cp || lex.op) && printf("Syntax Error : Parentheses ?\n");
+	(lex.cp != lex.op) && printf("Syntax Error : Parentheses ?\n");
 	return (lex.token);
 }
 
