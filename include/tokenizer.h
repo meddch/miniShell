@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/04 11:09:48 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/04 14:07:40 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_token	*new_tok(t_flag type, bool xpand, bool h_doc, char *word);
 t_token	*last_tok(t_token *tok);
 t_token	*last_sub_tok(t_token *tok);
 void	new_lex(t_lex *lex);
-char	*get_q_token(char **cmd, char q);
+char	*get_q_token(char **cmd, int flag);
 char	*get_word(char **cmd);
 char	*getq(char *str, int *index, char c);
 #endif

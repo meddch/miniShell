@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/04 13:19:35 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/04 14:12:25 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,16 @@ int	check_s_token(t_lex *lex, char **line)
 	(*cmd == '\'') && (lex->sq = !lex->sq);
 	(*cmd == '(') && (lex->op = !lex->op);
 	(*cmd == ')') && (lex->cp = !lex->cp);
-	add_back_tok(&lex->token , new_tok(token_flag(*cmd, lex->is_d),
+	if (ft_strchr("|<>&", *cmd))
+		add_back_tok(&lex->token , new_tok(token_flag(*cmd, lex->is_d),
 			false, false, ft_strndup(cmd, (cmd + lex->is_d + 1))));
-	cmd++;
-	if ((lex->sq && *line != '\'') || (lex->dq && *line != '\"'))
+	if ((lex->sq && *(cmd + 1)!= '\'') || (lex->dq && *(cmd + 1) != '\"'))
 	{
+		cmd++;
 		if (lex->spc)
 		{
 			add_back_tok(&lex->token, new_tok(WORD, (lex->dq == true), false, 
-					get_q_token(&cmd, *cmd)));
+					get_q_token(&cmd, (lex->dq == true))));
 			lex->spc = false;
 		}
 		else if (!lex->spc)
@@ -51,33 +52,11 @@ int	check_s_token(t_lex *lex, char **line)
 			while (lex->tmp->sub)
 				lex->tmp = lex->tmp->sub;
 			lex->tmp->sub = new_tok(WORD, (lex->dq == true), false, 
-					get_q_token(&cmd, *cmd));
+					get_q_token(&cmd, (lex->dq == true)));
 		}
 	}
+	cmd++;
 	(lex->is_d) && cmd++;
-	*line = cmd;
-	return (0);
-}
-
-int check_quote_token(t_lex *lex, char	**line)
-{
-	char *cmd;
-	
-	cmd = *line;
-	if (lex->spc)
-	{
-		add_back_tok(&lex->token, new_tok(WORD, (lex->dq == true), false, 
-				get_q_token(&cmd, *cmd)));
-		lex->spc = false;
-	}
-	else if (!lex->spc)
-	{
-		lex->tmp = last_tok(lex->token);
-		while (lex->tmp->sub)
-			lex->tmp = lex->tmp->sub;
-		lex->tmp->sub = new_tok(WORD, (lex->dq == true), false, 
-				get_q_token(&cmd, *cmd));
-	}
 	*line = cmd;
 	return (0);
 }
@@ -144,8 +123,9 @@ int	main(int ac ,char **av, char **env)
 		}
 		while(token)
 		{
-			printf("token :/%s/\n",token->data);
-			printf("type : %d\n",token->type);
+			printf("token :/%s/  type : %d  xpand :%d\n", token->data,token->type,token->xpand);
+			if (token->sub)
+				printf("           sub : /%s/ type : %d xpand :%d\n", token->sub->data, token->sub->type, token->sub->xpand);
 			token = token->next;
 		}
     }
