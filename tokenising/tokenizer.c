@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/03 20:51:13 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/03 22:18:18 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,18 @@ int	check_s_token(t_lex *lex, char **line)
 		add_back_tok(&lex->token , new_tok(token_flag(*cmd, lex->flag),
 			false, false, ft_strndup(cmd, (cmd + lex->flag + 1))));
 	}
+	cmd++;
+	if (*cmd && ft_strchr(WHITESPACE, *cmd))
+	{
+		while(*cmd && ft_strchr(WHITESPACE, *cmd))
+			cmd++;
+		cmd--;
+	}
 	(lex->flag) && cmd++;
-	while(*cmd && ft_strchr(WHITESPACE, *cmd))
-		cmd++;
-	cmd--;
 	*line = cmd;
 	return (0);
 }
+
 int check_q_token(t_lex *lex, char	**line)
 {
 	char *cmd;
@@ -60,11 +65,10 @@ int check_q_token(t_lex *lex, char	**line)
 	}
 	else if (!lex->spc)
 	{
-	printf("HHHH\n");
-		lex->sub = last_tok(lex->token);
-		while (lex->sub->sub)
-			lex->sub = lex->sub->sub;
-		lex->sub->sub = new_tok(WORD, (lex->dq == true), false, 
+		lex->tmp = last_tok(lex->token);
+		while (lex->tmp->sub)
+			lex->tmp = lex->tmp->sub;
+		lex->tmp->sub = new_tok(WORD, (lex->dq == true), false, 
 				get_q_token(&cmd, *cmd));
 	}
 	*line = cmd;
@@ -79,16 +83,16 @@ int check_w_token(t_lex *lex, char	**line)
 	if (lex->spc)
 	{
 		add_back_tok(&lex->token, new_tok(WORD, true, true, 
-				get_q_token(&cmd, *cmd)));
+				get_word(&cmd)));
 		lex->spc = false;
 	}
 	else if (!lex->spc)
 	{
-		lex->sub = last_tok(lex->token);
-		while (lex->sub->sub)
-			lex->sub = lex->sub->sub;
-		lex->sub->sub = new_tok(WORD, true, true, 
-				get_q_token(&cmd, *cmd));
+		lex->tmp = last_tok(lex->token);
+		while (lex->tmp->sub)
+			lex->tmp = lex->tmp->sub;
+		lex->tmp->sub = new_tok(WORD, true, true, 
+				get_word(&cmd));
 	}
 	*line = cmd;
 	return(0);
@@ -96,24 +100,20 @@ int check_w_token(t_lex *lex, char	**line)
 
 t_token	*tokenizer(char *line)
 {
-	t_lex	*lex;
+	t_lex	lex;
 	
-	lex = new_lex();
+	new_lex(&lex);
 	while(*line && *line != '\n')
 	{
-		lex->flag = 0;
-		ft_strchr("\"\'|<>&() \t", *line) && check_s_token(lex, &line);
-		((lex->sq && *line != '\'') || (lex->dq && *line != '\"'))
-			&& check_q_token(lex, &line);
-		(!ft_strchr("\"\'|<>&() \t", *line) && (!lex->dq || !lex->sq))
-			&& check_w_token(lex, &line);
+		lex.flag = 0;
+		ft_strchr("\"\'|<>&() \t", *line) && check_s_token(&lex, &line);
+		((lex.sq && *line != '\'') || (lex.dq && *line != '\"'))
+			&& check_q_token(&lex, &line);
+		(!ft_strchr("\"\'|<>&() \t", *line) && (!lex.dq || !lex.sq))
+			&& check_w_token(&lex, &line);
 	}
-	// if ((lex->sq || lex->dq))
-	// 	return (printf("Syntax : Quote Second Unfound\n"), NULL);
-	// if (lex->op || lex->cp)
-	// 	return (printf("Syntax : Need a parantes\n"), NULL);
-	add_back_tok(&lex->token, new_tok(END, false, false, ft_strdup("newline")));
-	return (lex->token);
+	add_back_tok(&lex.token, new_tok(END, false, false, ft_strdup("END")));
+	return (lex.token);
 }
 
 int	main(int ac ,char **av, char **env)
@@ -132,8 +132,10 @@ int	main(int ac ,char **av, char **env)
 		if (!lineptr || !ft_strcmp(lineptr, "exit"))
     		return(free(lineptr), 0);
 		if (*lineptr)
+		{
 			add_history(lineptr);
-		token = tokenizer(lineptr);
+			token = tokenizer(lineptr);	
+		}
 		while(token)
 		{
 			printf("token :/%s/\n",token->data);
