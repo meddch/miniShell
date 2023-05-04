@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/04 11:28:02 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/04 13:19:35 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,20 @@ int	check_s_token(t_lex *lex, char **line)
 	cmd++;
 	if ((lex->sq && *line != '\'') || (lex->dq && *line != '\"'))
 	{
-		
+		if (lex->spc)
+		{
+			add_back_tok(&lex->token, new_tok(WORD, (lex->dq == true), false, 
+					get_q_token(&cmd, *cmd)));
+			lex->spc = false;
+		}
+		else if (!lex->spc)
+		{
+			lex->tmp = last_tok(lex->token);
+			while (lex->tmp->sub)
+				lex->tmp = lex->tmp->sub;
+			lex->tmp->sub = new_tok(WORD, (lex->dq == true), false, 
+					get_q_token(&cmd, *cmd));
+		}
 	}
 	(lex->is_d) && cmd++;
 	*line = cmd;

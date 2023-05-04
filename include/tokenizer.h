@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/03 20:41:09 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/04 11:09:48 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdbool.h>
 # include "../libft/libft.h"
 
-#define WHITESPACE " \t\r\n\v"
+#define WHITESPACE " \t\r\v"
 #define SYMBOLS "|&<>"
 
 typedef enum s_flag
@@ -56,9 +56,9 @@ typedef struct s_token{
 }t_token;
 
 typedef	struct s_lex{
-	int			flag;
+	int			is_d;
 	t_token		*token;
-	t_token		*sub;
+	t_token		*tmp;
 	bool		spc;
 	bool		h_doc;
 	bool		dq;
@@ -73,7 +73,7 @@ int		add_back_tok(t_token **tok, t_token *new);
 t_token	*new_tok(t_flag type, bool xpand, bool h_doc, char *word);
 t_token	*last_tok(t_token *tok);
 t_token	*last_sub_tok(t_token *tok);
-t_lex	*new_lex();
+void	new_lex(t_lex *lex);
 char	*get_q_token(char **cmd, char q);
 char	*get_word(char **cmd);
 char	*getq(char *str, int *index, char c);
