@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:58:06 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/04 14:13:37 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:41:01 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,7 @@ int	token_flag(char c, int flag)
 	(flag) && (i += 7);
 	return (i + 1);
 }
-char	*getq(char *str, int *index, char c)
-{
-	int	i;
-	int	j;
 
-	i = *index;
-	j = i;
-	while (str[i] && str[i] != c)
-		i++;
-	if (!str[i])
-		return (*index = i - 1, ft_substr(str, j, i - j));
-	return (*index = i - 1, ft_substr(str, j, i - j));
-}
 char	*get_q_token(char **cmd, int flag)
 {
 	char	q;
@@ -65,7 +53,7 @@ char	*get_q_token(char **cmd, int flag)
 	if (flag)
 		q = '\"';
 	else
-		q = '\"';
+		q = '\'';
 	while (*s && *s != q)
 		s++;
 	tok = ft_strndup(*cmd, s);

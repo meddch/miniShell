@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/04 14:12:25 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:44:55 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ int	check_s_token(t_lex *lex, char **line)
 	cmd = *line;
 	(ft_strchr("|<>&", *cmd) && *cmd == *(cmd + 1)) && (lex->is_d = 1);
 	(*cmd != '\'' && *cmd != '\"') && (lex->spc = true);
-	(*cmd == '"') && (lex->dq = !lex->dq); 
+	(*cmd == '\"') && (lex->dq = !lex->dq); 
 	(*cmd == '\'') && (lex->sq = !lex->sq);
 	(*cmd == '(') && (lex->op = !lex->op);
 	(*cmd == ')') && (lex->cp = !lex->cp);
 	if (ft_strchr("|<>&", *cmd))
 		add_back_tok(&lex->token , new_tok(token_flag(*cmd, lex->is_d),
 			false, false, ft_strndup(cmd, (cmd + lex->is_d + 1))));
-	if ((lex->sq && *(cmd + 1)!= '\'') || (lex->dq && *(cmd + 1) != '\"'))
+	else if ((lex->sq && *(cmd + 1)!= '\'') || (lex->dq && *(cmd + 1) != '\"'))
 	{
 		cmd++;
 		if (lex->spc)
@@ -54,6 +54,8 @@ int	check_s_token(t_lex *lex, char **line)
 			lex->tmp->sub = new_tok(WORD, (lex->dq == true), false, 
 					get_q_token(&cmd, (lex->dq == true)));
 		}
+		(*cmd == '\"') && (lex->dq = !lex->dq); 
+		(*cmd == '\'') && (lex->sq = !lex->sq);
 	}
 	cmd++;
 	(lex->is_d) && cmd++;
@@ -92,12 +94,16 @@ t_token	*tokenizer(char *line)
 	while(*line && *line != '\n')
 	{
 		lex.is_d = 0;
-		(ft_strchr(WHITESPACE, *line)) && whitespaces(&lex, &line);
-		(ft_strchr("\"\'|<>&()", *line)) && check_s_token(&lex, &line);
-		(!ft_strchr("\"\'|<>&() \t", *line) && (!lex.dq || !lex.sq))
-			&& check_w_token(&lex, &line);
+		if (ft_strchr(WHITESPACE, *line))
+			whitespaces(&lex, &line);
+		else if(ft_strchr("\"\'|<>&()", *line))
+			check_s_token(&lex, &line);
+		else if ((!ft_strchr("\"\'|<>&() \t", *line) && (!lex.dq || !lex.sq)))
+			check_w_token(&lex, &line);
 	}
 	add_back_tok(&lex.token, new_tok(END, false, false, ft_strdup("END")));
+	(lex.sq || lex.dq) && printf("Syntax Error : Quotes ?\n");
+	(lex.cp || lex.op) && printf("Syntax Error : Parentheses ?\n");
 	return (lex.token);
 }
 
