@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:58:06 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/03 22:28:48 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/04 11:21:19 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ char	*get_q_token(char **cmd, char q)
 	s = *cmd;
 	while (s[i] && s[i] != q)
 		i++;
-	if (*s)
+	// if (*s)
 		tok = ft_strndup(*cmd, (s + i));
-	else
-		tok = ft_strndup(*cmd, (s + i - 1));
+	// else
+	// 	tok = ft_strndup(*cmd, (s + i - 1));
 	*cmd = (s + i);
-	printf("---%s\n",*cmd);
 	return (tok);
 }
 
@@ -81,10 +80,7 @@ char	*get_word(char **cmd)
 	s = *cmd;
 	while (*s && !ft_strchr("\"\'|<>&() \t", *s))
 		s++;
-	if (*s)
-		tok = ft_strndup(*cmd, s + 1);
-	else
-		tok = ft_strndup(*cmd, s);
+	tok = ft_strndup(*cmd, s);
 	*cmd = s;
 	return (tok);
 }

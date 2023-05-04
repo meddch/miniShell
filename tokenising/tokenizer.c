@@ -6,53 +6,47 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/03 22:18:18 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/04 11:28:02 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishel.h"
 
-bool	all_whitespaces(char *cmd)
+int	whitespaces(t_lex *lex, char **line)
 {
-	int i;
-
-	i = 0;
-	while(cmd[i] && ft_strchr(WHITESPACE,cmd[i]))
-		i++;
-	if (i == ft_strlen(cmd))
-		return true;
-	return false;
+	char *cmd;
+	
+	cmd = *line;
+	while (*cmd && ft_strchr(WHITESPACE, *cmd) && *cmd != '\n')
+		cmd++;
+	lex->spc = true;
+	*line = cmd;
+	return(0);
 }
-
 int	check_s_token(t_lex *lex, char **line)
 {
 	char *cmd;
 	
 	cmd = *line;
+	(ft_strchr("|<>&", *cmd) && *cmd == *(cmd + 1)) && (lex->is_d = 1);
+	(*cmd != '\'' && *cmd != '\"') && (lex->spc = true);
 	(*cmd == '"') && (lex->dq = !lex->dq); 
 	(*cmd == '\'') && (lex->sq = !lex->sq);
-	(ft_strchr("|<>&", *cmd) && *cmd == *(cmd + 1)) && (lex->flag = 1);
-	(*cmd != '\'' && *cmd != '\"') && (lex->spc = true);
 	(*cmd == '(') && (lex->op = !lex->op);
 	(*cmd == ')') && (lex->cp = !lex->cp);
-	if (!all_whitespaces(cmd) && !ft_strchr(WHITESPACE, *cmd))
-	{
-		add_back_tok(&lex->token , new_tok(token_flag(*cmd, lex->flag),
-			false, false, ft_strndup(cmd, (cmd + lex->flag + 1))));
-	}
+	add_back_tok(&lex->token , new_tok(token_flag(*cmd, lex->is_d),
+			false, false, ft_strndup(cmd, (cmd + lex->is_d + 1))));
 	cmd++;
-	if (*cmd && ft_strchr(WHITESPACE, *cmd))
+	if ((lex->sq && *line != '\'') || (lex->dq && *line != '\"'))
 	{
-		while(*cmd && ft_strchr(WHITESPACE, *cmd))
-			cmd++;
-		cmd--;
+		
 	}
-	(lex->flag) && cmd++;
+	(lex->is_d) && cmd++;
 	*line = cmd;
 	return (0);
 }
 
-int check_q_token(t_lex *lex, char	**line)
+int check_quote_token(t_lex *lex, char	**line)
 {
 	char *cmd;
 	
@@ -105,10 +99,9 @@ t_token	*tokenizer(char *line)
 	new_lex(&lex);
 	while(*line && *line != '\n')
 	{
-		lex.flag = 0;
-		ft_strchr("\"\'|<>&() \t", *line) && check_s_token(&lex, &line);
-		((lex.sq && *line != '\'') || (lex.dq && *line != '\"'))
-			&& check_q_token(&lex, &line);
+		lex.is_d = 0;
+		(ft_strchr(WHITESPACE, *line)) && whitespaces(&lex, &line);
+		(ft_strchr("\"\'|<>&()", *line)) && check_s_token(&lex, &line);
 		(!ft_strchr("\"\'|<>&() \t", *line) && (!lex.dq || !lex.sq))
 			&& check_w_token(&lex, &line);
 	}
