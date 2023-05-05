@@ -4,11 +4,11 @@ NAME = minishell
 
 CFLAGS = -Wall -Wextra -Werror 
 
-HEADER =   /include/tokenizer.h ./include/minishell.h ./include/parser.h ./libft/libft.h
+HEADER =   include/tokenizer.h include/minishell.h include/parser.h libft/libft.h include/gc.h
 
 LIBFT = libft/libft.a
 
-SRCS = main.c tokenising/tok_utils.c tokenising/utils.c tokenising/tokenizer.c
+SRCS = main.c srcs/tokenising/tok_utils.c srcs/tokenising/utils.c srcs/tokenising/tokenizer.c gc/gc.c
 
 OBJS=$(SRCS:.c=.o)
 

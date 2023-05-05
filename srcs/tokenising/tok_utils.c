@@ -6,17 +6,17 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:11:16 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/03 21:50:57 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 11:40:19 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishel.h"
+#include "../../include/minishel.h"
 
 t_token	*new_tok(t_flag type, bool xpand, bool h_doc, char *word)
 {
 	t_token	*tok;
 
-	tok = malloc(sizeof(t_token));
+	tok = gc(sizeof(t_token), 0);
 	tok->data = word;
 	tok->type = type;
 	tok->next = NULL;

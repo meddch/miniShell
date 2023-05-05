@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 09:34:27 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 11:20:52 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdbool.h>
-# include "minishel.h"
-
 #define WHITESPACE " \t\r\v"
 #define SYMBOLS "|&<>"
 
