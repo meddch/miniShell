@@ -6,7 +6,7 @@
 #    By: mechane <mechane@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 10:35:42 by mechane           #+#    #+#              #
-#    Updated: 2023/05/03 20:32:43 by mechane          ###   ########.fr        #
+#    Updated: 2023/05/05 11:59:15 by mechane          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ FILES_M = ft_memset \
 		ft_putstr_fd \
 		ft_putendl_fd \
 		ft_putnbr_fd \
+		ft_malloc \
 
 FILES_B = 	ft_lstnew \
 	  		ft_lstadd_front \

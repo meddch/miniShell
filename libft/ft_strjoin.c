@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:05:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/03 13:50:37 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 12:01:08 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	}
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	newstr = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	newstr = ft_malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (!newstr)
 		return (NULL);
 	while (*s1)

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 21:47:42 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/03 20:28:24 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 11:58:36 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_list
 	struct s_list	*next;
 }						t_list;
 
+void				*ft_malloc(size_t size);
 void				*ft_memset(void *dest, int c, size_t n);
 void				ft_bzero(void *b, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);

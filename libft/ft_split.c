@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 11:37:11 by mechane           #+#    #+#             */
-/*   Updated: 2022/10/24 01:02:15 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 12:00:45 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**ft_split(const char *str, char c)
 	j = 0;
 	if (!str)
 		return (NULL);
-	tab = (char **)malloc((num_word(str, c) + 1) * sizeof(char *));
+	tab = ft_malloc((num_word(str, c) + 1) * sizeof(char *));
 	if (!tab)
 		return (NULL);
 	while (str[i])

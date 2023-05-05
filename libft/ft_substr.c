@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:16:43 by mechane           #+#    #+#             */
-/*   Updated: 2022/10/22 12:25:15 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 12:01:40 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (ft_strlen(s + start) < len)
 		j = ft_strlen(s + start);
-	sbr = (char *)malloc((j + 1) * sizeof(char));
+	sbr = ft_malloc((j + 1) * sizeof(char));
 	if (sbr == NULL)
 		return (NULL);
 	i = j;

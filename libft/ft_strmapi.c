@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:52:16 by mechane           #+#    #+#             */
-/*   Updated: 2022/10/24 23:21:45 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 12:01:21 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	if (!s || !f)
 		return (NULL);
-	res = (char *) malloc((ft_strlen(s) + 1) * sizeof(char));
+	res = ft_malloc((ft_strlen(s) + 1) * sizeof(char));
 	if (res == NULL)
 		return (NULL);
 	while (s[i] != '\0')

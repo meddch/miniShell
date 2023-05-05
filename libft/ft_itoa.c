@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 22:19:45 by mechane           #+#    #+#             */
-/*   Updated: 2022/10/21 21:12:02 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 12:00:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_itoa(int n)
 	i = len_count(n) + 1;
 	if (n == 0)
 		return (ft_strdup("0"));
-	res = (char *)malloc((i + 1) * sizeof(char));
+	res = ft_malloc((i + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
 	res[i--] = '\0';
