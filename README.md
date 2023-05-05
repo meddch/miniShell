@@ -1,6 +1,3 @@
-# miniShell
-
-
 <block>		::= <pipeline> {("&&" | "||") <pipeline>}
 
 <pipeline>	::= <command> {"|" <command>}
