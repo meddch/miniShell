@@ -8,7 +8,8 @@ HEADER =   include/tokenizer.h include/minishell.h include/parser.h libft/libft.
 
 LIBFT = libft/libft.a
 
-SRCS = main.c srcs/tokenising/tok_utils.c srcs/tokenising/utils.c srcs/tokenising/tokenizer.c gc/gc.c
+SRCS = main.c srcs/tokenising/tok_utils.c srcs/tokenising/utils.c srcs/tokenising/tokenizer.c gc/gc.c \
+	   srcs/tokenising/lexer.c
 
 OBJS=$(SRCS:.c=.o)
 
