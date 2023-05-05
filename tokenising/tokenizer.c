@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/04 17:11:20 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 09:45:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_s_token(t_lex *lex, char **line)
 		(*cmd == '\'') && (lex->sq = !lex->sq);
 	}
 	cmd++;
-	(lex->is_d) && cmd++;
+	(lex->is_d) && (lex->is_d = 0) && cmd++;
 	*line = cmd;
 	return (0);
 }
@@ -93,40 +93,36 @@ t_token	*tokenizer(char *line)
 	new_lex(&lex);
 	while(*line && *line != '\n')
 	{
-		lex.is_d = 0;
-		if (ft_strchr(WHITESPACE, *line))
-			whitespaces(&lex, &line);
-		else if(ft_strchr("\"\'|<>&()", *line))
-			check_s_token(&lex, &line);
-		else if ((!ft_strchr("\"\'|<>&() \t", *line) && (!lex.dq || !lex.sq)))
-			check_w_token(&lex, &line);
+		(ft_strchr(WHITESPACE, *line)) && whitespaces(&lex, &line);
+		(ft_strchr("\"\'|<>&()", *line)) && check_s_token(&lex, &line);
+		(!ft_strchr("\"\'|<>&() \t", *line) && (!lex.dq || !lex.sq))
+			&& check_w_token(&lex, &line);
 	}
 	add_back_tok(&lex.token, new_tok(END, false, false, ft_strdup("END")));
-	(lex.sq || lex.dq) && printf("Syntax Error : Quotes ?\n");
-	(lex.cp != lex.op) && printf("Syntax Error : Parenthesis ?\n");
+	if (lex.sq || lex.dq)
+		return (printf("Syntax Error : Quotes ?\n"), NULL);
+	if (lex.cp != lex.op)
+		return (printf("Syntax Error : Parenthesis ?\n"), NULL);
 	return (lex.token);
 }
-
-int	main(int ac ,char **av, char **env)
-{	
+ 
+t_token	*lexer(void)
+{
 	char *prompt = "(miniShell) $ ";
 	char *lineptr;
     t_token *token;
-	
-	
-	(void)av,(void)env;
-	if (ac != 1)
-		return (1);
+		
 	while (1)
 	{
 		lineptr = readline(prompt);
 		if (!lineptr || !ft_strcmp(lineptr, "exit"))
-    		return(free(lineptr), 0);
+    		return(free(lineptr), NULL);
 		if (*lineptr)
 		{
 			add_history(lineptr);
 			token = tokenizer(lineptr);	
 		}
+		
 		while(token)
 		{
 			printf("token :/%s/  type : %d  xpand :%d\n", token->data,token->type,token->xpand);
@@ -134,5 +130,6 @@ int	main(int ac ,char **av, char **env)
 				printf("           sub : /%s/ type : %d xpand :%d\n", token->sub->data, token->sub->type, token->sub->xpand);
 			token = token->next;
 		}
-    }
+	}
 }
+

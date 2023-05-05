@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 09:42:23 by mechane          ###   ########.fr       */
+/*   Created: 2023/05/04 17:48:38 by mechane           #+#    #+#             */
+/*   Updated: 2023/05/04 17:49:45 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/minishel.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-int	main(int ac ,char **av, char **env)
-{	
-	
-	t_token *token;
-	
-	(void)av,(void)env;
-	if (ac != 1)
-		return (1);
-	token = lexer();
-}
+
+
+#endif
