@@ -1,15 +1,15 @@
-<block>		::= <pipeline> {("&&" | "||") <pipeline>}
+<block> ::= <pipeline> {("&&" | "||") <pipeline>}
 
-<pipeline>	::= <command> {"|" <command>}
+<pipeline> ::= <command> {"|" <command>}
 
-<command>	::= <cmdlist>
+<command> ::= <cmdlist>
 		| "(" <cmdline> ")" <redir>	(* subshell *)
 
-<cmdlist>	::= <redir>+			(* at least one redirect - without WORDs *)
+<cmdlist> ::= <redir>+			(* at least one redirect - without WORDs *)
 		| <redir> {<arg> <redir>}+	(* at least one WORD - zero or more <redir> in any place *)
 
-<redir>		::= {("<" | "<<" | ">" | ">>") <filename>}	(* a delimiter in case of heredoc *)
+<redir> ::= {("<" | "<<" | ">" | ">>") <filename>}	(* a delimiter in case of heredoc *)
 
-<arg>		::= token WORD | token VAR | token GROUP
+<arg> ::= token WORD | token VAR | token GROUP
 
-<filename>	::= token WORD | token VAR | token GROUP
+<filename> ::= token WORD | token VAR | token GROUP
