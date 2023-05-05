@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 11:20:52 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 13:45:18 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef enum s_flag
 	SUBSHELL,
 	REDIR,
 	SIGHER,
+	EMPTY,
 	END,
 }	t_flag;
 
@@ -68,6 +69,7 @@ typedef	struct s_lex{
 int		token_size(t_token *lst);
 int		token_flag(char c, int flag);
 int		add_back_tok(t_token **tok, t_token *new);
+int		whitespaces(t_lex *lex, char **line);
 t_token	*lexer(void);
 t_token	*new_tok(t_flag type, bool xpand, bool h_doc, char *word);
 t_token	*last_tok(t_token *tok);
@@ -75,4 +77,5 @@ t_token	*last_sub_tok(t_token *tok);
 void	new_lex(t_lex *lex);
 char	*get_q_token(char **cmd, int flag);
 char	*get_word(char **cmd);
+
 #endif

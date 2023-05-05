@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:58:06 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 11:40:36 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 13:37:35 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,16 @@ char	*get_word(char **cmd)
 	tok = ft_strndup(*cmd, s);
 	*cmd = s;
 	return (tok);
+}
+
+int	whitespaces(t_lex *lex, char **line)
+{
+	char *cmd;
+	
+	cmd = *line;
+	while (*cmd && ft_strchr(WHITESPACE, *cmd) && *cmd != '\n')
+		cmd++;
+	lex->spc = true;
+	*line = cmd;
+	return(0);
 }

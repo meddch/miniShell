@@ -6,24 +6,37 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 12:04:07 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 13:53:43 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
-int	whitespaces(t_lex *lex, char **line)
+
+void	check_quotes(t_lex *lex, char **line)
 {
 	char *cmd;
-	
+
 	cmd = *line;
-	while (*cmd && ft_strchr(WHITESPACE, *cmd) && *cmd != '\n')
-		cmd++;
-	lex->spc = true;
+	if (lex->spc)
+	{
+		add_back_tok(&lex->token, new_tok(WORD, (lex->dq == true), false, 
+				get_q_token(&cmd, (lex->dq == true))));
+		lex->spc = false;
+	}
+	else if (!lex->spc)
+	{
+		lex->tmp = last_tok(lex->token);
+		while (lex->tmp->sub)
+			lex->tmp = lex->tmp->sub;
+		lex->tmp->sub = new_tok(WORD, (lex->dq == true), false, 
+						get_q_token(&cmd, (lex->dq == true)));
+	}
+	(*cmd == '\"') && (lex->dq = !lex->dq); 
+	(*cmd == '\'') && (lex->sq = !lex->sq);
 	*line = cmd;
-	return(0);
 }
-int	check_s_token(t_lex *lex, char **line)
+void	check_symbols(t_lex *lex, char **line)
 {
 	char *cmd;
 	
@@ -37,23 +50,25 @@ int	check_s_token(t_lex *lex, char **line)
 	if (ft_strchr("|<>&", *cmd))
 		add_back_tok(&lex->token , new_tok(token_flag(*cmd, lex->is_d),
 			false, false, ft_strndup(cmd, (cmd + lex->is_d + 1))));
-	else if ((lex->sq && *(cmd + 1)!= '\'') || (lex->dq && *(cmd + 1) != '\"'))
+	(lex->is_d) && (lex->is_d = 0) && cmd++;
+	*line = cmd;
+}
+
+int	check_token(t_lex *lex, char **line)
+{
+	char *cmd;
+	
+	cmd = *line;
+	check_symbols(lex, &cmd);
+	if ((lex->sq && *(cmd + 1)!= '\'') || (lex->dq && *(cmd + 1) != '\"'))
 	{
 		cmd++;
-		if (lex->spc)
-		{
-			add_back_tok(&lex->token, new_tok(WORD, (lex->dq == true), false, 
-					get_q_token(&cmd, (lex->dq == true))));
-			lex->spc = false;
-		}
-		else if (!lex->spc)
-		{
-			lex->tmp = last_tok(lex->token);
-			while (lex->tmp->sub)
-				lex->tmp = lex->tmp->sub;
-			lex->tmp->sub = new_tok(WORD, (lex->dq == true), false, 
-					get_q_token(&cmd, (lex->dq == true)));
-		}
+		check_quotes(lex, &cmd);
+	}
+	else if ((lex->sq && *(cmd + 1) == '\'') || (lex->dq && *(cmd + 1) == '\"'))
+	{
+		cmd++;
+		add_back_tok(&lex->token, new_tok(EMPTY, false, false, ft_strdup("EMPTY")));
 		(*cmd == '\"') && (lex->dq = !lex->dq); 
 		(*cmd == '\'') && (lex->sq = !lex->sq);
 	}
@@ -94,7 +109,7 @@ t_token	*tokenizer(char *line)
 	while(*line && *line != '\n')
 	{
 		(ft_strchr(WHITESPACE, *line)) && whitespaces(&lex, &line);
-		(ft_strchr("\"\'|<>&()", *line)) && check_s_token(&lex, &line);
+		(ft_strchr("\"\'|<>&()", *line)) && check_token(&lex, &line);
 		(!ft_strchr("\"\'|<>&() \t", *line) && (!lex.dq || !lex.sq))
 			&& check_w_token(&lex, &line);
 	}
@@ -122,7 +137,8 @@ t_token	*lexer(void)
 			add_history(lineptr);
 			token = tokenizer(lineptr);	
 		}
-		
+		free(lineptr);
+		gc(0, 1);
 		while(token)
 		{
 			printf("token :/%s/  type : %d  xpand :%d\n", token->data,token->type,token->xpand);
@@ -130,7 +146,6 @@ t_token	*lexer(void)
 				printf("           sub : /%s/ type : %d xpand :%d\n", token->sub->data, token->sub->type, token->sub->xpand);
 			token = token->next;
 		}
-		gc(0, 0);
 	}
 }
 
