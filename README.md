@@ -1,4 +1,7 @@
-<block> ::= <pipeline> {("&&" | "||") <pipeline>}
+
+
+
+# <block> ::= <pipeline> {("&&" | "||") <pipeline>}
 
 <pipeline> ::= <command> {"|" <command>}
 
@@ -13,3 +16,5 @@
 <arg> ::= token WORD | token VAR | token GROUP
 
 <filename> ::= token WORD | token VAR | token GROUP
+
+>
