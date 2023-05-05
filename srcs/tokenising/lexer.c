@@ -26,10 +26,9 @@ t_token	*lexer(void)
 		if (*lineptr)
 		{
 			add_history(lineptr);
-			token = tokenizer(lineptr);	
+			token = tokenizer(lineptr);
 		}
 		free(lineptr);
-		gc(0, 1);
 		while(token)
 		{
 			printf("token :/%s/  type : %d  xpand :%d\n", token->data,token->type,token->xpand);
@@ -37,5 +36,6 @@ t_token	*lexer(void)
 				printf("           sub : /%s/ type : %d xpand :%d\n", token->sub->data, token->sub->type, token->sub->xpand);
 			token = token->next;
 		}
+		gc(0, 1);
 	}
 }

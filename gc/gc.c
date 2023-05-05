@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:47:40 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 11:37:40 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 15:37:00 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*gc(size_t size, int fr_flag)
 	static t_gc	*gc;
 	void		*address;
 	
-	if (fr_flag)
+	if (fr_flag == 1)
 		free_gc(&gc);
 	else
 	{
@@ -27,6 +27,7 @@ void	*gc(size_t size, int fr_flag)
 			free_gc(&gc);
 			return (exit(1), NULL);
 		}
+		gc_add_front(&gc, new_gc(address));
 		return (address);
 	}
 	return (NULL);
@@ -44,9 +45,9 @@ t_gc	*new_gc (void *ptr)
 	return (new);
 }
 
-void	gcadd_front(t_gc **gc, t_gc *new)
+void	gc_add_front(t_gc **gc, t_gc *new)
 {
-	if (!*gc)
+	if (!gc)
 		return ;
 	new->next = *gc;
 	*gc = new;

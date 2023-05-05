@@ -6,12 +6,13 @@
 #    By: mechane <mechane@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 10:35:42 by mechane           #+#    #+#              #
-#    Updated: 2023/05/05 11:59:15 by mechane          ###   ########.fr        #
+#    Updated: 2023/05/05 16:04:02 by mechane          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-
+RED = \033[0;31m
+BLUE = \033[0;34m
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
@@ -74,21 +75,22 @@ OBJS_B = $(addsuffix .o, $(FILES_B))
 
 
 %.o : %.c $(LIBFT_H)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
 	
 $(NAME): $(OBJS_M) 
-	$(AR) $@ $^
+	@$(AR) $@ $^
+	@echo "$(BLUE)libft ✅"
 
 bonus: $(OBJS_B)
-	$(AR) $(NAME) $^
+	@$(AR) $(NAME) $^
 
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJS_M) $(OBJS_B)
+	@$(RM) $(OBJS_M) $(OBJS_B)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all bonus
 

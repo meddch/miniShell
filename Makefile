@@ -1,34 +1,45 @@
 CC = cc
-
+RED = \033[0;31m
+GREEN = \033[0;32m
+BLUE = \033[0;34m
 NAME = minishell
-
+RM = rm -f
 CFLAGS = -Wall -Wextra -Werror 
 
 HEADER =   include/tokenizer.h include/minishell.h include/parser.h libft/libft.h include/gc.h
 
 LIBFT = libft/libft.a
 
-SRCS = main.c srcs/tokenising/tok_utils.c srcs/tokenising/utils.c srcs/tokenising/tokenizer.c gc/gc.c \
-	   srcs/tokenising/lexer.c
+FILE = main srcs/tokenising/tok_utils srcs/tokenising/utils srcs/tokenising/tokenizer gc/gc \
+	   srcs/tokenising/lexer
 
-OBJS=$(SRCS:.c=.o)
+SRCS = $(addsuffix .c, $(FILE))
+OBJS = $(addsuffix .o, $(FILE))
+
+%.o : %.c $(HEADER) 
+	@echo "$(BLUE)Building project ⏳.."
+	@ $(CC) $(CFLAGS) -c -o $@ $< -g
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make -C libft
-	$(CC) $(CFLAGS) $(LIBFT) -lreadline -o $(NAME) $^
+	@make -C libft
+	@$(CC) $(CFLAGS) $(LIBFT) -lreadline -o $(NAME) $^
+	@echo "$(BLUE)minishell ✅"
 
-%.o: %.c $(HEADER) 
-	$(CC) $(CFLAGS) -c $< -o $@ 
 
 clean:
-	make clean -C libft
-	rm -f $(OBJS)
+	@make clean -C libft
+	@$(RM) $(OBJS)
+	@echo  "$(RED)OBJS DELETED ☠ "
 
 fclean: clean 
-	rm -f $(NAME) $(LIBFT)
+	@$(RM) $(NAME) $(LIBFT)
+	@echo  "$(RED)ALL DELETED ☠ "
+
 
 re: fclean all 
+
+sm : all clean
 
 .PHONY: clean fclean re all

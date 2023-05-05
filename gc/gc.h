@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:47:54 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 11:35:27 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/05 14:50:19 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_gc
 
 t_gc	*new_gc (void *ptr);
 void	*gc(size_t size, int fr_flag);
-void	gcadd_front(t_gc **gc, t_gc *new);
+void	gc_add_front(t_gc **gc, t_gc *new);
 void	free_gc(t_gc **gc);
 
 #endif
