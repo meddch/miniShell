@@ -6,9 +6,14 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 11:40:47 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/06 13:39:45 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
+
+t_tree *parse_block(t_token *token)
+{
+	
+}
 
