@@ -18,7 +18,7 @@ OBJS = $(addsuffix .o, $(FILE))
 
 %.o : %.c $(HEADER) 
 	@echo "$(BLUE)Building project ⏳.."
-	@ $(CC) $(CFLAGS) -c -o $@ $< -g
+	@ $(CC) $(CFLAGS) -c -o $@ $< 
 
 all: $(NAME)
 

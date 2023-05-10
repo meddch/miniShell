@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 17:54:26 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/06 20:20:13 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/08 11:00:21 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,14 @@ t_tree	*constratct_sub(t_tree *tree)
 	sub->cmd_type = SUBSHELL;
 	sub->subsh = tree;
 	return ((t_tree *)sub);
+}
+
+t_tree	*new_redir(t_tree *tree)
+{
+	t_redir	*redir;
+
+	redir = gc(sizeof(t_redir), 0);
+	redir->cmd_type = REDIR;
+	redir->cmdtree = tree;
+	return ((t_tree *)redir);
 }
