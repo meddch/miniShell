@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/14 11:57:07 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/14 14:33:40 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ int	check_token(t_lex *lex, char **line)
 		cmd++;
 		check_quotes(lex, &cmd);
 	}
-	else if ((lex->sq && *(cmd + 1) == '\'') || (lex->dq && *(cmd + 1) == '\"'))
+	else if (((lex->sq && *(cmd + 1) == '\'') || (lex->dq && *(cmd + 1) == '\"')) && lex->spc)
 	{
 		cmd++;
-		add_back_tok(&lex->token, new_tok(EMPTY, false, false, ft_strdup("EMPTY")));
+		if ( *(cmd + 1) && ft_strchr(WHITESPACE, *(cmd + 1)))
+			add_back_tok(&lex->token, new_tok(EMPTY, false, false, ft_strdup("EMPTY")));
 		(*cmd == '\"') && (lex->dq = !lex->dq); 
 		(*cmd == '\'') && (lex->sq = !lex->sq);
 	}
 	cmd++;
-	(lex->is_d) && (lex->is_d = 0) && cmd++;
 	*line = cmd;
 	return (0);
 }
@@ -113,10 +113,12 @@ t_token	*tokenizer(char *line)
 	new_lex(&lex);
 	while(*line && *line != '\n')
 	{
-		(ft_strchr(WHITESPACE, *line)) && whitespaces(&lex, &line);
-		(ft_strchr("\"\'|<>&()", *line)) && check_token(&lex, &line);
-		(!ft_strchr("\"\'|<>&() \t", *line) && (!lex.dq || !lex.sq))
-			&& check_w_token(&lex, &line);
+		if (ft_strchr(WHITESPACE, *line))
+			whitespaces(&lex, &line);
+		else if (ft_strchr("\"\'|<>&()", *line))
+			check_token(&lex, &line);
+		else if (!ft_strchr("\"\'|<>&() \t", *line) && (!lex.dq || !lex.sq))
+			check_w_token(&lex, &line);
 	}
 	add_back_tok(&lex.token, new_tok(END, false, false, ft_strdup("END")));
 	if (lex.sq || lex.dq)

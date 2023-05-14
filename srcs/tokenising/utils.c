@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:58:06 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/09 13:45:31 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/14 14:12:55 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	whitespaces(t_lex *lex, char **line)
 	char *cmd;
 	
 	cmd = *line;
-	while (*cmd && ft_strchr(WHITESPACE, *cmd) && *cmd != '\n')
+	while (*cmd && ft_strchr(WHITESPACE, *cmd))
 		cmd++;
 	lex->spc = true;
 	*line = cmd;
