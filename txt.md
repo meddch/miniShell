@@ -13,6 +13,6 @@
 
 <redir>		::= {("<" | "<<" | ">" | ">>") <filename>}	(* a delimiter in case of heredoc *)
 
-<arg>		::= token WORD | token VAR | token GROUP
+<arg>		::= token WORD 
 
-<filename>	::= token WORD | token VAR | token GROUP -->
+<filename>	::= token WORD 

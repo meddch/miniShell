@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 13:57:46 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/14 11:57:07 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ void	check_symbols(t_lex *lex, char **line)
 	if (ft_strchr("|<>&", *cmd))
 		add_back_tok(&lex->token , new_tok(token_flag(*cmd, lex->is_d),
 			false, false, ft_strndup(cmd, (cmd + lex->is_d + 1))));
-	(lex->is_d) && (lex->is_d = 0) && cmd++;
+	if (lex->is_d == 1)
+	{
+		lex->is_d = 0;		
+		cmd++;
+	}
 	*line = cmd;
 }
 

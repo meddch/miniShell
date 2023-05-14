@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 17:54:26 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/08 11:00:21 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/14 11:50:22 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,4 @@ t_tree	*new_redir(t_tree *tree)
 	redir->cmdtree = tree;
 	return ((t_tree *)redir);
 }
+

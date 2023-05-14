@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/10 10:59:23 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/14 11:59:27 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef enum s_flag
 	APPEND = 1 << 12,
 	SUBSHELL,
 	REDIR = (RIN | ROUT | HEREDOC | APPEND),
-	EMPTY,
-	END,
+	EMPTY = 20,
+	END = 30,
 }	t_flag;
 
 typedef struct s_token{
