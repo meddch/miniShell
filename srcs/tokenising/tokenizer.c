@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/14 14:33:40 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/16 12:04:07 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ void	check_symbols(t_lex *lex, char **line)
 	(*cmd != '\'' && *cmd != '\"') && (lex->spc = true);
 	(*cmd == '\"') && (lex->dq = !lex->dq); 
 	(*cmd == '\'') && (lex->sq = !lex->sq);
-	(*cmd == '(') && (lex->op = !lex->op);
-	(*cmd == ')') && (lex->cp = !lex->cp);
-	if (ft_strchr("|<>&", *cmd))
+	if (ft_strchr("|<>&()", *cmd))
 		add_back_tok(&lex->token , new_tok(token_flag(*cmd, lex->is_d),
 			false, false, ft_strndup(cmd, (cmd + lex->is_d + 1))));
 	if (lex->is_d == 1)
@@ -74,7 +72,7 @@ int	check_token(t_lex *lex, char **line)
 	{
 		cmd++;
 		if ( *(cmd + 1) && ft_strchr(WHITESPACE, *(cmd + 1)))
-			add_back_tok(&lex->token, new_tok(EMPTY, false, false, ft_strdup("EMPTY")));
+			add_back_tok(&lex->token, new_tok(EMPTY, false, false, ft_strdup("")));
 		(*cmd == '\"') && (lex->dq = !lex->dq); 
 		(*cmd == '\'') && (lex->sq = !lex->sq);
 	}
@@ -105,6 +103,27 @@ int check_w_token(t_lex *lex, char	**line)
 	*line = cmd;
 	return(0);
 }
+bool	check_syntax(t_token *token,t_lex *lex)
+{
+	int	flag;
+
+	flag = 0;
+	if (lex->sq || lex->dq)
+		return (printf("Syntax Error : Quotes ?\n"), false);
+	while (token)
+	{
+		if (flag < 0)
+			return (printf("Syntax Error : Parenthesis ?\n"), false);
+		if (token->type == OPAR)
+			flag++;
+		else if (token->type == CPAR)
+			flag--;
+		token = token->next;
+	}
+	if (flag) 
+		return (printf("Syntax Error : Parenthesis ?\n"), false);
+	return (true);
+}
 
 t_token	*tokenizer(char *line)
 {
@@ -121,10 +140,8 @@ t_token	*tokenizer(char *line)
 			check_w_token(&lex, &line);
 	}
 	add_back_tok(&lex.token, new_tok(END, false, false, ft_strdup("END")));
-	if (lex.sq || lex.dq)
-		return (printf("Syntax Error : Quotes ?\n"), NULL);
-	if (lex.cp != lex.op)
-		return (printf("Syntax Error : Parenthesis ?\n"), NULL);
+	if(!check_syntax(lex.token, &lex))
+		return (NULL);
 	return (lex.token);
 }
 

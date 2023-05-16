@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 17:48:38 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/10 19:49:36 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:29:04 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,17 @@ typedef struct s_cmd
 
 typedef struct s_redir
 {
-	int			cmd_type;
-	int			redir_type;
+	t_flag		redir_type;
 	int			flags;
-	int			fd;
-	char		*arg;
-	t_token		*token;
+	int			fd_in;
+	int			fd_out;
+	t_token		*file;
 	t_tree	*cmdtree;
 }				t_redir;
 
-t_tree *constract_block(int type, t_tree *left, t_tree *right);
+t_tree	*constract_block(int type, t_tree *left, t_tree *right);
+t_tree	*constratct_sub(t_tree *tree);
+t_tree	*constract_pipe(t_tree *left, t_tree *right);
+t_redir	*new_redir(t_tree *tree);
 
 #endif

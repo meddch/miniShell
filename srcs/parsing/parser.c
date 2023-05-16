@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/09 13:20:42 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:02:40 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,27 @@ t_tree *parse_sub(t_token **token)
 t_tree	*parse_redir(t_tree *tree, t_token **token)
 {
 	t_tree	*ret;
-	t_token		redir_type;
+	t_redir	*redir;
+	int		redir_typ;
 
 	if ((*token)->type == END)
 		return (tree);
 	ret = tree;
+	redir_typ = (*token)->type;
 	if ((*token)->type == REDIR)
 	{
-		
+		redir->redir_type = redir_typ;
+		redir = new_redir(tree);
+		redir->flags = O_RDONLY;
+		if (redir_typ == ROUT  || redir_typ == APPEND)
+		{
+			if (redir_typ == ROUT)
+				redir->flags = O_CREAT | O_WRONLY | O_TRUNC;
+			else
+				redir->flags = O_CREAT | O_WRONLY | O_APPEND;
+		}
+		(*token) = (*token)->next;
+		if ((*token)->type != WORD)
+			return (NULL);
 	}
-	return (ret);
 }
