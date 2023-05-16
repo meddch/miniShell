@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:58:06 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/14 14:12:55 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/16 12:06:57 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	new_lex(t_lex *lex)
 	lex->h_doc = false;
 	lex->dq = false;
 	lex->sq = false;
-	lex->op = false;
-	lex->cp = false;
 	lex->token = NULL;
 	lex->tmp = NULL;
 	lex->is_d = 0;

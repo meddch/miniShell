@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/16 12:04:07 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/16 12:06:01 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,12 @@ int check_w_token(t_lex *lex, char	**line)
 	*line = cmd;
 	return(0);
 }
-bool	check_syntax(t_token *token,t_lex *lex)
+bool	check_syntax(t_lex *lex)
 {
-	int	flag;
+	t_token	*token;
+	int		flag;
 
+	token = lex->token;
 	flag = 0;
 	if (lex->sq || lex->dq)
 		return (printf("Syntax Error : Quotes ?\n"), false);
@@ -140,7 +142,7 @@ t_token	*tokenizer(char *line)
 			check_w_token(&lex, &line);
 	}
 	add_back_tok(&lex.token, new_tok(END, false, false, ft_strdup("END")));
-	if(!check_syntax(lex.token, &lex))
+	if(!check_syntax(&lex))
 		return (NULL);
 	return (lex.token);
 }
