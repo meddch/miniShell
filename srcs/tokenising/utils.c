@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:58:06 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/14 14:12:55 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/18 15:28:53 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	new_lex(t_lex *lex)
 	lex->h_doc = false;
 	lex->dq = false;
 	lex->sq = false;
-	lex->op = false;
-	lex->cp = false;
 	lex->token = NULL;
 	lex->tmp = NULL;
 	lex->is_d = 0;
@@ -31,16 +29,20 @@ int	token_flag(char c, int flag)
 	char	*str;
 	int		i;
 
-	i = -1;
+	i = 0;
 	str = "\"\'|<>()";
-	while (str[++i])
+	while (str[i])
+	{
 		if (str[i] == c)
 			break ;
+		i++;
+	}
 	if (c == '&' && !flag)
 		return (0);
 	else if (c == '&' && flag)
 		return (9);
-	(flag) && (i += 7);
+	if (flag)
+		i += 7;
 	return (i + 1);
 }
 

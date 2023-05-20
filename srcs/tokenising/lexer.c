@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 13:57:23 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/14 17:23:49 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ t_token	*lexer(void)
 		free(lineptr);
 		while(token)
 		{
-			printf("token :/%s/  type : %d  xpand :%d\n", token->data,token->type,token->xpand);
+			printf("token :/%s/  type : %d  xpand :%d  h_doc :%d\n", token->data,token->type,token->xpand, token->h_doc);
 			if (token->sub)
-				printf("           sub : /%s/ type : %d xpand :%d\n", token->sub->data, token->sub->type, token->sub->xpand);
+				printf("           sub : /%s/ type : %d xpand :%d h_doc :%d\n", token->sub->data, token->sub->type, token->sub->xpand, token->sub->h_doc);
 			token = token->next;
 		}
 		gc(0, 1);
