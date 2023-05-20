@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 17:54:26 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/14 18:09:42 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/20 13:16:27 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,19 @@ t_redir	*new_redir(t_tree *tree)
 	return ((t_tree *)redir);
 }
 
-int	fill_redir(t_redir *redir)
+t_tree	*new_cmd(t_token *cmd_list)
 {
-	
-	
-	
+	t_token		*tmp;
+	t_cmd		*cmd;
+
+	cmd = gc(sizeof(cmd), 0);
+	if (!cmd)
+		return (NULL);
+	cmd->cmd_type = WORD;
+	cmd->cmd = cmd_list;
+	tmp = cmd_list;
+	while (tmp->next->type == WORD && tmp->next->type != END)
+		tmp = tmp->next;
+	tmp->next = NULL;
+	return ((t_tree *)cmd);
 }

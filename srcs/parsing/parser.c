@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/15 15:02:40 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/19 15:58:38 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,38 @@ t_tree *parse_sub(t_token **token)
 		return(parse_cmd(token));
 }
 
+
+t_tree	*parse_cmd(t_token **token)
+{
+	t_tree	*tree;
+	t_cmd	*cmd;
+	
+	if ((*token)->type == END)
+		return (tree);
+	tree = 
+	
+}
+
+
+
+
+
 t_tree	*parse_redir(t_tree *tree, t_token **token)
 {
 	t_tree	*ret;
-	t_redir	*redir;
 	int		redir_typ;
 
 	if ((*token)->type == END)
 		return (tree);
 	ret = tree;
-	redir_typ = (*token)->type;
-	if ((*token)->type == REDIR)
+	while ((*token)->type == ())
 	{
-		redir->redir_type = redir_typ;
-		redir = new_redir(tree);
-		redir->flags = O_RDONLY;
-		if (redir_typ == ROUT  || redir_typ == APPEND)
-		{
-			if (redir_typ == ROUT)
-				redir->flags = O_CREAT | O_WRONLY | O_TRUNC;
-			else
-				redir->flags = O_CREAT | O_WRONLY | O_APPEND;
-		}
-		(*token) = (*token)->next;
-		if ((*token)->type != WORD)
+		redir_typ = (*token)->type;
+		*token = (*token)->next;
+		ret = new_redir(ret);
+		if (!fill_redir((t_redir *)ret, redir_typ, *token))
 			return (NULL);
+		*token = (*token)->next;
 	}
+	return (ret);
 }

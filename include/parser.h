@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 17:48:38 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/15 15:29:04 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/20 13:12:08 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ typedef struct s_subsh
 typedef struct s_cmd
 {
 	int	cmd_type;
-	t_token *list;
+	t_token	*cmd;	
 }				t_cmd;
 
-typedef struct s_redir
+typedef struct s_redir 
 {
 	t_flag		redir_type;
 	int			flags;

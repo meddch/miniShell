@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/16 12:03:55 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/18 15:17:53 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef enum s_flag
 	HEREDOC = 11,
 	APPEND = 12,
 	SUBSHELL,
-	REDIR = (RIN | ROUT | HEREDOC | APPEND),
+	REDIR,
 	EMPTY = 20,
 	END = 30,
 }	t_flag;
