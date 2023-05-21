@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/19 15:58:38 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/21 14:20:17 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_tree	*parse_redir(t_tree *tree, t_token **token)
 	if ((*token)->type == END)
 		return (tree);
 	ret = tree;
-	while ((*token)->type == ())
+	while ((*token)->type == (REDIR))
 	{
 		redir_typ = (*token)->type;
 		*token = (*token)->next;

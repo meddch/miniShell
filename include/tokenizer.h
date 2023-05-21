@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/18 15:17:53 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/21 16:33:49 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,23 @@
 #define WHITESPACE " \t\r\v"
 #define SYMBOLS "|&<>"
 
-typedef enum s_flag
+typedef enum e_flag
 {
-	WORD = 0,
-	DQ = 1,
-	SQ = 2,
-	PIPE = 3,
-	RIN = 4,
-	ROUT = 5,
-	OPAR = 6,
-	CPAR = 7,
-	SPACE = 8,
-	AND = 9,
-	OR = 10,
-	HEREDOC = 11,
-	APPEND = 12,
-	SUBSHELL,
-	REDIR,
+	WORD = 1 << 0,
+	DQ = 1 << 1,
+	SQ = 1 << 2,
+	PIPE = 1 << 3,
+	OPAR = 1 << 4,
+	CPAR = 1 << 5,
+	RIN = 1 << 6,
+	ROUT = 1 << 7,
+	SPACE = 1 << 8,
+	AND = 1 << 9,
+	OR = 1 << 10,
+	HEREDOC = 1 << 11,
+	APPEND = 1 << 12,
+	SUBSHELL = 22,
+	REDIR = (RIN | ROUT | APPEND| HEREDOC),
 	EMPTY = 20,
 	END = 30,
 }	t_flag;

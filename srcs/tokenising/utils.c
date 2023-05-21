@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:58:06 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/18 15:28:53 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/21 16:35:31 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,32 @@ void	new_lex(t_lex *lex)
 	return ;
 }
 
+//refactor
 int	token_flag(char c, int flag)
 {
 	char	*str;
 	int		i;
 
-	i = 0;
-	str = "\"\'|<>()";
-	while (str[i])
+	i = 1;
+	str = "\"\'|()<>";
+	while (*str)
 	{
-		if (str[i] == c)
+		if (*str == c)
 			break ;
 		i++;
+		str++;
 	}
 	if (c == '&' && !flag)
-		return (0);
+		return (WORD);
 	else if (c == '&' && flag)
-		return (9);
-	if (flag)
-		i += 7;
-	return (i + 1);
+		return (AND);
+	else if (c == '|' && flag)
+		return (OR);
+	else if (c == '>' && flag)
+		return (APPEND);
+	else if (c == '<' && flag)
+		return (HEREDOC);
+	return (1 << i);
 }
 
 char	*get_q_token(char **cmd, int flag)
@@ -60,7 +66,7 @@ char	*get_q_token(char **cmd, int flag)
 	while (*s && *s != q)
 		s++;
 	tok = ft_strndup(*cmd, s);
-	*cmd = (s );
+	*cmd = s;
 	return (tok);
 }
 
