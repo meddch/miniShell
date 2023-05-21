@@ -6,13 +6,13 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 17:54:26 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/20 13:16:27 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/21 22:24:39 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/minishel.h"
 
-t_tree	*constract_block(int type, t_tree *left, t_tree *right)
+t_tree	*constract_block(t_flag type, t_tree *left, t_tree *right)
 {
 	t_connector *n;
 	n = gc(sizeof(t_connector), 0);
@@ -35,7 +35,7 @@ t_tree	*constratct_sub(t_tree *tree)
 	return ((t_tree *)sub);
 }
 
-t_redir	*new_redir(t_tree *tree)
+t_tree	*new_redir(t_tree *tree)
 {
 	t_redir	*redir;
 
@@ -54,9 +54,9 @@ t_tree	*new_cmd(t_token *cmd_list)
 	if (!cmd)
 		return (NULL);
 	cmd->cmd_type = WORD;
-	cmd->cmd = cmd_list;
+	cmd-> = cmd_list;
 	tmp = cmd_list;
-	while (tmp->next->type == WORD && tmp->next->type != END)
+	while (tmp && tmp->next->type == WORD)
 		tmp = tmp->next;
 	tmp->next = NULL;
 	return ((t_tree *)cmd);
