@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:11:16 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 11:40:19 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/22 19:28:44 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ int	token_size(t_token *lst)
 
 t_token	*last_tok(t_token *tok)
 {
+	
 	if (!tok)
 		return (NULL);
 	while (tok->next)
+	{
+		
 		tok = tok->next;
+	}
 	return (tok);
 }
 

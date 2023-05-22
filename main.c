@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 12:03:45 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/22 12:49:14 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ int	main(int ac ,char **av, char **env)
 	if (ac != 1)
 		return (1);
 	token = lexer();
+	// parser(&token);
 }

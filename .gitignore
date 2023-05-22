@@ -1,4 +1,4 @@
-minishell
-*.[oa]
+.minishell
+*.o
 test.c
 a.out

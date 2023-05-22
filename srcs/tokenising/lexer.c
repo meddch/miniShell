@@ -6,17 +6,85 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/14 17:23:49 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/22 21:32:02 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
  #include "../../include/minishel.h"
+
+
+void displayTree(t_tree *root, int level)
+{
+    if (root == NULL)
+        return;
+    if (root->node_type != NODE_CMD && root->node_type != NODE_REDIR && root->node_type != NODE_SUBSH)
+        displayTree(((t_connector *)root)->right, level + 1);
+
+    for (int i = 0; i < level; i++)
+        printf("\t");
+
+    switch (root->node_type)
+    {
+        case NODE_AND:
+            printf("AND Node\n");
+            break;
+        case NODE_OR:
+            printf("OR Node\n");
+            break;
+        case NODE_PIPE:
+            printf("PIPE Node\n");
+            break;
+        case NODE_SUBSH:
+            printf("SUBSHELL Node\n");
+            break;
+        case NODE_REDIR:
+            printf("REDIR Node ---> file : %s\n",((t_redir *)root)->file->data);
+            break;
+        case NODE_CMD:
+            {
+            printf("CMD Node ---> data : %s\n",((t_cmd*)root)->list->data);
+            // printf("CMD Node ---> data_sub : %s\n",((t_cmd*)root)->list->sub->data);
+            
+            break;
+            }
+            
+        default:
+            printf("Unknown Node\n");
+            break;
+    }
+
+    if (root->node_type == NODE_SUBSH)
+    {
+        displayTree(((t_subsh *)root)->subsh, level + 1);
+    }
+    if (root->node_type == NODE_REDIR)
+    {
+        displayTree(((t_redir *)root)->cmdtree, level + 1);
+    }
+    else if (root->node_type != NODE_CMD)
+    
+    {
+        displayTree(((t_connector *)root)->left, level + 1);
+    }
+}
+
+void print_token(t_token *token)
+{
+    if (!token)
+        return;
+    while(token)
+    {
+        printf(" token type %d\n      token data : %s\n",token->type, token->data);
+        token = token->next;
+    }
+}
 
 t_token	*lexer(void)
 {
 	char *prompt = "(miniShell) $ ";
 	char *lineptr;
     t_token *token;
+	t_tree	*tree;
 		
 	while (1)
 	{
@@ -29,13 +97,12 @@ t_token	*lexer(void)
 			token = tokenizer(lineptr);
 		}
 		free(lineptr);
-		while(token)
-		{
-			printf("token :/%s/  type : %d  xpand :%d  h_doc :%d\n", token->data,token->type,token->xpand, token->h_doc);
-			if (token->sub)
-				printf("           sub : /%s/ type : %d xpand :%d h_doc :%d\n", token->sub->data, token->sub->type, token->sub->xpand, token->sub->h_doc);
-			token = token->next;
-		}
-		gc(0, 1);
+		print_token(token);
+        tree = parser(&token);
+		displayTree(tree, 0);
+        // printf("%d\n",tree->node_type);
+        // printf("%s\n", ((t_cmd *)tree)->list->data);
+		
 	}
+	return (token);
 }
