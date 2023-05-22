@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/22 17:30:46 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/22 21:32:02 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,13 @@ void displayTree(t_tree *root, int level)
             printf("REDIR Node ---> file : %s\n",((t_redir *)root)->file->data);
             break;
         case NODE_CMD:
+            {
             printf("CMD Node ---> data : %s\n",((t_cmd*)root)->list->data);
+            // printf("CMD Node ---> data_sub : %s\n",((t_cmd*)root)->list->sub->data);
+            
             break;
+            }
+            
         default:
             printf("Unknown Node\n");
             break;
@@ -60,6 +65,17 @@ void displayTree(t_tree *root, int level)
     
     {
         displayTree(((t_connector *)root)->left, level + 1);
+    }
+}
+
+void print_token(t_token *token)
+{
+    if (!token)
+        return;
+    while(token)
+    {
+        printf(" token type %d\n      token data : %s\n",token->type, token->data);
+        token = token->next;
     }
 }
 
@@ -81,8 +97,11 @@ t_token	*lexer(void)
 			token = tokenizer(lineptr);
 		}
 		free(lineptr);
-		tree = parser(&token);
+		print_token(token);
+        tree = parser(&token);
 		displayTree(tree, 0);
+        // printf("%d\n",tree->node_type);
+        // printf("%s\n", ((t_cmd *)tree)->list->data);
 		
 	}
 	return (token);

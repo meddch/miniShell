@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:52:28 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/22 16:45:07 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/22 20:01:36 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ t_token	*copy_token(t_token **tok)
 	return (copy);
 }
 
-void	add_token_list(t_tree *cmd_list, t_token **token)
+void	add_token_list(t_token **list, t_token **token)
 {
 	t_token	*last;
-	if (!(((t_cmd*)cmd_list)->list))
+	
+	if ((!list || !*list))
 	{
-		((t_cmd *)cmd_list)->list = copy_token(token);
+		*list = copy_token(token);
 		return ;
 	}
-	last = last_tok(((t_cmd *)cmd_list)->list);
-	last->next = copy_token(token);
+	last = last_tok(*list);
+	last->sub = copy_token(token);
 }
