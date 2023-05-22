@@ -6,7 +6,7 @@
 #    By: mechane <mechane@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 10:35:42 by mechane           #+#    #+#              #
-#    Updated: 2023/05/05 16:04:02 by mechane          ###   ########.fr        #
+#    Updated: 2023/05/21 23:07:50 by mechane          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,21 +57,9 @@ FILES_M = ft_memset \
 		ft_putnbr_fd \
 		ft_malloc \
 
-FILES_B = 	ft_lstnew \
-	  		ft_lstadd_front \
-	  		ft_lstsize \
-	  		ft_lstlast \
-	  		ft_lstadd_back \
-	  		ft_lstdelone \
-	  		ft_lstclear \
-	  		ft_lstiter \
-	  		ft_lstmap
 
 SRCS_M = $(addsuffix .c, $(FILES_M))
-SRCS_B =$(addsuffix .c, $(FILES_B))
-
 OBJS_M = $(addsuffix .o, $(FILES_M))
-OBJS_B = $(addsuffix .o, $(FILES_B))
 
 
 %.o : %.c $(LIBFT_H)
@@ -81,18 +69,15 @@ $(NAME): $(OBJS_M)
 	@$(AR) $@ $^
 	@echo "$(BLUE)libft ✅"
 
-bonus: $(OBJS_B)
-	@$(AR) $(NAME) $^
-
 all: $(NAME)
 
 clean:
-	@$(RM) $(OBJS_M) $(OBJS_B)
+	@$(RM) $(OBJS_M) 
 
 fclean: clean
 	@$(RM) $(NAME)
 
-re: fclean all bonus
+re: fclean all 
 
-.PHONY: bonus all clean fclean re
+.PHONY:  all clean fclean re
 	
