@@ -1,4 +1,5 @@
-.minishell
+/.vscode
+minishell
 *.o
 test.c
 a.out
