@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/22 21:32:02 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/23 11:51:25 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void displayTree(t_tree *root, int level)
 {
     if (root == NULL)
         return;
-    if (root->node_type != NODE_CMD && root->node_type != NODE_REDIR && root->node_type != NODE_SUBSH)
+    if (root->node_type == NODE_PIPE || root->node_type == NODE_AND || root->node_type == NODE_OR)
         displayTree(((t_connector *)root)->right, level + 1);
 
     for (int i = 0; i < level; i++)
@@ -41,13 +41,8 @@ void displayTree(t_tree *root, int level)
             printf("REDIR Node ---> file : %s\n",((t_redir *)root)->file->data);
             break;
         case NODE_CMD:
-            {
             printf("CMD Node ---> data : %s\n",((t_cmd*)root)->list->data);
-            // printf("CMD Node ---> data_sub : %s\n",((t_cmd*)root)->list->sub->data);
-            
             break;
-            }
-            
         default:
             printf("Unknown Node\n");
             break;
@@ -57,12 +52,11 @@ void displayTree(t_tree *root, int level)
     {
         displayTree(((t_subsh *)root)->subsh, level + 1);
     }
-    if (root->node_type == NODE_REDIR)
+    else if (root->node_type == NODE_REDIR)
     {
         displayTree(((t_redir *)root)->cmdtree, level + 1);
     }
     else if (root->node_type != NODE_CMD)
-    
     {
         displayTree(((t_connector *)root)->left, level + 1);
     }
@@ -100,9 +94,6 @@ t_token	*lexer(void)
 		print_token(token);
         tree = parser(&token);
 		displayTree(tree, 0);
-        // printf("%d\n",tree->node_type);
-        // printf("%s\n", ((t_cmd *)tree)->list->data);
-		
 	}
 	return (token);
 }
