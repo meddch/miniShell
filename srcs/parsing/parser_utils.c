@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:40:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/22 17:13:42 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/23 11:46:01 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,26 @@ bool	fill_redir(t_redir *redir, t_flag redir_type, t_token *filenode)
 	return (true);
 
 	
+}
+
+t_tree	*parse_redir(t_tree *cmdtree, t_token **token)
+{
+	t_tree	*tree;
+	t_flag	redir_typ;
+
+	if (!(*token))
+		return (NULL);
+	tree = cmdtree;
+	while (((*token)->type) & REDIR)
+	{
+		redir_typ = (*token)->type;
+		*token = (*token)->next;
+		if ((*token)->type != WORD)
+			return (NULL);
+		tree = new_redir(tree);
+		if (!fill_redir((t_redir *)tree , redir_typ, *token))
+			return (NULL);
+		(*token)= (*token)->next;
+	}
+	return (tree);
 }
