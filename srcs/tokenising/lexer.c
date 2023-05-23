@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/22 21:32:02 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/23 11:05:00 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,14 @@ void displayTree(t_tree *root, int level)
             break;
         case NODE_CMD:
             {
+            while (((t_cmd*)root)->list)
+            {
             printf("CMD Node ---> data : %s\n",((t_cmd*)root)->list->data);
-            // printf("CMD Node ---> data_sub : %s\n",((t_cmd*)root)->list->sub->data);
+                 for (int i = 0; i < level; i++)
+                    printf("\t");
+                ((t_cmd*)root)->list =((t_cmd*)root)->list->next;
+            }
+           
             
             break;
             }
