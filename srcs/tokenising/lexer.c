@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/24 12:18:27 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/26 15:47:38 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	check_token(t_lex *lex, char **line)
 	{
 		cmd++;
 		if ( *(cmd + 1) && ft_strchr(WHITESPACE, *(cmd + 1)))
-			add_back_tok(&lex->token, new_tok(EMPTY, false, false, ft_strdup("")));
+			add_back_tok(&lex->token, new_tok(WORD, false, false, ft_strdup("")));
 		if (*cmd == '\"')
 			(lex->dq = !lex->dq); 
 		if (*cmd == '\'')
