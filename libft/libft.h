@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 21:47:42 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/21 23:06:11 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/26 15:14:38 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
- 
 
 void				*ft_malloc(size_t size);
 void				*ft_memset(void *dest, int c, size_t n);
@@ -56,5 +56,6 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+char**				ft_split_set(char* str, char* delimiter_set);
 
 #endif

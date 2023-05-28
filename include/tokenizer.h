@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/21 16:33:49 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/27 18:24:40 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdbool.h>
-#define WHITESPACE " \t\r\v"
-#define SYMBOLS "|&<>"
+# define SYNTX "Syntax Error :"
+# define WHITESPACE " \t\r\v"
+# define SYMBOLS "|&<>"
 
 typedef enum e_flag
 {
@@ -40,7 +41,6 @@ typedef enum e_flag
 	APPEND = 1 << 12,
 	SUBSHELL = 22,
 	REDIR = (RIN | ROUT | APPEND| HEREDOC),
-	EMPTY = 20,
 	END = 30,
 }	t_flag;
 
@@ -69,11 +69,16 @@ int		add_back_tok(t_token **tok, t_token *new);
 int		whitespaces(t_lex *lex, char **line);
 char	*get_q_token(char **cmd, int flag);
 char	*get_word(char **cmd);
+int 	check_w_token(t_lex *lex, char	**line);
 void	new_lex(t_lex *lex);
+int		check_token(t_lex *lex, char **line);
+void	check_quotes(t_lex *lex, char **line);
+void	check_symbols(t_lex *lex, char **line);
 t_token	*lexer(void);
 t_token	*new_tok(t_flag type, bool xpand, bool h_doc, char *word);
 t_token	*last_tok(t_token *tok);
 t_token	*last_sub_tok(t_token *tok);
+int		add_back_sub(t_token **tok, t_token *new);
 t_token	*tokenizer(char *line);
 
 #endif
