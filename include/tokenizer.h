@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/26 15:47:11 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/27 18:24:40 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_token	*lexer(void);
 t_token	*new_tok(t_flag type, bool xpand, bool h_doc, char *word);
 t_token	*last_tok(t_token *tok);
 t_token	*last_sub_tok(t_token *tok);
+int		add_back_sub(t_token **tok, t_token *new);
 t_token	*tokenizer(char *line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/26 15:47:38 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/27 18:12:48 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void displayTree(t_tree *root, int level)
     if (root == NULL)
         return;
     if (root->node_type == NODE_PIPE || root->node_type == NODE_AND || root->node_type == NODE_OR)
-        displayTree(((t_connector *)root)->right, level + 1);
+        displayTree(((t_connector *)root)->left, level + 1);
 
     for (int i = 0; i < level; i++)
         printf("\t");
@@ -58,7 +58,7 @@ void displayTree(t_tree *root, int level)
     }
     else if (root->node_type != NODE_CMD)
     {
-        displayTree(((t_connector *)root)->left, level + 1);
+        displayTree(((t_connector *)root)->right, level + 1);
     }
 }
 

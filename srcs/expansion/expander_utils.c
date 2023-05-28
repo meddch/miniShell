@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishel.h                                         :+:      :+:    :+:   */
+/*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 13:56:44 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/27 19:17:43 by mechane          ###   ########.fr       */
+/*   Created: 2023/05/27 18:34:33 by mechane           #+#    #+#             */
+/*   Updated: 2023/05/27 18:43:13 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHEL_H
-# define MINISHEL_H
+#include "../../include/minishel.h"
 
-# include "tokenizer.h"
-# include "../libft/libft.h"
-# include "parser.h"
-# include "../gc/gc.h"
-# include <dirent.h>
-
-int g_es;
-
-typedef struct v_env
+char *get_variable(t_env *env, char *var)
 {
-	char			*val;
-	char			*var;
-	struct v_env	*next;
-	int				*def;
-}			t_env;
-t_token	*expanand_wc(char *pattern);
-#endif
+    t_env	*current;
+
+    current = env;
+	while (current)
+	{
+        if (!ft_strcmp(current->var, var))
+			return (current->val);
+        current = current->next;
+    }
+    return (NULL);
+}
