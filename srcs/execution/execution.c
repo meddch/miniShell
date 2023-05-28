@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:54:14 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 13:36:23 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/28 18:38:37 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,4 @@ void	exec(t_tree *tree, t_env *env)
 		exec_redir(tree, env);
 	else if (tree->node_type == NODE_CMD)
 		exec_cmd(tree, env);
-	else
-		return ;
 }

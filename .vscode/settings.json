@@ -8,6 +8,7 @@
 		"locale": "c",
 		"sstream": "c",
 		"string": "c",
-		"vector": "c"
+		"vector": "c",
+		"minishel.h": "c"
 	}
 }

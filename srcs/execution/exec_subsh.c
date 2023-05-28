@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:34:59 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 17:35:22 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/28 18:53:04 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exec_subsh(t_tree *tree, t_env *env)
 		return (perror("fork"));
 	if (!pid)
 	{
-		exec(((t_subsh *)tree)->subsh, &env);
+		exec(((t_subsh *)tree)->subsh, env);
 		exit(g_st);
 	}
 	waitpid(pid, &status, WUNTRACED);

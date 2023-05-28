@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 11:53:09 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 19:19:18 by mechane          ###   ########.fr       */
+/*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
+/*   Updated: 2023/05/28 19:19:00 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTION_H
-# define EXECUTION_H
+#include "../../include/minishel.h"
 
-# define READ_END	0
-# define WRITE_END	1
-# define LEFT_NODE	2
-# define RIGHT_NODE	3
-
-
-
-void	exec(t_tree *tree, t_env *env);
-void	exit_status(int status);
-void	exec_subsh(t_tree *tree, t_env *env);
-void	exec_oper(t_tree *tree, t_env *env);
-void	exec_pipe(t_tree *tree, t_env *env);
-void	exec_cmd(t_cmd *tree, t_env *env);
-
-#endif
+void	exec_cmd(t_cmd *tree, t_env *env)
+{
+	
+}
