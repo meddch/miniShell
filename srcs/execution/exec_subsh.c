@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
+/*   exec_subsh.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 11:53:09 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 17:36:39 by mechane          ###   ########.fr       */
+/*   Created: 2023/05/28 17:34:59 by mechane           #+#    #+#             */
+/*   Updated: 2023/05/28 17:35:22 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTION_H
-# define EXECUTION_H
+#include "../../include/minishel.h"
 
-# define READ_END	0
-# define WRITE_END	1
-# define LEFT_NODE	2
-# define RIGHT_NODE	3
+void	exec_subsh(t_tree *tree, t_env *env)
+{
+	pid_t	pid;
+	int		status;
 
-
-
-void	exec(t_tree *tree, t_env *env);
-void	exit_status(int status);
-void	exec_subsh(t_tree *tree, t_env *env);
-void	exec_oper(t_tree *tree, t_env *env);
-void	exec_pipe(t_tree *tree, t_env *env);
-
-#endif
+	pid = fork();
+	if (pid == -1)
+		return (perror("fork"));
+	if (!pid)
+	{
+		exec(((t_subsh *)tree)->subsh, &env);
+		exit(g_st);
+	}
+	waitpid(pid, &status, WUNTRACED);
+	exit_status(status);
+}

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:58:51 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 13:20:41 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/28 17:34:28 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,3 +20,5 @@ void	exec_oper(t_tree *tree, t_env *env)
 	if (tree->node_type == NODE_OR && g_st)
 		exec(((t_connector *)tree)->right, env);
 }
+
+
