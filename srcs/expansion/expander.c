@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:47:05 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/27 19:19:12 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/28 11:06:50 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,29 @@
 
 char	*expansion(t_env *env, char	*to_expand)
 {
-
+	char	*expanded;
+	char	*tmp;
+	
+	expanded = NULL;
+	if (!to_expand)
+		return (NULL);
+	while(*to_expand)
+	{
+		if (*to_expand == '$' && (*to_expand +1))
+		{
+			to_expand++;
+			if (to_expand == '?')
+			{
+				tmp = ft_itoa(g_st);
+				to_expand++;		
+			}	
+			else	
+				tmp = expand_var(&to_expand, env);
+		}
+		else
+			tmp = get_non_var(&to_expand);
+		expanded = ft_strjoin(expanded, tmp);
+	}	
 }
 
 void	exp_help(t_env *env, char *to_expand, t_token **expand)
