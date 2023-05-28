@@ -6,13 +6,13 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:34:33 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 11:06:56 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/28 11:19:55 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
-char *get_env_variable(t_env *env, char *var)
+char    *get_env_variable(t_env *env, char *var)
 {
     t_env	*current;
 
