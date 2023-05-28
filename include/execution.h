@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishel.h                                         :+:      :+:    :+:   */
+/*   exeuction.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 13:56:44 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 13:09:04 by mechane          ###   ########.fr       */
+/*   Created: 2023/05/28 11:53:09 by mechane           #+#    #+#             */
+/*   Updated: 2023/05/28 11:53:34 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHEL_H
-# define MINISHEL_H
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
-# include "tokenizer.h"
-# include "expander.h"
-# include "parser.h"
-# include "../libft/libft.h"
-# include "../gc/gc.h"
 
-int g_st;
+
+
+
 
 
 

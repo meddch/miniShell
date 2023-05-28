@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishel.h                                         :+:      :+:    :+:   */
+/*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 13:56:44 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 13:09:04 by mechane          ###   ########.fr       */
+/*   Created: 2023/05/28 13:22:22 by mechane           #+#    #+#             */
+/*   Updated: 2023/05/28 13:24:59 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHEL_H
-# define MINISHEL_H
+#include "../../include/minishel.h"
 
-# include "tokenizer.h"
-# include "expander.h"
-# include "parser.h"
-# include "../libft/libft.h"
-# include "../gc/gc.h"
-
-int g_st;
-
-
-
-#endif
+void	exec_pipe(t_tree *tree, t_env *env)
+{
+	
+}
