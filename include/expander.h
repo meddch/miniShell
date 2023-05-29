@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:07:45 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 12:08:17 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/29 13:03:10 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct v_env
 	int				*def;
 }			t_env;
 
-t_token	*expand_sub(t_env *env, char *to_expand, t_token **expand, int dq_flag);
 t_token	*expand_node(t_env	*env, char	*to_expand, int	dq_flag);
+t_token	*expand_sub(t_env *env, char *to_expand, int dq_flag);
 t_token	*expanand_wc(char *pattern);
 char	*get_env_variable(t_env *env, char *var);
 char	*expand_var(char **var, t_env *env);

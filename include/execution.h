@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:53:09 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 12:29:51 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/29 13:43:41 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	exec_oper(t_tree *tree, t_env *env);
 void	exec_pipe(t_tree *tree, t_env *env);
 void	exec_cmd(t_cmd *tree, t_env *env);
 bool	is_builtin(char *cmd, char **argv);
-
+char	*get_cmd_path(char *arg, t_env *env);
 #endif

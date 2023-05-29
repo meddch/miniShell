@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 12:31:43 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/29 13:45:09 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,22 @@ char	**get_cmdline(t_cmd *tree, t_env *env)
 
 void	exec_cmd(t_cmd *tree, t_env *env)
 {
+	pid_t pid;
 	char	**cmdline;
+	char	*cmd;
 
 	cmdline = get_cmdline(tree, env);
 	if (is_builtin(cmdline[0], cmdline))
 		return ;
-	
+	cmd = get_cmd_path(cmdline[0], env);
+	pid = fork();
+	//create ft_fork (protect)
+	if (pid == -1)
+		return ;
+	else if (pid == 0)
+	{
+		execve(cmd, cmdline, env);
+		printf("command not found: %s\n", cmdline[0]); //fd_printf 
+	}
+	waitpid(pid, &g_st, WUNTRACED);
 }

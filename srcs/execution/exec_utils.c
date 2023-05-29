@@ -6,11 +6,28 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 12:36:49 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/29 13:43:26 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
+
+
+t_env	*ft_lstchr(t_env *lst, const char *variable)
+{
+	int	len;
+
+	if (!lst)
+		return (NULL);
+	len = ft_strlen(variable);
+	while (lst)
+	{
+		if (!ft_memcmp(lst->val, variable, len + 1))
+			return (lst);
+		lst = lst->next;
+	}
+	return (NULL);
+}
 
 bool	is_builtin(char *cmd, char **argv)
 {
@@ -39,7 +56,7 @@ void	exit_status(int status)
 		g_st = 128 + WTERMSIG(status);
 }
 
-char	*valid_path(char *arg, t_env *myenv)
+char	*get_cmd_path(char *arg, t_env *env)
 {
 	int		i;
 	char	*new_arg;
@@ -49,9 +66,9 @@ char	*valid_path(char *arg, t_env *myenv)
 	i = -1;
 	if (*arg == '/' || !access(arg, X_OK) || !*arg)
 		return (arg);
-	tmp = ft_lstchr(myenv, "PATH");
+	tmp = ft_lstchr(env, "PATH");
 	if (!tmp)
-		return (fd_printf(2, "%s: No such file or directory\n", arg), NULL);
+		return (printf("%s: No such file or directory\n", arg), NULL);
 	paths = ft_split(tmp->val, ':');
 	while (paths[++i])
 	{
