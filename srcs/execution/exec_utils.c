@@ -6,14 +6,14 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 13:43:26 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/30 11:17:04 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
 
-t_env	*ft_lstchr(t_env *lst, const char *variable)
+t_env	*ft_lstchr(t_env *lst, char *variable)
 {
 	int	len;
 
@@ -22,7 +22,7 @@ t_env	*ft_lstchr(t_env *lst, const char *variable)
 	len = ft_strlen(variable);
 	while (lst)
 	{
-		if (!ft_memcmp(lst->val, variable, len + 1))
+		if (!ft_memcmp(lst->var, variable, len + 1))
 			return (lst);
 		lst = lst->next;
 	}
