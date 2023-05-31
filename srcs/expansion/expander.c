@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:47:05 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 13:02:50 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 19:52:56 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*expansion(t_env *env, char	*to_expand)
 		if (*to_expand == '$' && (*to_expand +1))
 		{
 			to_expand++;
-			if (to_expand == '?')
+			if (*to_expand == '?')
 			{
 				tmp = ft_itoa(g_st);
 				to_expand++;		
@@ -36,7 +36,8 @@ char	*expansion(t_env *env, char	*to_expand)
 		else
 			tmp = get_non_var(&to_expand);
 		expanded = ft_strjoin(expanded, tmp);
-	}	
+	}
+	return (expanded);
 }
 
 void	exp_help(t_env *env, char *to_expand, t_token **expand)
@@ -67,10 +68,10 @@ t_token	*expand_sub(t_env *env, char *to_expand, int dq_flag)
 	{	
 		hold = ft_split_set(expansion(env, to_expand), WHITESPACE);
 		if (!hold[i])
-			add_back_sub(expand, new_tok(WORD, 0, 0, ft_strdup("")));
+			add_back_sub(&expand, new_tok(WORD, 0, 0, ft_strdup("")));
 		while (hold[i])
 		{
-			add_back_sub(expand, new_tok(WORD, 0, 0, hold[i]));
+			add_back_sub(&expand, new_tok(WORD, 0, 0, hold[i]));
 			i++;
 		}
 	}

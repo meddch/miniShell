@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_redir.cc                                      :+:      :+:    :+:   */
+/*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 12:23:47 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 19:46:41 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ bool	dup_to(t_tree *tree, t_env *env)
 	char	**file_name;
 	int		to_dup;
 	
+	fd = 0;
 	redir = (t_redir *)tree;
 	to_dup = STDIN_FILENO;
 	((redir->node_type & (ROUT | APPEND))) && (to_dup = STDOUT_FILENO);
@@ -71,7 +72,7 @@ bool	dup_to(t_tree *tree, t_env *env)
 		file_name = get_filename(redir->file, env);
 		if (file_name[1])
 			return (printf("ambiguous redirect\n"), false); // use fd_printf and exit(1)
-		if (fd = open(*file_name, redir->flags, 0664) == -1 || dup2(fd, to_dup) == -1)
+		if ((fd = open(*file_name, redir->flags, 0664)) == -1 || dup2(fd, to_dup) == -1)
 			return (false); // create ft_open to handle error and fd_print error + exit(1)  // create ft-dup to handle error and exit(1)
 		close(fd);
 		return (true);
@@ -86,7 +87,7 @@ bool	dup_to(t_tree *tree, t_env *env)
 
 void	exec_redir(t_tree *tree, t_env *env)
 {
-	int		status;
+	// int		status;
 	pid_t	pid;
 	
 	pid = fork(); // fork function that protect fail

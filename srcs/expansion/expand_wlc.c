@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wlc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:55:26 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/27 16:54:33 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 19:51:08 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ t_token	*expanand_wc(char *pattern)
 	while (item)
 	{
 		if (match(item->d_name, pattern))
-			addtok(&token, ft_newtoken(WORD, 0, 0, ft_strdup(item->d_name)));
+			add_back_tok(&token, new_tok(WORD, 0, 0, ft_strdup(item->d_name)));
 		item = readdir(dirc);
 	}
 	closedir(dirc);
 	if (!token)
 		add_back_tok(&token, new_tok(WORD, 0, 0, pattern));
+	return (token);
 }

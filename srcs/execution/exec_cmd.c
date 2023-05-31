@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 14:12:23 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 19:47:45 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**switch_env(t_env *myenv)
 	char	**env;
 
 	i = 0;
-	len = ft_lstsize(myenv); // need env utils (in builltins)
+	len = ft_envsize(myenv); // need env utils (in builltins)
 	env = gc(sizeof(char *) * (len + 1), 0);
 	env[len] = 0;
 	while (myenv)
@@ -107,8 +107,8 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 	char	*cmd;
 
 	cmdline = get_cmdline(tree, env);
-	if (is_builtin(cmdline[0], cmdline))
-		return ;
+	// if (is_builtin(cmdline[0], cmdline))
+	// 	return ;
 	cmd = get_cmd_path(cmdline[0], env);
 	pid = fork();
 	//create ft_fork (protect)
