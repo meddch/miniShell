@@ -6,7 +6,7 @@
 #    By: mechane <mechane@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 10:35:42 by mechane           #+#    #+#              #
-#    Updated: 2023/05/26 14:33:58 by mechane          ###   ########.fr        #
+#    Updated: 2023/05/29 12:40:46 by mechane          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ FILES_M = ft_memset \
 		ft_strdup \
 		ft_substr \
 		ft_strjoin \
+		ft_strjoin_sp \
 		ft_strtrim \
 		ft_striteri \
 		ft_split \

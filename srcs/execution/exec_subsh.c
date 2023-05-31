@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exec_subsh.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 12:33:01 by mechane          ###   ########.fr       */
+/*   Created: 2023/05/28 17:34:59 by mechane           #+#    #+#             */
+/*   Updated: 2023/05/28 18:53:04 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/minishel.h"
+#include "../../include/minishel.h"
 
-int	main(int ac ,char **av, char **env)
-{	
-	
-	t_tree	*tree;
-	t_env	*my_env;
-	
-	(void)av;
-	if (ac != 1)
-		return (1);
-	while (true)
+void	exec_subsh(t_tree *tree, t_env *env)
+{
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (pid == -1)
+		return (perror("fork"));
+	if (!pid)
 	{
-		tree = parser(lexer());
-		if (!tree)
-			break ;
-		exec(tree, my_env);
-		gc(0, 1);
+		exec(((t_subsh *)tree)->subsh, env);
+		exit(g_st);
 	}
-	exit(g_st);
+	waitpid(pid, &status, WUNTRACED);
+	exit_status(status);
 }

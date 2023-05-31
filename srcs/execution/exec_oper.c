@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exec_oper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 12:33:01 by mechane          ###   ########.fr       */
+/*   Created: 2023/05/28 12:58:51 by mechane           #+#    #+#             */
+/*   Updated: 2023/05/28 17:34:28 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/minishel.h"
+#include "../../include/minishel.h"
 
-int	main(int ac ,char **av, char **env)
-{	
-	
-	t_tree	*tree;
-	t_env	*my_env;
-	
-	(void)av;
-	if (ac != 1)
-		return (1);
-	while (true)
-	{
-		tree = parser(lexer());
-		if (!tree)
-			break ;
-		exec(tree, my_env);
-		gc(0, 1);
-	}
-	exit(g_st);
+void	exec_oper(t_tree *tree, t_env *env)
+{
+	exec(((t_connector *)tree)->left, env);
+	if (tree->node_type == NODE_AND && !g_st)
+		exec(((t_connector *)tree)->right, env);
+	if (tree->node_type == NODE_OR && g_st)
+		exec(((t_connector *)tree)->right, env);
 }
+
+

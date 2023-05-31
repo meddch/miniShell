@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:07:45 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 11:10:59 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 12:05:19 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,20 @@
 #include "../include/minishel.h"
 # include <dirent.h>
 
-t_token	*expanand_wc(char *pattern);
+typedef struct v_env
+{
+	char			*val;
+	char			*var;
+	struct v_env	*next;
+	int				*def;
+}			t_env;
+
 t_token	*expand_node(t_env	*env, char	*to_expand, int	dq_flag);
+t_token	*expand_sub(t_env *env, char *to_expand, int dq_flag);
+t_token	*expanand_wc(char *pattern);
 char	*get_env_variable(t_env *env, char *var);
 char	*expand_var(char **var, t_env *env);
 char	*get_non_var(char **to_check);
 char	*get_valid_var(char **to_check);
-void	expand_sub(t_env *env, char *to_expand, t_token **expand, int dq_flag);
-
+char	*expansion(t_env *env, char	*to_expand);
 #endif

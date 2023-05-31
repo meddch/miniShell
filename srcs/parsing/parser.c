@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/27 11:43:10 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/28 13:45:24 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_tree	*parse_cmd(t_token **token)
 	return (tree);
 }
 
-
+// code fd_print to print syntax_error
 
 t_tree	*parser(t_token **token)
 {

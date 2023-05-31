@@ -11,7 +11,7 @@ HEADER =   include/tokenizer.h include/minishell.h include/parser.h libft/libft.
 LIBFT = libft/libft.a
 
 FILE = main srcs/tokenising/tok_utils srcs/tokenising/utils srcs/tokenising/tokenizer gc/gc \
-	   srcs/tokenising/lexer srcs/parsing/parser srcs/parsing/list_utils srcs/parsing/parser_utils srcs/parsing/tree_constractor
+	   srcs/tokenising/lexer srcs/parsing/parser srcs/parsing/list_utils srcs/parsing/parser_utils srcs/parsing/tree_constractor gnl/get_next_line gnl/get_next_line_utils
 
 SRCS = $(addsuffix .c, $(FILE))
 OBJS = $(addsuffix .o, $(FILE))

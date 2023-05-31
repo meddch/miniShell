@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/24 12:25:23 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/29 11:46:55 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ bool	check_syntax(t_lex *lex)
 	while (token)
 	{
 		if (flag < 0)
-			return (printf("%s Parenthesis ?\n", SYNTX), false);
+			return (printf("%s Parenthesis ?\n", SYNTX), false); //use fd_printf
 		if (token->type == OPAR)
 			flag++;
 		else if (token->type == CPAR)

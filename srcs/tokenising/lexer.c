@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/27 18:12:48 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 12:29:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ t_token	*lexer(void)
 	while (1)
 	{
 		lineptr = readline(prompt);
-		if (!lineptr || !ft_strcmp(lineptr, "exit"))
+		if (!lineptr)
     		return(free(lineptr), NULL);
 		if (*lineptr)
 		{
@@ -140,9 +140,9 @@ t_token	*lexer(void)
 			token = tokenizer(lineptr);
 		}
 		free(lineptr);
-		print_token(token);
-        tree = parser(&token);
-		displayTree(tree, 0);
+		// print_token(token);
+        // tree = parser(&token);
+		// displayTree(tree, 0);
 	}
 	return (token);
 }
