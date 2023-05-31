@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:53:09 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 15:01:21 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 11:41:26 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,6 @@ void	exec_pipe(t_tree *tree, t_env *env);
 void	exec_cmd(t_cmd *tree, t_env *env);
 bool	is_builtin(char *cmd, char **argv);
 char	*get_cmd_path(char *arg, t_env *env);
+void	apply_exp(t_token **token, t_env *env);
+void 	apply_wc(t_token **token);
 #endif

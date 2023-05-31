@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/26 15:35:31 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 12:33:01 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 int	main(int ac ,char **av, char **env)
 {	
 	
-	t_token *token;
+	t_tree	*tree;
+	t_env	*my_env;
 	
-	(void)av,(void)env;
+	(void)av;
 	if (ac != 1)
 		return (1);
-	token = lexer();
-	
-	// parser(&token);
+	while (true)
+	{
+		tree = parser(lexer());
+		if (!tree)
+			break ;
+		exec(tree, my_env);
+		gc(0, 1);
+	}
+	exit(g_st);
 }

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:07:45 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 13:03:10 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 12:05:19 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ char	*get_env_variable(t_env *env, char *var);
 char	*expand_var(char **var, t_env *env);
 char	*get_non_var(char **to_check);
 char	*get_valid_var(char **to_check);
+char	*expansion(t_env *env, char	*to_expand);
 #endif
