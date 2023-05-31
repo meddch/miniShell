@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 20:12:17 by azari            ###   ########.fr       */
+/*   Updated: 2023/05/31 20:30:16 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int ac ,char **av, char **env)
 		if (!tree)
 			break ;
 		displayTree(tree,0);
-		// exec(tree, my_env);
+		exec(tree, my_env);
 		gc(0, 1);
 	}
 	exit(g_st);

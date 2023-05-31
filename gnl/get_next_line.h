@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:24:57 by mechane           #+#    #+#             */
-/*   Updated: 2023/01/26 18:46:54 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 20:33:32 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 
 # define BUFFER_SIZE 42
 
-size_t	ft_strlen(const char *s);
-char	*ft_strjoin(const char *s1, const char *s2);
-char	*ft_strchr(const char *str, int c);
-char	*ft_strdup(const char *source);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	ft_sstrlen(const char *s);
+char	*ft_sstrjoin(const char *s1, const char *s2);
+char	*ft_sstrchr(const char *str, int c);
+char	*ft_sstrdup(const char *source);
+char	*ft_ssubstr(char const *s, unsigned int start, size_t len);
 size_t	strlen_nw(const char *s);
 char	*get_next_line(int fd);
 char	*ft_read(char *stash, int fd, char *buff);

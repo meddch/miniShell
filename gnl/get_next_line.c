@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:55:04 by mechane           #+#    #+#             */
-/*   Updated: 2022/10/29 10:35:13 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 20:33:54 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_read(char *stash, int fd, char *buff)
 
 	temp = NULL;
 	ret = 1 ;
-	while (ret > 0 && !ft_strchr(buff, '\n'))
+	while (ret > 0 && !ft_sstrchr(buff, '\n'))
 	{	
 		ret = read(fd, buff, BUFFER_SIZE);
 		if (ret < 0)
@@ -40,7 +40,7 @@ char	*ft_read(char *stash, int fd, char *buff)
 			return (NULL);
 		}
 		buff[ret] = '\0';
-		temp = ft_strjoin(stash, buff);
+		temp = ft_sstrjoin(stash, buff);
 		free(stash);
 		stash = temp;
 	}
@@ -80,9 +80,9 @@ char	*get_next_line(int fd)
 		free(stash);
 		return (stash = 0);
 	}
-	line = ft_substr(stash, 0, strlen_nw(stash) + 1);
-	temp = ft_substr(stash, strlen_nw(stash) + 1,
-			ft_strlen(stash + strlen_nw(stash) +1));
+	line = ft_ssubstr(stash, 0, strlen_nw(stash) + 1);
+	temp = ft_ssubstr(stash, strlen_nw(stash) + 1,
+			ft_sstrlen(stash + strlen_nw(stash) +1));
 	free(stash);
 	stash = temp ;
 	return (line);

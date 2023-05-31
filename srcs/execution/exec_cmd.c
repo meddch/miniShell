@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 19:47:45 by azari            ###   ########.fr       */
+/*   Updated: 2023/05/31 20:41:59 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ char	**get_cmdline(t_cmd *tree, t_env *env)
 	int		i;
 	int		size;
 	
-	i = -1;
+	i = 0;
 	cmdlist = tree->list;
 	apply_exp(&cmdlist, env);
 	apply_wc(&cmdlist);
+	printf("----------------->%s\n",cmdlist->data);
 	size = token_size(cmdlist);
 	cmd = gc(sizeof(char *)*(size + 1), 0);
 	while (cmdlist)
@@ -106,6 +107,8 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 	char	**cmdline;
 	char	*cmd;
 
+	printf("----%s\n",tree->list->data);
+	
 	cmdline = get_cmdline(tree, env);
 	// if (is_builtin(cmdline[0], cmdline))
 	// 	return ;
