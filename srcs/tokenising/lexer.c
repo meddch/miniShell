@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 12:29:23 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 14:08:32 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ t_token	*lexer(void)
 	char *prompt = "(minishell) $ ";
 	char *lineptr;
     t_token *token;
-	t_tree	*tree;
 		
 	while (1)
 	{
