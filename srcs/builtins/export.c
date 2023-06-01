@@ -6,11 +6,23 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:09:44 by azari             #+#    #+#             */
-/*   Updated: 2023/06/01 14:21:23 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 15:15:13 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
+
+int	checker_id(char	*arg)
+{
+	int	i;
+
+	i = 1;
+	if (!ft_isalnum(arg[0]))
+		return (-1);
+	while (arg[i] && ft_isalnum(arg[i]))
+		i++;
+	return (0);
+}
 
 void	export_print(t_env* env)
 {
@@ -30,10 +42,7 @@ void	export(t_env **env, char **args)
 
 	i = 0;
 	if (!args[1])
-	{
-		export_print(*env);
-		return ;
-	}
+		return (export_print(*env));
 	while (args[++i])
 	{
 		
