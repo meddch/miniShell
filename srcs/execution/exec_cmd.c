@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 15:58:46 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 18:28:53 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	apply_exp(t_token **token, t_env *env)
 	
 	tmp = *token;
 	exp = NULL;
-	while(tmp)
+	while(tmp && (tmp->type == WORD))
 	{
 		add_back_tok(&exp, expand_node(env, tmp->data, (tmp->h_doc == 0)));
 		while(tmp->sub)
@@ -39,7 +39,7 @@ void 	apply_wc(t_token **token)
 	
 	tmp = *token;
 	exp = NULL;
-	while(tmp)
+	while(tmp && (tmp->type == WORD))
 	{
 		add_back_tok(&exp, expanand_wc(tmp->data));
 		while(tmp->sub)
@@ -107,8 +107,6 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 	char	**cmdline;
 	char	*cmd;
 
-	// printf("----%s\n",tree->list->data);
-	
 	cmdline = get_cmdline(tree, env);
 	// if (is_builtin(cmdline[0], cmdline))
 	// 	return ;
@@ -124,5 +122,5 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 		execve(cmd, cmdline, switch_env(env));
 		printf("command not found: %s\n", cmdline[0]); //fd_printf 
 	}
-	waitpid(pid, &g_st, WUNTRACED);
+	waitpid(pid, &g_st, 0);
 }

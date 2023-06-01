@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 17:55:42 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 18:37:01 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ char	**get_filename(t_token *file, t_env *env)
 	i = 0;
 	apply_exp(&file, env);
 	apply_wc(&file);
-		puts("I'am HERE");
 	size = token_size(file);
 	file_name = gc(sizeof(char *)*(size + 1), 0);
-	while (file)
+	while (file && file->type == WORD)
 	{
 		file_name[i] = ft_strdup(file->data);
 		while (file->sub)
@@ -52,7 +51,7 @@ char	**get_filename(t_token *file, t_env *env)
 		file = file->next;
 		i++;
 	}
-	file_name[i] = NULL;
+	file_name[size] = NULL;
 	return (file_name);
 }
 
@@ -88,21 +87,23 @@ bool	dup_to(t_tree *tree, t_env *env)
 
 void	exec_redir(t_tree *tree, t_env *env)
 {
-	// int		status;
 	pid_t	pid;
 	
-	pid = fork(); // fork function that protect fail
-	if (pid == 0)
+	pid = fork();
+	if (pid == -1)
+		return (perror("fork"));
+	if (!pid)
 	{
 		while (tree && tree->node_type == NODE_REDIR)
-			{
-				if (dup_to(tree, env) == false)
-				break ;
+		{
+			if (dup_to(tree, env) == false)
+			{	
 				tree = ((t_redir *)tree)->cmdtree;
-				printf("--------%d\n",tree->node_type);
+				break ;
 			}
-		puts("LLLL");
-		exec(tree, env);
+			tree = ((t_redir *)tree)->cmdtree;
+		}
+		exec_cmd(((t_cmd *)tree), env);
 		exit(0);
 	}
 	waitpid(pid, &g_st, 0);
