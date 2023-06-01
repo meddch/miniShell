@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:54:14 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 18:38:37 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 19:48:49 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	exec(t_tree *tree, t_env *env)
 	else if (tree->node_type == NODE_REDIR)
 		exec_redir(tree, env);
 	else if (tree->node_type == NODE_CMD)
-		exec_cmd(tree, env);
+		exec_cmd((t_cmd *)tree, env);
 }

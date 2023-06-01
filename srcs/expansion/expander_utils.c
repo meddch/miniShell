@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:34:33 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 11:19:55 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 19:54:38 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ char	*get_valid_var(char **to_check)
 	char	*tmp;
 	
 	var = *to_check;
-	if (!var || (!ft_isalpha(var) && (var) != '_'))
+	if (!var || (!ft_isalpha(*var) && (*var) != '_'))
 		return (NULL);
 	var++;
 	tmp = var;
 	while (*var && ft_isalnum(*var))
 		var++;
 	(*to_check) = var;
-	return (ft_strndup(tmp, (*var - 1)));
+	return (ft_strndup(tmp, var - 1));
 }
 
 char	*get_non_var(char **to_check)
@@ -50,7 +50,7 @@ char	*get_non_var(char **to_check)
 	while(*tmp && *tmp != '$')
 		tmp++;
 	(*to_check) = tmp;
-	return (ft_strndup((*to_check), (*tmp + 1)));
+	return (ft_strndup((*to_check), (tmp + 1)));
 }
 
 char	*expand_var(char **var, t_env *env)

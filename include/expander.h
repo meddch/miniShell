@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:07:45 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 12:05:19 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 18:45:56 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,6 @@
 
 #include "../include/minishel.h"
 # include <dirent.h>
-
-typedef struct v_env
-{
-	char			*val;
-	char			*var;
-	struct v_env	*next;
-	int				*def;
-}			t_env;
 
 t_token	*expand_node(t_env	*env, char	*to_expand, int	dq_flag);
 t_token	*expand_sub(t_env *env, char *to_expand, int dq_flag);

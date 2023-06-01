@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 13:45:09 by mechane          ###   ########.fr       */
+/*   Updated: 2023/05/31 20:41:59 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ char	**get_cmdline(t_cmd *tree, t_env *env)
 	int		i;
 	int		size;
 	
-	i = -1;
+	i = 0;
 	cmdlist = tree->list;
 	apply_exp(&cmdlist, env);
 	apply_wc(&cmdlist);
+	printf("----------------->%s\n",cmdlist->data);
 	size = token_size(cmdlist);
 	cmd = gc(sizeof(char *)*(size + 1), 0);
 	while (cmdlist)
@@ -81,15 +82,36 @@ char	**get_cmdline(t_cmd *tree, t_env *env)
 	return (cmd);
 }
 
+char	**switch_env(t_env *myenv)
+{
+	int		i;
+	int		len;
+	char	**env;
+
+	i = 0;
+	len = ft_envsize(myenv); // need env utils (in builltins)
+	env = gc(sizeof(char *) * (len + 1), 0);
+	env[len] = 0;
+	while (myenv)
+	{
+		(env[i++] = ft_strjoin_sp(myenv->var,
+					myenv->val, '='));
+		myenv = myenv->next;
+	}
+	return (env);
+}
+
 void	exec_cmd(t_cmd *tree, t_env *env)
 {
 	pid_t pid;
 	char	**cmdline;
 	char	*cmd;
 
+	printf("----%s\n",tree->list->data);
+	
 	cmdline = get_cmdline(tree, env);
-	if (is_builtin(cmdline[0], cmdline))
-		return ;
+	// if (is_builtin(cmdline[0], cmdline))
+	// 	return ;
 	cmd = get_cmd_path(cmdline[0], env);
 	pid = fork();
 	//create ft_fork (protect)
@@ -97,7 +119,7 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 		return ;
 	else if (pid == 0)
 	{
-		execve(cmd, cmdline, env);
+		execve(cmd, cmdline, switch_env(env));
 		printf("command not found: %s\n", cmdline[0]); //fd_printf 
 	}
 	waitpid(pid, &g_st, WUNTRACED);
