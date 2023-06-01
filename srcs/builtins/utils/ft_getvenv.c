@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:28:09 by azari             #+#    #+#             */
-/*   Updated: 2023/05/31 19:07:51 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 13:44:03 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_var(char *line)
 	return (var);
 }
 
-char	*get_val(char	*line)
+char	*get_val(char *line)
 {
 	char	*val;
 	size_t	i;

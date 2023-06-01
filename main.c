@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 20:30:16 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 13:59:35 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,39 +66,40 @@ void displayTree(t_tree *root, int level)
 int	main(int ac ,char **av, char **env)
 {	
 	
-	t_tree	*tree;
-	t_token	*token;
-	char *prompt = "(minishell) $ ";
-	char *lineptr;
+	// t_tree	*tree;
+	// t_token	*token;
+	// char *prompt = "(minishell) $ ";
+	// char *lineptr;
 	(void)ac;
-	t_env	*my_env;
-	
 	(void)av;
+	t_env	*my_env;
+    char *args[20] = {"echo", "-nnnnn-nnnnn", "speedup", NULL};
 	my_env = ft_getvenv(env);
+    echo(args);
 	// int len = ft_envsize(my_env);
 	// ft_printf_fd(1, "--[%d]--\n", len);
 	// ft_env(my_env);
-	if (ac != 1)
-		return (1);
-	while (1)
-	{
-		lineptr = readline(prompt);
-		if (!lineptr)
-    		break ;
-		if (*lineptr)
-		{
-			add_history(lineptr);
-			token = tokenizer(lineptr);
-		}
-		free(lineptr);
-		tree = parser(&token);
-		if (!tree)
-			break ;
-		displayTree(tree,0);
-		exec(tree, my_env);
-		gc(0, 1);
-	}
-	exit(g_st);
+	// if (ac != 1)
+	// 	return (1);
+	// while (1)
+	// {
+	// 	lineptr = readline(prompt);
+	// 	if (!lineptr)
+    // 		break ;
+	// 	if (*lineptr)
+	// 	{
+	// 		add_history(lineptr);
+	// 		token = tokenizer(lineptr);
+	// 	}
+	// 	free(lineptr);
+	// 	tree = parser(&token);
+	// 	if (!tree)
+	// 		break ;
+	// 	// displayTree(tree,0);
+	// 	// exec(tree, my_env);
+	// 	gc(0, 1);
+	// }
+	// exit(g_st);
 }
 
 
