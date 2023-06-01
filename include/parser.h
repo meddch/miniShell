@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 17:48:38 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 17:49:05 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 20:29:11 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ t_tree	*parse_cmd(t_token **token);
 t_tree	*parse_redir(t_tree *cmdtree, t_token **token);
 t_tree	*new_cmd(void);
 void	add_token_list(t_token **list, t_token **token);
-
+char	*join_delim(t_token *delim);
 
 #endif

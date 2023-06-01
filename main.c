@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 19:10:37 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 20:19:26 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ int	main(int ac ,char **av, char **env)
 		return (1);
 	while (1)
 	{
-		lineptr = readline(prompt);
+		tree = NULL;
+		token = NULL;
+        lineptr = readline(prompt);
 		if (!lineptr)
     		break ;
 		if (*lineptr)
