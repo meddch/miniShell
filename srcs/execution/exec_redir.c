@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 18:37:01 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 19:52:30 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,12 @@ bool	dup_to(t_tree *tree, t_env *env)
 		return (true);
 	}
 	if (redir->file->h_doc && !redir->file->sub)
-		fd = xpand_h_doc(env, redir->fd_in);
-	dup2(fd, to_dup);// create ft-dup to handle error and exit(1)
+		{
+			fd = xpand_h_doc(env, redir->fd_in);
+			dup2(fd, to_dup);// create ft-dup to handle error and exit(1)
+		}
+	else
+		dup2(redir->fd_in, to_dup);
 	return (true);
 }
 

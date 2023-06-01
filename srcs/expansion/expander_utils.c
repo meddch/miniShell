@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:34:33 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 15:44:10 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 19:57:55 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_valid_var(char **to_check)
 	while (*var && ft_isalnum(*var))
 		var++;
 	(*to_check) = var;
-	return (ft_strndup(tmp, var + 1));
+	return (ft_strndup(tmp, var));
 }
 
 char	*get_non_var(char **to_check)

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:47:05 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 16:03:05 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 19:46:54 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*expansion(t_env *env, char	*to_expand)
 	expanded = NULL;
 	while(*to_expand)
 	{
-		if (*to_expand == '$' && (*to_expand +1))
+		if (*to_expand == '$' && (*to_expand + 1))
 		{
 			to_expand++;
 			if (*to_expand == '?')

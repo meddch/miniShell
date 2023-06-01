@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:40:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 17:50:01 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 19:37:32 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,15 @@ int	heredoc(char *delim)
 
 bool	fill_redir(t_redir *redir, t_flag redir_type, t_token *filenode)
 {
+	t_token *hold;
+
+	hold = filenode;
 	if (redir_type == RIN && filenode->type != WORD)
 		return (false);
 	redir->fd_in = STDIN_FILENO;
 	redir->flags = O_RDONLY;
 	redir->redir_type = redir_type;
-	redir->file = filenode;
+	redir->file = copy_token(&hold);
 	if ((redir_type & (ROUT | APPEND)))
 	{
 		redir->fd_in = STDOUT_FILENO;
