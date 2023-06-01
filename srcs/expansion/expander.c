@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:47:05 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 19:52:56 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 16:03:05 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ char	*expansion(t_env *env, char	*to_expand)
 	char	*expanded;
 	char	*tmp;
 	
-	expanded = NULL;
 	if (!to_expand)
 		return (NULL);
+	expanded = NULL;
 	while(*to_expand)
 	{
 		if (*to_expand == '$' && (*to_expand +1))
@@ -47,8 +47,11 @@ void	exp_help(t_env *env, char *to_expand, t_token **expand)
 
 	i = 0;
 	hold = ft_split_set(expansion(env, to_expand), WHITESPACE);
-	if (!hold[i])
-		add_back_tok(expand, new_tok(WORD, 0, 0, ft_strdup("")));
+	if (!hold || !hold[i])
+		{
+			add_back_tok(expand, new_tok(WORD, 0, 0, ft_strdup("")));
+			return ;
+		}
 	while (hold[i])
 	{
 		add_back_tok(expand, new_tok(WORD, 0, 0, hold[i]));

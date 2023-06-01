@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 17:48:38 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/22 19:56:34 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 17:49:05 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_subsh
 typedef struct s_redir 
 {
 	int			node_type;
+	t_flag		redir_type;
 	int			flags;
 	int			fd_in;
 	int			fd_out;

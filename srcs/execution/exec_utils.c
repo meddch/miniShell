@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 19:47:03 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 17:20:16 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ char	*get_cmd_path(char *arg, t_env *env)
 	t_env	*tmp;
 
 	i = -1;
-	if (*arg == '/' || !access(arg, X_OK) || !*arg)
+	if (*arg == '/' && !access(arg, X_OK))
 		return (arg);
 	tmp = ft_lstchr(env, "PATH");
 	if (!tmp)
-		return (printf("%s: No such file or directory\n", arg), NULL);
+		return (ft_printf_fd(2, "%s : No such file or directory\n", arg), NULL);
 	paths = ft_split(tmp->val, ':');
 	while (paths[++i])
 	{

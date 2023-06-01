@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 19:46:41 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 17:55:42 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ char	**get_filename(t_token *file, t_env *env)
 	int		size;
 	char	**file_name;
 	
-	i = -1;
+	i = 0;
 	apply_exp(&file, env);
 	apply_wc(&file);
+		puts("I'am HERE");
 	size = token_size(file);
 	file_name = gc(sizeof(char *)*(size + 1), 0);
 	while (file)
@@ -66,12 +67,12 @@ bool	dup_to(t_tree *tree, t_env *env)
 	fd = 0;
 	redir = (t_redir *)tree;
 	to_dup = STDIN_FILENO;
-	((redir->node_type & (ROUT | APPEND))) && (to_dup = STDOUT_FILENO);
-	if (redir->node_type & (RIN | ROUT | APPEND))
+	((redir->redir_type & (ROUT | APPEND))) && (to_dup = STDOUT_FILENO);
+	if (redir->redir_type & (RIN | ROUT | APPEND))
 	{
 		file_name = get_filename(redir->file, env);
 		if (file_name[1])
-			return (printf("ambiguous redirect\n"), false); // use fd_printf and exit(1)
+			return (ft_printf_fd(2, "ambiguous redirect\n"), false); // use fd_printf and exit(1)
 		if ((fd = open(*file_name, redir->flags, 0664)) == -1 || dup2(fd, to_dup) == -1)
 			return (false); // create ft_open to handle error and fd_print error + exit(1)  // create ft-dup to handle error and exit(1)
 		close(fd);
@@ -94,8 +95,13 @@ void	exec_redir(t_tree *tree, t_env *env)
 	if (pid == 0)
 	{
 		while (tree && tree->node_type == NODE_REDIR)
-			if (dup_to(tree, env) == false)
+			{
+				if (dup_to(tree, env) == false)
 				break ;
+				tree = ((t_redir *)tree)->cmdtree;
+				printf("--------%d\n",tree->node_type);
+			}
+		puts("LLLL");
 		exec(tree, env);
 		exit(0);
 	}

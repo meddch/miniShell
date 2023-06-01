@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/28 13:45:24 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 15:39:27 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ t_tree	*parser(t_token **token)
 	tree = parse_block(token);
 	if (((*token)->type != END) && !tree)
 	{
-		printf("%d \n",(*token)->type);
 		printf("%s unexpected token `%s'\n",SYNTX, (*token)->data);
 		return (NULL);
 	}

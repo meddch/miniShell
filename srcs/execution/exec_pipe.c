@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 13:22:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 19:44:50 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 17:10:28 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void	exec_pipe(t_tree *tree, t_env *env)
 	close(fd[WRITE_END]);
 	if (wait(&status) == pid[1])
 		g_st = status;
+	while (wait(NULL) != -1);
 }

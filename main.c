@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 20:30:16 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 17:26:32 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,6 @@ int	main(int ac ,char **av, char **env)
 	
 	(void)av;
 	my_env = ft_getvenv(env);
-	// int len = ft_envsize(my_env);
-	// ft_printf_fd(1, "--[%d]--\n", len);
-	// ft_env(my_env);
 	if (ac != 1)
 		return (1);
 	while (1)
@@ -92,13 +89,12 @@ int	main(int ac ,char **av, char **env)
 		}
 		free(lineptr);
 		tree = parser(&token);
-		if (!tree)
-			break ;
 		displayTree(tree,0);
 		exec(tree, my_env);
 		gc(0, 1);
 	}
 	exit(g_st);
+
 }
 
 

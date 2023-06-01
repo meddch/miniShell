@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 20:41:59 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 15:58:46 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ char	**get_cmdline(t_cmd *tree, t_env *env)
 	int		size;
 	
 	i = 0;
+	// printf("----------------->%s\n",tree->list->data);
 	cmdlist = tree->list;
 	apply_exp(&cmdlist, env);
 	apply_wc(&cmdlist);
-	printf("----------------->%s\n",cmdlist->data);
 	size = token_size(cmdlist);
 	cmd = gc(sizeof(char *)*(size + 1), 0);
 	while (cmdlist)
@@ -107,12 +107,14 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 	char	**cmdline;
 	char	*cmd;
 
-	printf("----%s\n",tree->list->data);
+	// printf("----%s\n",tree->list->data);
 	
 	cmdline = get_cmdline(tree, env);
 	// if (is_builtin(cmdline[0], cmdline))
 	// 	return ;
 	cmd = get_cmd_path(cmdline[0], env);
+	if (!cmd)
+		return ; // set exit status
 	pid = fork();
 	//create ft_fork (protect)
 	if (pid == -1)

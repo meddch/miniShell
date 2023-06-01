@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:40:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/23 11:46:01 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 17:50:01 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ bool	fill_redir(t_redir *redir, t_flag redir_type, t_token *filenode)
 		return (false);
 	redir->fd_in = STDIN_FILENO;
 	redir->flags = O_RDONLY;
+	redir->redir_type = redir_type;
 	redir->file = filenode;
 	if ((redir_type & (ROUT | APPEND)))
 	{
