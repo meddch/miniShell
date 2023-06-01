@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 20:19:26 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 20:37:18 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	main(int ac ,char **av, char **env)
 		}
 		free(lineptr);
 		tree = parser(&token);
-		// displayTree(tree,0);
+		displayTree(tree,0);
 		exec(tree, my_env);
 		gc(0, 1);
 	}

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 19:52:30 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 20:42:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**get_filename(t_token *file, t_env *env)
 }
 
 
-bool	dup_to(t_tree *tree, t_env *env)
+bool	dup_to(t_tree *tree, t_env *env, int flag)
 {
 	t_redir	*redir;
 	int		fd;
@@ -72,8 +72,9 @@ bool	dup_to(t_tree *tree, t_env *env)
 		file_name = get_filename(redir->file, env);
 		if (file_name[1])
 			return (ft_printf_fd(2, "ambiguous redirect\n"), false); // use fd_printf and exit(1)
-		if ((fd = open(*file_name, redir->flags, 0664)) == -1 || dup2(fd, to_dup) == -1)
+		if ((fd = open(*file_name, redir->flags, 0664)) == -1)
 			return (false); // create ft_open to handle error and fd_print error + exit(1)  // create ft-dup to handle error and exit(1)
+		(flag == 0) && (dup2(fd, to_dup));
 		close(fd);
 		return (true);
 	}
@@ -92,7 +93,9 @@ bool	dup_to(t_tree *tree, t_env *env)
 void	exec_redir(t_tree *tree, t_env *env)
 {
 	pid_t	pid;
+	int		flag;
 	
+	flag = 0;
 	pid = fork();
 	if (pid == -1)
 		return (perror("fork"));
@@ -100,11 +103,12 @@ void	exec_redir(t_tree *tree, t_env *env)
 	{
 		while (tree && tree->node_type == NODE_REDIR)
 		{
-			if (dup_to(tree, env) == false)
+			if (dup_to(tree, env, flag) == false)
 			{	
 				tree = ((t_redir *)tree)->cmdtree;
 				break ;
 			}
+			flag = 1;
 			tree = ((t_redir *)tree)->cmdtree;
 		}
 		exec_cmd(((t_cmd *)tree), env);
