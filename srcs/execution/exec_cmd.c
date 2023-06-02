@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 12:02:16 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 12:57:53 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 	// 	return ;
 	cmd = get_cmd_path(cmdline[0], env);
 	if (!cmd)
-		return ; // set exit status
+		return (exit(1)) ; // set exit status
 	pid = ft_fork();
 	if (pid == 0)
 	{
@@ -121,6 +121,7 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 		set_status(127);
 		exit(127);
 	}
-	waitpid(pid, &status, 0);
-	set_status(status);
+	if (wait(&status) == pid)
+		set_status(status);
+	
 }

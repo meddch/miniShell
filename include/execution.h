@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:53:09 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 11:17:51 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 12:53:52 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 #include "parser.h"
 #include <errno.h>
+// #include <sys/wait.h>
+
 
 void	exec(t_tree *tree, t_env *env);
 void	exit_status(int status);
