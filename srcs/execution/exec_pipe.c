@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 13:22:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 17:10:28 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 10:56:49 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ pid_t	run_pipe(t_tree *tree,t_env *env, int fd[2], int node)
 	(node == LEFT_NODE) && (file = STDOUT_FILENO);
 	(node == RIGHT_NODE) && (end = READ_END);
 	(node == RIGHT_NODE) && (file = STDIN_FILENO);
-	pid = fork();
-	if (pid == -1)
-		perror("Pipe failed");
+	pid = ft_fork();
 	if (pid == 0)
 	{
-		(!close(file)) && (dup2(fd[end], file));
+		ft_dup2(fd[end], file);
 		(!close(fd[READ_END])) && (close(fd[WRITE_END]));
 		exec(tree, env);
 		exit(0);
@@ -41,8 +39,8 @@ void	exec_pipe(t_tree *tree, t_env *env)
 	int		fd[2];
 	int		status;
 
-	if (pipe(fd) == -1)
-		return (perror("Pipe failed"));
+	if (ft_pipe(fd) == -1)
+		return ;
 	pid[0] = run_pipe(((t_connector *)tree)->left, env, fd, LEFT_NODE);
 	if (!pid[0])
 		return ;

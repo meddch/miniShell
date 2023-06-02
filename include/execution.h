@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:53:09 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 19:48:07 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:45:47 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,7 @@ char	*get_cmd_path(char *arg, t_env *env);
 void	apply_exp(t_token **token, t_env *env);
 void 	apply_wc(t_token **token);
 void	exec_redir(t_tree *tree, t_env *env);
+void	ft_dup2(int dst, int src);
+pid_t	ft_fork(void);
+int     ft_pipe(int fildes[2]);
 #endif

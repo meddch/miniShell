@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 20:53:31 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 10:58:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 int	xpand_h_doc(t_env *env, int fd_in)
 {
 	int		fd[2];
-	char	*gnl;
+	char	*line;
 
-	if (pipe(fd) == -1)
-		return (perror("pipe"), exit(1), 0);
-	gnl = expansion(env, get_next_line(fd_in));
-	while (gnl)
+	if (ft_pipe(fd) == -1)
+		exit(1);
+	line = expansion(env, get_next_line(fd_in));
+	while (line)
 	{
-		write(fd[1], gnl, ft_strlen(gnl));
-		free(gnl);
-		gnl = expansion(env, get_next_line(fd_in));
+		write(fd[1], line, ft_strlen(line));
+		free(line);
+		line = expansion(env, get_next_line(fd_in));
 	}
 	return (close(fd[1]), fd[0]);
 }
@@ -71,21 +71,17 @@ bool	dup_to(t_tree *tree, t_env *env, int flag)
 	{
 		file_name = get_filename(redir->file, env);
 		if (file_name[1])
-			return (ft_printf_fd(2, "ambiguous redirect\n"), false); // use fd_printf and exit(1)
-		if ((fd = open(*file_name, redir->flags, 0664)) == -1)
-			return (false); // create ft_open to handle error and fd_print error + exit(1)  // create ft-dup to handle error and exit(1)
-		(flag == 0) && (dup2(fd, to_dup));
-		close(fd);
-		return (true);
+			return (ft_printf_fd(2, "ambiguous redirect\n"), false);
+		fd = open(*file_name, redir->flags, 0664);
+		if (flag == 0)
+			return (ft_dup2(fd, to_dup), true);
 	}
 	if (redir->file->h_doc && !redir->file->sub)
 		{
 			fd = xpand_h_doc(env, redir->fd_in);
-			dup2(fd, to_dup);// create ft-dup to handle error and exit(1)
+			return (ft_dup2(fd, to_dup), true);
 		}
-	else
-		dup2(redir->fd_in, to_dup);
-	return (true);
+	return (dup2(redir->fd_in, to_dup), true);
 }
 
 
@@ -96,9 +92,9 @@ void	exec_redir(t_tree *tree, t_env *env)
 	int		flag;
 	
 	flag = 0;
-	pid = fork();
+	pid = ft_fork();
 	if (pid == -1)
-		return (perror("fork"));
+		return ;
 	if (!pid)
 	{
 		while (tree && tree->node_type == NODE_REDIR)
