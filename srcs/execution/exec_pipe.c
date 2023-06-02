@@ -6,11 +6,12 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 13:22:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 10:56:49 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 11:52:57 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
+
 
 pid_t	run_pipe(t_tree *tree,t_env *env, int fd[2], int node)
 {
@@ -28,7 +29,7 @@ pid_t	run_pipe(t_tree *tree,t_env *env, int fd[2], int node)
 		ft_dup2(fd[end], file);
 		(!close(fd[READ_END])) && (close(fd[WRITE_END]));
 		exec(tree, env);
-		exit(0);
+		exit(get_status());
 	}
 	return (pid);
 }
@@ -50,6 +51,6 @@ void	exec_pipe(t_tree *tree, t_env *env)
 	close(fd[READ_END]);
 	close(fd[WRITE_END]);
 	if (wait(&status) == pid[1])
-		g_st = status;
+		set_status(status);
 	while (wait(NULL) != -1);
 }

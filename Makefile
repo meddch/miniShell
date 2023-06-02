@@ -13,7 +13,7 @@ LIBFT = libft/libft.a
 FILE = main  srcs/tokenising/tok_utils  srcs/tokenising/utils  srcs/tokenising/tokenizer gc/gc srcs/tokenising/lexer  srcs/parsing/parser  srcs/parsing/list_utils  srcs/parsing/parser_utils \
 	   srcs/parsing/tree_constractor   gnl/get_next_line   gnl/get_next_line_utils srcs/builtins/utils/ft_getvenv srcs/builtins/utils/struct_utils \
 	   srcs/builtins/utils/print_utils srcs/builtins/utils/ft_printf_fd srcs/builtins/ft_env \
-	   srcs/execution/exec_cmd srcs/execution/exec_oper srcs/execution/exec_pipe srcs/execution/exec_redir \
+	   srcs/execution/exec_cmd srcs/execution/exec_oper srcs/execution/exec_pipe srcs/execution/exec_redir srcs/execution/exit_status \
 	   srcs/execution/exec_subsh srcs/execution/exec_utils srcs/execution/execution \
 	   srcs/expansion/expand_wlc srcs/expansion/expander srcs/expansion/expander_utils \
 

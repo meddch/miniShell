@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 17:20:16 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 11:58:10 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,7 @@ t_env	*ft_lstchr(t_env *lst, char *variable)
 // 	return (false);
 // }
 
-void	exit_status(int status)
-{
-	if (WIFEXITED(status))
-		g_st = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-		g_st = 128 + WTERMSIG(status);
-}
+
 
 char	*get_cmd_path(char *arg, t_env *env)
 {

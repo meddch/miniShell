@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 10:59:24 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 12:02:16 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 	pid_t pid;
 	char	**cmdline;
 	char	*cmd;
+	int		status;
 
 	cmdline = get_cmdline(tree, env);
 	// if (is_builtin(cmdline[0], cmdline))
@@ -113,12 +114,13 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 	if (!cmd)
 		return ; // set exit status
 	pid = ft_fork();
-	if (pid == -1)
-		return ;
 	if (pid == 0)
 	{
 		execve(cmd, cmdline, switch_env(env));
 		ft_printf_fd(2, "command not found: %s\n", cmdline[0]);
+		set_status(127);
+		exit(127);
 	}
-	waitpid(pid, &g_st, 0);
+	waitpid(pid, &status, 0);
+	set_status(status);
 }

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 10:58:23 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 11:59:42 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	xpand_h_doc(t_env *env, int fd_in)
 	int		fd[2];
 	char	*line;
 
-	if (ft_pipe(fd) == -1)
-		exit(1);
+	ft_pipe(fd);
 	line = expansion(env, get_next_line(fd_in));
 	while (line)
 	{
@@ -71,7 +70,7 @@ bool	dup_to(t_tree *tree, t_env *env, int flag)
 	{
 		file_name = get_filename(redir->file, env);
 		if (file_name[1])
-			return (ft_printf_fd(2, "ambiguous redirect\n"), false);
+			return (ft_printf_fd(2, "ambiguous redirect\n"), exit(1), false);
 		fd = open(*file_name, redir->flags, 0664);
 		if (flag == 0)
 			return (ft_dup2(fd, to_dup), true);
@@ -90,11 +89,10 @@ void	exec_redir(t_tree *tree, t_env *env)
 {
 	pid_t	pid;
 	int		flag;
+	int		status;
 	
 	flag = 0;
 	pid = ft_fork();
-	if (pid == -1)
-		return ;
 	if (!pid)
 	{
 		while (tree && tree->node_type == NODE_REDIR)
@@ -110,5 +108,6 @@ void	exec_redir(t_tree *tree, t_env *env)
 		exec_cmd(((t_cmd *)tree), env);
 		exit(0);
 	}
-	waitpid(pid, &g_st, 0);
+	waitpid(pid, &status, 0);
+	set_status(status);
 }

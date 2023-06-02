@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:53:09 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 10:45:47 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 11:17:51 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define RIGHT_NODE	3
 
 #include "parser.h"
+#include <errno.h>
 
 void	exec(t_tree *tree, t_env *env);
 void	exit_status(int status);
@@ -34,4 +35,7 @@ void	exec_redir(t_tree *tree, t_env *env);
 void	ft_dup2(int dst, int src);
 pid_t	ft_fork(void);
 int     ft_pipe(int fildes[2]);
+void	set_status(int status);
+int     get_status(void);
+void	check_status(void);
 #endif

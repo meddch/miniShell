@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 09:08:56 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 11:46:13 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_token	*tokenizer(char *line)
 	}
 	add_back_tok(&lex.token, new_tok(END, false, false, ft_strdup("END")));
 	if(!check_syntax(&lex))
-		return (NULL);
+		return (set_status(258), NULL);
 	return (lex.token);
 }
 

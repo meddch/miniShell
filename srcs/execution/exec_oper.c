@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:58:51 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 10:45:37 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 11:56:24 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ void	ft_dup2(int dst, int src)
 {
 	close(src);
 	if (dup2(dst, src) == -1)
+	{
 		perror("dup2");
+		exit(1);
+	}
+	return ;
 }
 
 pid_t	ft_fork(void)
@@ -34,7 +38,10 @@ pid_t	ft_fork(void)
 
 	pid = fork();
 	if (pid == -1)
+	{
 		perror("fork");
+		exit(1);
+	}	
 	return (pid);
 }
 
@@ -44,6 +51,9 @@ int	ft_pipe(int fd[2])
 
 	ret = pipe(fd);
 	if (ret == -1)
+	{
 		perror("pipe");
+		exit(1);
+	}
 	return (ret);
 }
