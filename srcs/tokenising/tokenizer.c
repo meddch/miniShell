@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 18:12:51 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 09:08:56 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ bool	check_syntax(t_lex *lex)
 	token = lex->token;
 	flag = 0;
 	if (lex->sq || lex->dq)
-		return (printf("%s Quotes ?\n", SYNTX), false);
+		return (ft_printf_fd(2, "%s Quotes ?\n", SYNTX), false);
 	while (token)
 	{
 		if (flag < 0)
-			return (printf("%s Parenthesis ?\n", SYNTX), false); //use fd_printf
+			return (ft_printf_fd(2, "%s Parenthesis ?\n", SYNTX), false); //use fd_printf
 		if (token->type == OPAR)
 			flag++;
 		else if (token->type == CPAR)
@@ -83,7 +83,7 @@ bool	check_syntax(t_lex *lex)
 		token = token->next;
 	}
 	if (flag) 
-		return (printf("%s Parenthesis ?\n", SYNTX), false);
+		return (ft_printf_fd(2, "%s Parenthesis ?\n", SYNTX), false);
 	return (true);
 }
 

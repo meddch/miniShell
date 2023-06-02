@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 20:37:18 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 09:14:05 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,22 @@ void displayTree(t_tree *root, int level)
     }
 }
 
-
+void print_token(t_token *token)
+{
+    if (!token)
+        return;
+    while(token)
+    {
+        printf(" token type %d\n   token data : %s\n",token->type, token->data);
+		while (token->sub)
+       		{
+			 printf("                  token sub : %s\n",token->sub->data);
+				token->sub = token->sub->next;	
+			}
+			
+        token = token->next;
+    }
+}
 
 int	main(int ac ,char **av, char **env)
 {	
@@ -90,8 +105,9 @@ int	main(int ac ,char **av, char **env)
 			token = tokenizer(lineptr);
 		}
 		free(lineptr);
+		// print_token(token);
 		tree = parser(&token);
-		displayTree(tree,0);
+        // displayTree(tree,0);
 		exec(tree, my_env);
 		gc(0, 1);
 	}

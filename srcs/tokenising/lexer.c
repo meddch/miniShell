@@ -6,24 +6,12 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 15:37:33 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 09:14:10 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
  #include "../../include/minishel.h"
 
-
-
-void print_token(t_token *token)
-{
-    if (!token)
-        return;
-    while(token)
-    {
-        printf(" token type %d\n   token data : %s\n",token->type, token->data);
-        token = token->next;
-    }
-}
 
 int	check_token(t_lex *lex, char **line)
 {

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:34:33 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 19:57:55 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 08:47:20 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_non_var(char **to_check)
 	tmp = *to_check;
 	while(*tmp && *tmp != '$')
 		tmp++;
-	hold = ft_strndup((*to_check), (tmp + 1));
+	hold = ft_strndup((*to_check), (tmp ));
 	(*to_check) = tmp;
 	return (hold);
 }

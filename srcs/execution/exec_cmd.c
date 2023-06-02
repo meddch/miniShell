@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 18:28:53 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 09:21:53 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	apply_exp(t_token **token, t_env *env)
 		add_back_tok(&exp, expand_node(env, tmp->data, (tmp->h_doc == 0)));
 		while(tmp->sub)
 		{
-			add_back_sub(&exp->sub, expand_sub(env, tmp->sub->data, (tmp->sub->h_doc == 0)));
+			add_back_sub(&exp, expand_sub(env, tmp->sub->data, (tmp->sub->h_doc == 0)));
 			tmp->sub = tmp->sub->sub;
 		}
 		tmp = tmp->next;
@@ -44,7 +44,7 @@ void 	apply_wc(t_token **token)
 		add_back_tok(&exp, expanand_wc(tmp->data));
 		while(tmp->sub)
 		{
-			add_back_sub(&exp->sub, expanand_wc(tmp->sub->data));
+			add_back_sub(&exp, expanand_wc(tmp->sub->data));
 			tmp->sub = tmp->sub->sub;
 		}
 		tmp = tmp->next;
@@ -61,7 +61,6 @@ char	**get_cmdline(t_cmd *tree, t_env *env)
 	int		size;
 	
 	i = 0;
-	// printf("----------------->%s\n",tree->list->data);
 	cmdlist = tree->list;
 	apply_exp(&cmdlist, env);
 	apply_wc(&cmdlist);
@@ -89,7 +88,7 @@ char	**switch_env(t_env *myenv)
 	char	**env;
 
 	i = 0;
-	len = ft_envsize(myenv); // need env utils (in builltins)
+	len = ft_envsize(myenv);
 	env = gc(sizeof(char *) * (len + 1), 0);
 	env[len] = 0;
 	while (myenv)
@@ -120,7 +119,7 @@ void	exec_cmd(t_cmd *tree, t_env *env)
 	else if (pid == 0)
 	{
 		execve(cmd, cmdline, switch_env(env));
-		printf("command not found: %s\n", cmdline[0]); //fd_printf 
+		ft_printf_fd(2, "command not found: %s\n", cmdline[0]); //fd_printf 
 	}
 	waitpid(pid, &g_st, 0);
 }
