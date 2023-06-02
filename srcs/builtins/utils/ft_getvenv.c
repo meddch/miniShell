@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:28:09 by azari             #+#    #+#             */
-/*   Updated: 2023/06/01 13:44:03 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:26:39 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ char	*get_var(char *line)
 	i = 0;
 	while (line[i] && line[i + 1] != '=')
 		i++;
-	var = ft_sub(line, 0, i + 1);
+	if (line[i] == '+')
+		var = ft_sub(line, 0, i);
+	else
+		var = ft_sub(line, 0, i + 1);
 	return (var);
 }
 

@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:09:44 by azari             #+#    #+#             */
-/*   Updated: 2023/06/02 14:32:48 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/02 20:40:46 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,17 @@ void	ft_print_export(t_env *env)
 
 int	ft_check_id(char *id)
 {
-	int	eq_index;
+	int	index;
 
-	eq_index = 1;
-	if (id[0] != '_' && !ft_isalpha(id[0]))
-		return (-1)	;
-	while (id[eq_index] && id[eq_index] != '=')
-	{
-		if (!ft_isalnum(id[eq_index]) && id[eq_index] != '_')
-			return (-1);
-		eq_index++;
-	}
-	if (id[eq_index] == '=' && id[eq_index + 1])
-		return (eq_index);
+	index = 1;
+	if (!ft_isalpha(id[0]) && id[0] != '_')
+		return (0);
+	while (id[index] && (ft_isalnum(id[index]) || id[index] == '_'))
+		index++;
+	if (id[index] == '+' && id[index + 1] == '=' && ft_strchr(id, '='))
+		return (-1);
+	if (id[index] == '=')
+		return (1);
 	return (0);
 }
 
@@ -62,13 +60,21 @@ char	**ft_get_varval(char *arg)
 	return (varval);
 }
 
-void	ft_add_front(t_env **env, t_env *new)
+void	ft_export_node(t_env **env, char **node, int def, int flag)
 {
-	t_env *tmp;
-	
-	tmp = *env;
-	new->next = tmp;
-	*env = new;
+	t_env	*srch;
+	char	*oval;
+
+	srch = ft_srchenv(*env, node[0]);
+	if (srch && def == 0)
+		return (free(node[0]), free(node[1]));
+	if (!srch)
+		return (ft_envadd_back(env, ft_env_new(node[0], node[1])));
+	oval = srch->val;
+	free(node[0]);
+	if (!flag)
+		return (srch->val = node[1], free(oval));
+	return (srch->val = ft_strjoin(oval, node[1]), free(oval));
 }
 
 void	export(t_env **env, char **args)
@@ -76,7 +82,6 @@ void	export(t_env **env, char **args)
 	int		i;
 	int		check;
 	char	**node;
-	t_env	*tmp;
 
 	i = 0;
 	if (!args[1])
@@ -85,13 +90,14 @@ void	export(t_env **env, char **args)
 	{
 		check = ft_check_id(args[i]);
 		node = ft_get_varval(args[i]);
-		if (check != -1)
-		{
-			tmp = ft_env_new(node[0], node[1]);
-			ft_envadd_back(env, tmp);
-		}
-		else
-			ft_printf_fd(2, "export: `%s': not a valid identifier\n", node[0]);
+		if (!check)
+			ft_printf_fd(2, "export: `%s': not a valid identifier\n", args[i]);
+		else if (check == -1)
+			ft_export_node(env, node, 1, 1);
+		else if (check && !ft_strchr(args[i], '='))
+			ft_export_node(env, node, 0, 0);
+		else if (check && ft_strchr(args[i], '='))
+			ft_export_node(env, node, 1, 0);
+		free (node);
 	}
 }
-
