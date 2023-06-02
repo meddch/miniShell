@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 11:59:42 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 19:09:57 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ bool	dup_to(t_tree *tree, t_env *env, int flag)
 			return (ft_printf_fd(2, "ambiguous redirect\n"), exit(1), false);
 		fd = open(*file_name, redir->flags, 0664);
 		if (flag == 0)
-			return (ft_dup2(fd, to_dup), true);
+			ft_dup2(fd, to_dup);
+		return (true);
 	}
 	if (redir->file->h_doc && !redir->file->sub)
 		{

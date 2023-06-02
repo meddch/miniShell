@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:58:51 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 11:56:24 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 18:56:18 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exec_oper(t_tree *tree, t_env *env)
 
 void	ft_dup2(int dst, int src)
 {
-	close(src);
+	// close(src);
 	if (dup2(dst, src) == -1)
 	{
 		perror("dup2");
