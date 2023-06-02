@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:32:30 by azari             #+#    #+#             */
-/*   Updated: 2023/05/31 19:08:41 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/02 14:25:23 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_env	*ft_env_new(char *evar, char *eval)
 		return (NULL);
 	new->var = evar;
 	new->val = eval;
-	new->def= 1; 
+	new->def= 0; 
 	new->next = NULL;
 	return (new);
 }
