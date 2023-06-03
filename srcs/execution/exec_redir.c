@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 19:09:57 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 11:59:26 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ bool	dup_to(t_tree *tree, t_env *env, int flag)
 		if (file_name[1])
 			return (ft_printf_fd(2, "ambiguous redirect\n"), exit(1), false);
 		fd = open(*file_name, redir->flags, 0664);
+		if (fd == -1)
+			return (ft_printf_fd(2, "%s : No such file or directory\n", *file_name), exit(1), false);
 		if (flag == 0)
 			ft_dup2(fd, to_dup);
 		return (true);
@@ -86,7 +88,7 @@ bool	dup_to(t_tree *tree, t_env *env, int flag)
 
 
 
-void	exec_redir(t_tree *tree, t_env *env)
+void	exec_redir(t_tree *tree, t_env **env)
 {
 	pid_t	pid;
 	int		flag;
@@ -98,10 +100,10 @@ void	exec_redir(t_tree *tree, t_env *env)
 	{
 		while (tree && tree->node_type == NODE_REDIR)
 		{
-			if (dup_to(tree, env, flag) == false)
+			if (dup_to(tree, *env, flag) == false)
 			{	
 				tree = ((t_redir *)tree)->cmdtree;
-				break ;
+				return ;
 			}
 			flag = 1;
 			tree = ((t_redir *)tree)->cmdtree;

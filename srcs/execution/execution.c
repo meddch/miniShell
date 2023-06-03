@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:54:14 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 19:48:49 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/03 09:37:29 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
-void	exec(t_tree *tree, t_env *env)
+void	exec(t_tree *tree, t_env **env)
 {
 	if (!tree)
 		return ;

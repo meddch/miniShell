@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 11:58:10 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 12:35:17 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,24 @@ t_env	*ft_lstchr(t_env *lst, char *variable)
 	return (NULL);
 }
 
-// bool	is_builtin(char *cmd, char **argv)
-// {
-// 	if (!ft_strncmp(cmd, "echo", sizeof("echo") + 1))
-// 		return (echo(argv), true);
-// 	else if (!ft_strncmp(cmd, "cd", sizeof("cd") + 1))
-// 		return (cd(argv), true);
-// 	else if (!ft_strncmp(cmd, "pwd", sizeof("pwd") + 1))
-// 		return (pwd(argv), true);
-// 	else if (!ft_strncmp(cmd, "export", sizeof("export") + 1))
-// 		return (export(argv), true);
-// 	else if (!ft_strncmp(cmd, "unset", sizeof("unset") + 1))
-// 		return (unset(argv), true);
-// 	else if (!ft_strncmp(cmd, "env", sizeof("env") + 1))
-// 		return (ft_env(argv), true);
-// 	else if (!ft_strncmp(cmd, "exit", sizeof("exit") + 1))
-// 		return (ft_exit(argv), true);
-// 	return (false);
-// }
+bool	is_builtin(char *cmd, char **argv, t_env **env)
+{
+	if (!ft_strncmp(cmd, "echo", sizeof("echo") + 1))
+		return (echo(argv), true);
+	// else if (!ft_strncmp(cmd, "cd", sizeof("cd") + 1))
+	// 	return (cd(argv), true);
+	else if (!ft_strncmp(cmd, "pwd", sizeof("pwd") + 1))
+		return (pwd(), true);
+	else if (!ft_strncmp(cmd, "export", sizeof("export") + 1))
+		return (export(env, argv), true);
+	else if (!ft_strncmp(cmd, "unset", sizeof("unset") + 1))
+		return (unset(env, argv), true);
+	else if (!ft_strncmp(cmd, "env", sizeof("env") + 1))
+		return (ft_env(*env), true);
+	// else if (!ft_strncmp(cmd, "exit", sizeof("exit") + 1))
+	// 	return (ft_exit(argv), true);
+	return (false);
+}
 
 
 
@@ -58,7 +58,9 @@ char	*get_cmd_path(char *arg, t_env *env)
 	t_env	*tmp;
 
 	i = -1;
-	if (*arg == '/' && !access(arg, X_OK))
+	if (!arg)
+		return (NULL);
+	if (*arg && *arg == '/' && !access(arg, X_OK))
 		return (arg);
 	tmp = ft_lstchr(env, "PATH");
 	if (!tmp)

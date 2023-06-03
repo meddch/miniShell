@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:37:24 by azari             #+#    #+#             */
-/*   Updated: 2023/05/31 19:12:16 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 13:42:30 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,15 @@ void	ft_putstr__fd(char *s, int fd)
 		return ;
 	write(fd, s, ft__strlen(s));
 }
-char	*ft_sub(char const *s, unsigned int start, size_t len)
-{
-	char	*sub;
-	size_t	i;
-	size_t	lens;
 
-	i = 0;
-	if (s)
-	{
-		lens = ft__strlen(s);
-		if (len > lens)
-			len = lens;
-		sub = (char *)malloc((len + 1) * sizeof(char));
-		if (!sub)
-			return (0);
-		while (i < len && s[start] && start <= lens)
-			sub[i++] = s[start++];
-		sub[i] = '\0';
-		return (sub);
-	}
-	return (0);
+void	ft_putendl_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	write(fd, s, ft__strlen(s));
+	write(fd, "\n", 1);
+}
+void ft_putstr(char *str)
+{
+	write(1, str, ft__strlen(str));
 }

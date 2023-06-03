@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_status.c                                      :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 11:15:58 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 12:00:32 by mechane          ###   ########.fr       */
+/*   Created: 2023/04/10 05:52:20 by azari             #+#    #+#             */
+/*   Updated: 2023/06/03 13:12:00 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishel.h"
+#include "../../include/builtins.h"
 
-void	set_status(int status)
+
+void	ft_putstrr(char *str)
 {
-	g_st = status / 256;
+	write(1, str, ft_strlen(str));
+	write(1, "\n", 1);
 }
 
-int	get_status(void)
+void	pwd(void)
 {
-	if (WIFEXITED(g_st))
-		return (g_st = WEXITSTATUS(g_st));
-	return (1);
+	char	path[PATH_MAX];
+
+	if (getcwd(path, sizeof(path)))
+		ft_putstrr(path);
 }

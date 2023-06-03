@@ -6,13 +6,13 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:58:51 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 18:56:18 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 09:36:14 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
-void	exec_oper(t_tree *tree, t_env *env)
+void	exec_oper(t_tree *tree, t_env **env)
 {
 	exec(((t_connector *)tree)->left, env);
 	if (tree->node_type == NODE_AND && !g_st)

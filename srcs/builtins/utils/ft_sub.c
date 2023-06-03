@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_status.c                                      :+:      :+:    :+:   */
+/*   ft_sub.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 11:15:58 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 12:00:32 by mechane          ###   ########.fr       */
+/*   Created: 2023/06/01 13:32:18 by azari             #+#    #+#             */
+/*   Updated: 2023/06/03 13:13:17 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishel.h"
+#include "../../../include/builtins.h"
 
-void	set_status(int status)
+char	*ft_sub(char const *s, unsigned int start, size_t len)
 {
-	g_st = status / 256;
-}
+	char	*sub;
+	size_t	i;
+	size_t	lens;
 
-int	get_status(void)
-{
-	if (WIFEXITED(g_st))
-		return (g_st = WEXITSTATUS(g_st));
-	return (1);
+	i = 0;
+	if (s)
+	{
+		lens = ft_strlen(s);
+		if (len > lens)
+			len = lens;
+		sub = (char *)malloc((len + 1) * sizeof(char));
+		if (!sub)
+			return (0);
+		while (i < len && s[start] && start <= lens)
+			sub[i++] = s[start++];
+		sub[i] = '\0';
+		return (sub);
+	}
+	return (0);
 }

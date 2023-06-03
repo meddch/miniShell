@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 12:57:53 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 12:31:09 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,25 +100,26 @@ char	**switch_env(t_env *myenv)
 	return (env);
 }
 
-void	exec_cmd(t_cmd *tree, t_env *env)
+void	exec_cmd(t_cmd *tree, t_env **env)
 {
 	pid_t pid;
 	char	**cmdline;
 	char	*cmd;
 	int		status;
 
-	cmdline = get_cmdline(tree, env);
-	// if (is_builtin(cmdline[0], cmdline))
-	// 	return ;
-	cmd = get_cmd_path(cmdline[0], env);
+	cmdline = get_cmdline(tree, *env);
+	if (!cmdline)
+		return ;
+	// if (is_builtin(cmdline[0], cmdline, env))
+		// return ;
+	cmd = get_cmd_path(cmdline[0], *env);
 	if (!cmd)
 		return (exit(1)) ; // set exit status
 	pid = ft_fork();
 	if (pid == 0)
 	{
-		execve(cmd, cmdline, switch_env(env));
+		execve(cmd, cmdline, switch_env(*env));
 		ft_printf_fd(2, "command not found: %s\n", cmdline[0]);
-		set_status(127);
 		exit(127);
 	}
 	if (wait(&status) == pid)

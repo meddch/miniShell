@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 11:42:45 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 11:56:45 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_tree	*parse_cmd(t_token **token)
 	if (!tree)
 		return (NULL);
 	if ((*token)->type != WORD)
-		return (NULL);
+		return (tree);
 	while ((*token) && (*token)->type == WORD)
 	{
 		cpy_token = copy_token(token);
@@ -99,7 +99,7 @@ t_tree	*parse_cmd(t_token **token)
 	return (tree);
 }
 
-// code fd_print to print syntax_error
+
 
 t_tree	*parser(t_token **token)
 {
@@ -110,7 +110,7 @@ t_tree	*parser(t_token **token)
 	tree = parse_block(token);
 	if (((*token)->type != END) && !tree)
 	{
-		printf("%s unexpected token `%s'\n",SYNTX, (*token)->data);
+		ft_printf_fd(2, "%s unexpected token `%s'\n",SYNTX, (*token)->data);
 		set_status(258);
 		return (NULL);
 	}

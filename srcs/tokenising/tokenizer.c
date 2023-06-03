@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 11:46:13 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 13:03:48 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_symbols(t_lex *lex, char **line)
 	char *cmd;
 	
 	cmd = *line;
-	if (ft_strchr("|<>&", *cmd) && *cmd == *(cmd + 1))
+	if (ft_strchr("|<>&", *cmd) && (*cmd == *(cmd + 1)))
 		lex->is_d = 1;
 	if (*cmd != '\'' && *cmd != '\"')
 		lex->spc = true;
@@ -58,7 +58,7 @@ void	check_symbols(t_lex *lex, char **line)
 	if (lex->is_d == 1)
 	{
 		lex->is_d = 0;		
-		cmd++;
+		(*cmd + 1) && (cmd++);
 	}
 	*line = cmd;
 }

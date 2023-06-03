@@ -16,6 +16,8 @@ FILE = main  srcs/tokenising/tok_utils  srcs/tokenising/utils  srcs/tokenising/t
 	   srcs/execution/exec_cmd srcs/execution/exec_oper srcs/execution/exec_pipe srcs/execution/exec_redir srcs/execution/exit_status \
 	   srcs/execution/exec_subsh srcs/execution/exec_utils srcs/execution/execution \
 	   srcs/expansion/expand_wlc srcs/expansion/expander srcs/expansion/expander_utils \
+	   srcs/builtins/echo   srcs/builtins/export   srcs/builtins/pwd    srcs/builtins/unset \
+	   srcs/builtins/utils/ft_sub \
 
 SRCS = $(addsuffix .c, $(FILE))
 OBJS = $(addsuffix .o, $(FILE))

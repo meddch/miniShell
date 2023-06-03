@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getvenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:28:09 by azari             #+#    #+#             */
-/*   Updated: 2023/05/31 19:07:51 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/03 13:12:57 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@ char	*get_var(char *line)
 	i = 0;
 	while (line[i] && line[i + 1] != '=')
 		i++;
-	var = ft_sub(line, 0, i + 1);
+	if (line[i] == '+')
+		var = ft_sub(line, 0, i);
+	else
+		var = ft_sub(line, 0, i + 1);
 	return (var);
 }
 
-char	*get_val(char	*line)
+char	*get_val(char *line)
 {
 	char	*val;
 	size_t	i;
@@ -33,7 +36,7 @@ char	*get_val(char	*line)
 	while (line[i] && line[i] != '=')
 		i++;
 	(line[i] == '=') && (i += 1);
-	val = ft_sub(line, i, ft__strlen(line + i));
+	val = ft_sub(line, i, ft_strlen(line + i));
 	return (val);
 }
 
