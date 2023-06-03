@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:22:32 by azari             #+#    #+#             */
-/*   Updated: 2023/06/03 13:02:03 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 13:57:53 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	ft_env(t_env *virt);
 void	echo(char **args);
 t_env	*ft_srchenv(t_env *env, char *var);
 void	ft_export_node(t_env **env, char **node, int def, int flag);
+char	*ft_join(const char *s1, const char *s2);
 void	pwd(void);
 #endif

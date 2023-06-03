@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 12:35:17 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 14:00:04 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ t_env	*ft_lstchr(t_env *lst, char *variable)
 
 bool	is_builtin(char *cmd, char **argv, t_env **env)
 {
-	if (!ft_strncmp(cmd, "echo", sizeof("echo") + 1))
+	if (!ft_strncmp(cmd, "echo", ft_strlen("echo")))
 		return (echo(argv), true);
-	// else if (!ft_strncmp(cmd, "cd", sizeof("cd") + 1))
+	// else if (!ft_strncmp(cmd, "cd", ft_strlen("cd") + 1))
 	// 	return (cd(argv), true);
-	else if (!ft_strncmp(cmd, "pwd", sizeof("pwd") + 1))
+	else if (!ft_strncmp(cmd, "pwd", ft_strlen("pwd") + 1))
 		return (pwd(), true);
-	else if (!ft_strncmp(cmd, "export", sizeof("export") + 1))
+	else if (!ft_strncmp(cmd, "export", ft_strlen("export") + 1))
 		return (export(env, argv), true);
-	else if (!ft_strncmp(cmd, "unset", sizeof("unset") + 1))
+	else if (!ft_strncmp(cmd, "unset", ft_strlen("unset") + 1))
 		return (unset(env, argv), true);
-	else if (!ft_strncmp(cmd, "env", sizeof("env") + 1))
+	else if (!ft_strncmp(cmd, "env", ft_strlen("env") + 1))
 		return (ft_env(*env), true);
-	// else if (!ft_strncmp(cmd, "exit", sizeof("exit") + 1))
+	// else if (!ft_strncmp(cmd, "exit", ft_strlen("exit") + 1))
 	// 	return (ft_exit(argv), true);
 	return (false);
 }

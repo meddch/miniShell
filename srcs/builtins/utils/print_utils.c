@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:37:24 by azari             #+#    #+#             */
-/*   Updated: 2023/06/01 13:42:30 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/03 13:57:37 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft__strlen(const char *str)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (i);
 	while (str[i])
 		i++;
 	return (i);
@@ -46,4 +48,32 @@ void	ft_putendl_fd(char *s, int fd)
 void ft_putstr(char *str)
 {
 	write(1, str, ft__strlen(str));
+}
+
+char	*ft_join(const char *s1, const char *s2)
+{
+	char	*newstr;
+	int		s1_len;
+	int		s2_len;
+
+	if (!(s1) && !(s2))
+		return (NULL);
+	if (!s1)
+	{
+		newstr = ft_strdup(s2);
+		return (newstr);
+	}
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	newstr = malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!newstr)
+		return (NULL);
+	while (*s1)
+		*newstr++ = *s1++;
+	if (!s2)
+		return (newstr);
+	while (*s2)
+		*newstr++ = *s2++;
+	*newstr = '\0';
+	return (newstr - s1_len - s2_len);
 }

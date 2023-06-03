@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 12:31:09 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 14:12:36 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	exec_cmd(t_cmd *tree, t_env **env)
 	if (!cmdline)
 		return ;
 	// if (is_builtin(cmdline[0], cmdline, env))
-		// return ;
+	// 	return ;
 	cmd = get_cmd_path(cmdline[0], *env);
 	if (!cmd)
 		return (exit(1)) ; // set exit status

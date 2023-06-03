@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 11:56:45 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 16:53:24 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ t_tree *parse_block(t_token **token)
 		return (NULL);
 	tree = parse_pipeline(token);
 	if (!tree)
-	{
 		return (NULL);
-	}
 	while((*token) && ((*token)->type & (AND | OR)))
 	{
 		((*token)->type == AND) && (tree = constract_block(NODE_AND, tree, NULL));
@@ -65,7 +63,7 @@ t_tree *parse_sub(t_token **token)
 		*token = (*token)->next;
 		tree = constract_sub(parse_block(token));
 		if(!((t_subsh *)tree)->subsh || (*token)->type != CPAR)
-			return(NULL);
+			return (NULL);
 		*token = (*token)->next;
 		return (parse_redir(tree, token));
 	}
@@ -79,15 +77,17 @@ t_tree	*parse_cmd(t_token **token)
 	t_cmd	*tmp;
 	t_token *cpy_token;
 	
-	if (!(*token) || (*token)->type == END)
+	if (!(*token))
 		return (NULL);
 	tree = new_cmd();
 	tmp = ((t_cmd *)tree);
 	tree = parse_redir(tree, token);
 	if (!tree)
 		return (NULL);
-	if ((*token)->type != WORD)
+	if (((*token)->type) == END)
 		return (tree);
+	if ((((*token)->type) != (WORD)))
+		return (NULL);
 	while ((*token) && (*token)->type == WORD)
 	{
 		cpy_token = copy_token(token);
@@ -106,11 +106,14 @@ t_tree	*parser(t_token **token)
 	t_tree	*tree;
 
 	if (!*token || (*token)->type == END)
-		return (NULL);
+			return (NULL);
 	tree = parse_block(token);
-	if (((*token)->type != END) && !tree)
+	if (!tree || (*token)->type != END)
 	{
-		ft_printf_fd(2, "%s unexpected token `%s'\n",SYNTX, (*token)->data);
+		if (!(((*token)->type) & (WORD | END)))
+			ft_printf_fd(2, "syntax error near unexpected token `%s'\n", (*token)->data);
+		else
+			ft_printf_fd(2, "syntax error near unexpected token `newline'\n");
 		set_status(258);
 		return (NULL);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:53:22 by azari             #+#    #+#             */
-/*   Updated: 2023/06/02 13:02:23 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/03 13:51:30 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	ft_env(t_env *virt)
 {
+	
 	if (!virt)
 		return ;
 	while (virt)
 	{
-		if (virt->def)
+		if (virt->val != NULL)
 			printf("%s=%s\n", virt->var, virt->val);
 		virt = virt->next;
 	}

@@ -1,0 +1,20 @@
+total 536
+-rw-r--r--   1 mechane  candidate      85 Jun  3 16:41 -la
+drwxr-xr-x  19 mechane  candidate     646 Jun  3 16:41 .
+drwxr-xr-x   7 mechane  candidate     238 Jun  3 14:23 ..
+-rw-r--r--@  1 mechane  candidate    6148 Jun  3 09:24 .DS_Store
+drwxr-xr-x  15 mechane  candidate     510 Jun  3 13:43 .git
+-rw-r--r--   1 mechane  candidate      53 Jun  1 13:46 .gitignore
+-rw-r--r--   1 mechane  candidate    1625 Jun  3 09:43 Makefile
+-rw-r--r--   1 mechane  candidate       0 Jun  3 16:42 a
+-rwxr-xr-x   1 mechane  candidate   49456 Jun  1 15:04 a.out
+drwxr-xr-x   5 mechane  candidate     170 Jun  3 13:12 gc
+drwxr-xr-x   7 mechane  candidate     238 Jun  3 13:12 gnl
+drwxr-xr-x   8 mechane  candidate     272 Jun  3 09:25 include
+drwxr-xr-x  83 mechane  candidate    2822 Jun  3 13:13 libft
+-rw-r--r--   1 mechane  candidate    3143 Jun  3 16:31 main.c
+-rw-r--r--   1 mechane  candidate   15144 Jun  3 16:31 main.o
+-rwxr-xr-x   1 mechane  candidate  168240 Jun  3 16:41 minishell
+drwxr-xr-x   8 mechane  candidate     272 Jun  3 09:22 srcs
+-rw-r--r--   1 mechane  candidate    1356 Jun  3 09:25 test.c
+-rw-r--r--   1 mechane  candidate     532 Jun  3 09:25 txt.md

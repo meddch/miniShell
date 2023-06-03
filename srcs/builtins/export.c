@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:09:44 by azari             #+#    #+#             */
-/*   Updated: 2023/06/02 20:40:46 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/03 13:56:09 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_check_id(char *id)
 		return (-1);
 	if (id[index] == '=')
 		return (1);
-	return (0);
+	return (1);
 }
 
 char	**ft_get_varval(char *arg)
@@ -74,7 +74,7 @@ void	ft_export_node(t_env **env, char **node, int def, int flag)
 	free(node[0]);
 	if (!flag)
 		return (srch->val = node[1], free(oval));
-	return (srch->val = ft_strjoin(oval, node[1]), free(oval));
+	return (srch->val = ft_join(oval, node[1]), free(oval));
 }
 
 void	export(t_env **env, char **args)
