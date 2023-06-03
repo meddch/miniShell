@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 16:49:55 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 20:19:44 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,17 @@ int	main(int ac ,char **av, char **env)
 		tree = NULL;
 		token = NULL;
         lineptr = readline(prompt);
-		if (*lineptr)
+        if (lineptr && *lineptr)
 		{
 			add_history(lineptr);
 			token = tokenizer(lineptr);
-		}
 		free(lineptr);
 		// print_token(token);
 		tree = parser(&token);
         // displayTree(tree,0);
 		exec(tree, &my_env);
 		gc(0, 1);
+		}
 	}
 	exit(g_st);
 

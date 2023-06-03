@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 13:03:48 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 20:29:29 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	check_symbols(t_lex *lex, char **line)
 			false, false, ft_strndup(cmd, (cmd + lex->is_d + 1))));
 	if (lex->is_d == 1)
 	{
-		lex->is_d = 0;		
+		lex->is_d = 0;
 		(*cmd + 1) && (cmd++);
 	}
 	*line = cmd;
@@ -75,7 +75,7 @@ bool	check_syntax(t_lex *lex)
 	while (token)
 	{
 		if (flag < 0)
-			return (ft_printf_fd(2, "%s Parenthesis ?\n", SYNTX), false); //use fd_printf
+			return (ft_printf_fd(2, "%s Parenthesis ?\n", SYNTX), false); 
 		if (token->type == OPAR)
 			flag++;
 		else if (token->type == CPAR)

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:55:26 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 15:11:18 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 20:42:14 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_token	*expanand_wc(char *pattern)
 	item = readdir(dirc);
 	while (item)
 	{
-		if (match(pattern, item->d_name))
+		if (pattern && match(pattern, item->d_name))
 			add_back_tok(&token, new_tok(WORD, 0, 0, ft_strdup(item->d_name)));
 		item = readdir(dirc);
 	}

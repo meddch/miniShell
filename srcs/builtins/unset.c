@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:15:28 by azari             #+#    #+#             */
-/*   Updated: 2023/06/03 11:28:42 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 19:54:37 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,50 +15,35 @@
 void	ft_delnode(t_env **env, char *var)
 {
 	t_env	*cur;
-	t_env	*fr;
+	t_env	*unset;
 
 	cur = *env;
-	while (cur->next)
+	unset = ft_srchenv(*env, var);
+	if (!unset)
+		return ;
+	while (cur)
 	{
-		if (cur->next->var == var && cur->next->next)
+		if (cur->next == unset)
 		{
-			fr = cur->next;
-			cur->next = cur->next->next;
-			free(fr);
+			cur->next = unset->next;
+			free (unset);
 		}
-		else
-			cur = cur->next;
+		cur = cur->next;
 	}
-}
-
-int	checker(char *id)
-{
-	int	i;
-
-	i = 0;
-	if (!ft_isalpha(id[0]) && id[0] != '_')
-		return (-1);
-	i++;
-	while (id[i] && (ft_isalnum(id[i]) || id[i] == '_'))
-		i++;
-		if (!id[i])
-		return (1);
-	return (0);
 }
 
 void	unset(t_env **env, char **arg)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (!env)
 		return ;
-	while (arg[i])
+	while (arg[++i])
 	{
-		if (checker(arg[i]))
+		if (ft_check_id(arg[i]) != 0)
 			ft_delnode(env, arg[i]);
 		else
 			ft_printf_fd(2, "unset: `%s': not a valid identifier\n", arg[i]);
-		i++;
 	}
 }
