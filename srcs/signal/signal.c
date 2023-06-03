@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishel.h                                         :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 13:56:44 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 22:37:12 by mechane          ###   ########.fr       */
+/*   Created: 2023/06/03 22:30:25 by mechane           #+#    #+#             */
+/*   Updated: 2023/06/03 22:34:42 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHEL_H
-# define MINISHEL_H
+#include "../../include/minishel.h"
 
-# include "builtins.h"
-# include "tokenizer.h"
-# include "expander.h"
-# include "execution.h"
-# include "parser.h"
-# include "../libft/libft.h"
-# include "../gc/gc.h"
-# include "../gnl/get_next_line.h"
-#include <signal.h>
-
-int g_st;
-void	*inter_handler(void);
-#endif
+void	*inter_handler(void)
+{
+	ft_putstr_fd("\n", STDOUT_FILENO);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	set_status(1);
+    return (NULL);
+}
