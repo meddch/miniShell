@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:09:44 by azari             #+#    #+#             */
-/*   Updated: 2023/06/02 20:40:46 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/03 14:07:35 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_check_id(char *id)
 		return (-1);
 	if (id[index] == '=')
 		return (1);
-	return (0);
+	return (1);
 }
 
 char	**ft_get_varval(char *arg)
