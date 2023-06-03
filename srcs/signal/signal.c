@@ -6,15 +6,17 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 22:30:25 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 22:34:42 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 22:53:47 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
-void	*inter_handler(void)
+void	*inter_handler(int seg)
 {
-	ft_putstr_fd("\n", STDOUT_FILENO);
+	printf("%d\n",seg);
+	if (seg != SIGINT)
+		return (NULL);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

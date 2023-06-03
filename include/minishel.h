@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:56:44 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 22:37:12 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 22:49:26 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 # include "../gc/gc.h"
 # include "../gnl/get_next_line.h"
 #include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 int g_st;
-void	*inter_handler(void);
+void	*inter_handler(int seg);
 #endif

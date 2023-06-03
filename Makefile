@@ -5,6 +5,8 @@ BLUE = \033[0;34m
 NAME = minishell
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address 
+LDFLAGS ="-L/Users/mechane/.brew/opt/readline/lib"
+CPPFLAGS ="-I/Users/mechane/.brew/opt/readline/include"
 
 HEADER =   include/tokenizer.h include/minishell.h include/parser.h libft/libft.h include/gc.h
 
@@ -24,13 +26,13 @@ OBJS = $(addsuffix .o, $(FILE))
 
 %.o : %.c $(HEADER) 
 	@echo "$(BLUE)Building project ⏳.."
-	@ $(CC) $(CFLAGS) -c -o $@ $< 
+	@ $(CC) $(CFLAGS) $(LDFLAGS) $(CPPFLAGS) -c -o $@ $< 
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C libft
-	@$(CC) $(CFLAGS) $(LIBFT) -lreadline -o $(NAME) $^
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(CPPFLAGS)  $(LIBFT) -lreadline -o $(NAME) $^
 	@echo "$(BLUE)minishell ✅"
 
 
