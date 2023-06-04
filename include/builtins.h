@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:22:32 by azari             #+#    #+#             */
-/*   Updated: 2023/06/04 11:56:25 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/04 15:21:56 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ void	export(t_env **env, char **args);
 void	ft_putnbr__fd(long val, int fd);
 void	ft_putendl__fd(char *s, int fd);
 void	unset(t_env **env, char **arg);
-void	unset(t_env **env, char **arg);
 void	ft_putstr__fd(char *s, int fd);
 void	ft_print_export(t_env *env);
-size_t	ft__strlen(const char *str);
 char	**ft_get_varval(char *arg);
 t_env	*ft_getvenv(char **env);
 int		ft_envsize(t_env *env);
@@ -59,5 +57,6 @@ void	ft_env(t_env *virt);
 void	echo(char **args);
 t_env	*ft_srchenv(t_env *env, char *var);
 void	ft_export_node(t_env **env, char **node, int def, int flag);
-int		ft_check(char *id);
+char	*ft_join(const char *s1, const char *s2);
+void	pwd(void);
 #endif

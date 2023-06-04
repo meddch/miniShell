@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:07:45 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 18:45:56 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/01 14:57:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include "../include/minishel.h"
 # include <dirent.h>
+#include <stdbool.h>
+#include <string.h>
 
 t_token	*expand_node(t_env	*env, char	*to_expand, int	dq_flag);
 t_token	*expand_sub(t_env *env, char *to_expand, int dq_flag);

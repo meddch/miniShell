@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 17:48:38 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/22 19:56:34 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 16:26:59 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_subsh
 typedef struct s_redir 
 {
 	int			node_type;
+	t_flag		redir_type;
 	int			flags;
 	int			fd_in;
 	int			fd_out;
@@ -71,6 +72,6 @@ t_tree	*parse_cmd(t_token **token);
 t_tree	*parse_redir(t_tree *cmdtree, t_token **token);
 t_tree	*new_cmd(void);
 void	add_token_list(t_token **list, t_token **token);
-
+char	*join_delim(t_token *delim);
 
 #endif

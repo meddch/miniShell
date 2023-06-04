@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:31:31 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 11:46:55 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 20:29:29 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_symbols(t_lex *lex, char **line)
 	char *cmd;
 	
 	cmd = *line;
-	if (ft_strchr("|<>&", *cmd) && *cmd == *(cmd + 1))
+	if (ft_strchr("|<>&", *cmd) && (*cmd == *(cmd + 1)))
 		lex->is_d = 1;
 	if (*cmd != '\'' && *cmd != '\"')
 		lex->spc = true;
@@ -57,8 +57,8 @@ void	check_symbols(t_lex *lex, char **line)
 			false, false, ft_strndup(cmd, (cmd + lex->is_d + 1))));
 	if (lex->is_d == 1)
 	{
-		lex->is_d = 0;		
-		cmd++;
+		lex->is_d = 0;
+		(*cmd + 1) && (cmd++);
 	}
 	*line = cmd;
 }
@@ -71,11 +71,11 @@ bool	check_syntax(t_lex *lex)
 	token = lex->token;
 	flag = 0;
 	if (lex->sq || lex->dq)
-		return (printf("%s Quotes ?\n", SYNTX), false);
+		return (ft_printf_fd(2, "%s Quotes ?\n", SYNTX), false);
 	while (token)
 	{
 		if (flag < 0)
-			return (printf("%s Parenthesis ?\n", SYNTX), false); //use fd_printf
+			return (ft_printf_fd(2, "%s Parenthesis ?\n", SYNTX), false); 
 		if (token->type == OPAR)
 			flag++;
 		else if (token->type == CPAR)
@@ -83,7 +83,7 @@ bool	check_syntax(t_lex *lex)
 		token = token->next;
 	}
 	if (flag) 
-		return (printf("%s Parenthesis ?\n", SYNTX), false);
+		return (ft_printf_fd(2, "%s Parenthesis ?\n", SYNTX), false);
 	return (true);
 }
 
@@ -103,7 +103,7 @@ t_token	*tokenizer(char *line)
 	}
 	add_back_tok(&lex.token, new_tok(END, false, false, ft_strdup("END")));
 	if(!check_syntax(&lex))
-		return (NULL);
+		return (set_status(258), NULL);
 	return (lex.token);
 }
 

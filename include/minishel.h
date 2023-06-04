@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishel.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:56:44 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 18:45:09 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/03 22:49:26 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@
 # include "../libft/libft.h"
 # include "../gc/gc.h"
 # include "../gnl/get_next_line.h"
+#include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 int g_st;
-
+void	*inter_handler(int seg);
 #endif

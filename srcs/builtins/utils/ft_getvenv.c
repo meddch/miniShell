@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getvenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:28:09 by azari             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/02 15:26:39 by azari            ###   ########.fr       */
+=======
+/*   Updated: 2023/06/03 13:12:57 by mechane          ###   ########.fr       */
+>>>>>>> 18de7abb25f41569a6fe0cdc2eb8f9ada8b7b616
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +40,7 @@ char	*get_val(char *line)
 	while (line[i] && line[i] != '=')
 		i++;
 	(line[i] == '=') && (i += 1);
-	val = ft_sub(line, i, ft__strlen(line + i));
+	val = ft_sub(line, i, ft_strlen(line + i));
 	return (val);
 }
 

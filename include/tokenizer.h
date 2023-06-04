@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/27 18:24:40 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 22:47:19 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # define SYNTX "Syntax Error :"
-# define WHITESPACE " \t\r\v"
+# define WHITESPACE " \t\r\v\n"
 # define SYMBOLS "|&<>"
 
 typedef enum e_flag
@@ -34,14 +34,14 @@ typedef enum e_flag
 	CPAR = 1 << 5,
 	RIN = 1 << 6,
 	ROUT = 1 << 7,
-	SPACE = 1 << 8,
+	SPC = 1 << 8,
 	AND = 1 << 9,
 	OR = 1 << 10,
 	HEREDOC = 1 << 11,
 	APPEND = 1 << 12,
-	SUBSHELL = 22,
+	SUBSHELL = 1 << 16,
 	REDIR = (RIN | ROUT | APPEND| HEREDOC),
-	END = 30,
+	END = 1 << 15,
 }	t_flag;
 
 typedef struct s_token{

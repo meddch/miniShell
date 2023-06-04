@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:11:16 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/27 18:24:16 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/02 09:20:38 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	add_back_tok(t_token **tok, t_token *new)
 		return (0);
 	}
 	last_tok(*tok)->next = new;
-	new->next = NULL;
 	return (0);
 }
 
@@ -79,7 +78,7 @@ int	add_back_sub(t_token **tok, t_token *new)
 		*tok = new;
 		return (0);
 	}
-	last_sub_tok(*tok)->sub = new;
+	last_sub_tok(last_tok(*tok))->sub = new;
 	new->sub = NULL;
 	return (0);
 }

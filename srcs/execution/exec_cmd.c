@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 20:41:59 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/03 19:52:05 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	apply_exp(t_token **token, t_env *env)
 	
 	tmp = *token;
 	exp = NULL;
-	while(tmp)
+	while(tmp && (tmp->type == WORD))
 	{
 		add_back_tok(&exp, expand_node(env, tmp->data, (tmp->h_doc == 0)));
 		while(tmp->sub)
 		{
-			add_back_sub(&exp->sub, expand_sub(env, tmp->sub->data, (tmp->sub->h_doc == 0)));
+			add_back_sub(&exp, expand_sub(env, tmp->sub->data, (tmp->sub->h_doc == 0)));
 			tmp->sub = tmp->sub->sub;
 		}
 		tmp = tmp->next;
@@ -39,12 +39,12 @@ void 	apply_wc(t_token **token)
 	
 	tmp = *token;
 	exp = NULL;
-	while(tmp)
+	while(tmp && (tmp->type == WORD))
 	{
 		add_back_tok(&exp, expanand_wc(tmp->data));
 		while(tmp->sub)
 		{
-			add_back_sub(&exp->sub, expanand_wc(tmp->sub->data));
+			add_back_sub(&exp, expanand_wc(tmp->sub->data));
 			tmp->sub = tmp->sub->sub;
 		}
 		tmp = tmp->next;
@@ -64,7 +64,6 @@ char	**get_cmdline(t_cmd *tree, t_env *env)
 	cmdlist = tree->list;
 	apply_exp(&cmdlist, env);
 	apply_wc(&cmdlist);
-	printf("----------------->%s\n",cmdlist->data);
 	size = token_size(cmdlist);
 	cmd = gc(sizeof(char *)*(size + 1), 0);
 	while (cmdlist)
@@ -89,7 +88,7 @@ char	**switch_env(t_env *myenv)
 	char	**env;
 
 	i = 0;
-	len = ft_envsize(myenv); // need env utils (in builltins)
+	len = ft_envsize(myenv);
 	env = gc(sizeof(char *) * (len + 1), 0);
 	env[len] = 0;
 	while (myenv)
@@ -101,26 +100,31 @@ char	**switch_env(t_env *myenv)
 	return (env);
 }
 
-void	exec_cmd(t_cmd *tree, t_env *env)
+void	exec_cmd(t_cmd *tree, t_env **env)
 {
 	pid_t pid;
 	char	**cmdline;
 	char	*cmd;
+	int		status;
 
-	printf("----%s\n",tree->list->data);
-	
-	cmdline = get_cmdline(tree, env);
-	// if (is_builtin(cmdline[0], cmdline))
-	// 	return ;
-	cmd = get_cmd_path(cmdline[0], env);
-	pid = fork();
-	//create ft_fork (protect)
-	if (pid == -1)
+	cmdline = get_cmdline(tree, *env);
+	if (!cmdline)
 		return ;
-	else if (pid == 0)
+	if (is_builtin(cmdline[0], cmdline, env))
+		return ;
+	cmd = get_cmd_path(cmdline[0], *env);
+	if (!cmd)
+		return (exit(1)) ; // set exit status
+	pid = ft_fork();
+	if (pid == 0)
 	{
-		execve(cmd, cmdline, switch_env(env));
-		printf("command not found: %s\n", cmdline[0]); //fd_printf 
+		execve(cmd, cmdline, switch_env(*env));
+		ft_printf_fd(2, " %s : command not found\n", cmdline[0]);
+		if (errno == ENOENT)
+			exit(127);
+		if (errno == EACCES)
+			exit(126);
 	}
-	waitpid(pid, &g_st, WUNTRACED);
+	if (wait(&status) == pid)
+		set_status(status);
 }

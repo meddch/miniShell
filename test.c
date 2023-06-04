@@ -2,6 +2,9 @@
 
 #include <stdbool.h>
 #include <string.h>
+
+
+
 bool match(char *pattern, char *string)
 {
     if (*pattern == '\0')
@@ -11,7 +14,7 @@ bool match(char *pattern, char *string)
         while (*string != '\0')
 		{
             if (match(pattern + 1, string))
-				return true;
+				return (true);
             string++;
         }
         return (match(pattern + 1, string));
@@ -19,25 +22,27 @@ bool match(char *pattern, char *string)
     if (*pattern == '?')
 	{
         if (*string == '\0')
-			return false;
+			return (false);
         return (match(pattern + 1, string + 1));
     }
     if (*pattern == *string) 
 	{
         if (*string == '\0')
-            return true;
+            return (true);
         return (match(pattern + 1, string + 1));
     }
-    return false;
+    return (false);
 }
 
 #include <stdio.h>
 
 int main() {
-    char *pattern = "?c";
+    char *pattern = "main*";
     char *string1 = "gc";
+    char *string11 = "makedk";
+    char *string22 = "makedksdgjk";
     char *string2 = "main.c";
-    char *string3 = "test.c";
+    char *string3 = "main.o";
 
     if (match(pattern, string1)) {
         printf("%s matches %s\n", string1, pattern);
@@ -45,8 +50,14 @@ int main() {
     if (match(pattern, string2)) {
         printf("%s matches %s\n", string2, pattern);
     }
+    if (match(pattern, string11)) {
+        printf("%s matches %s\n", string11, pattern);
+    }
     if (match(pattern, string3)) {
         printf("%s matches %s\n", string3, pattern);
+    }
+    if (match(pattern, string22)) {
+        printf("%s matches %s\n", string22, pattern);
     }
 
     return 0;

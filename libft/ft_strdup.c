@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:03:57 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 12:00:56 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/01 19:41:03 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strdup( const char *source )
 	int		i;
 
 	i = 0;
+	if (!source)
+		return (ft_strdup(""));
 	while (source[i] != '\0')
 		i++;
 	ptr = ft_malloc((i + 1) * sizeof(char));

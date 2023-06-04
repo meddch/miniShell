@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/04 11:58:37 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/04 15:18:27 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,22 @@ void displayTree(t_tree *root, int level)
     }
 }
 
-
+void print_token(t_token *token)
+{
+    if (!token)
+        return;
+    while(token)
+    {
+        printf(" token type %d\n   token data : %s\n",token->type, token->data);
+		while (token->sub)
+       		{
+			 printf("                  token sub : %s\n",token->sub->data);
+				token->sub = token->sub->next;	
+			}
+			
+        token = token->next;
+    }
+}
 
 int	main(int ac ,char **av, char **env)
 {	
@@ -76,33 +91,30 @@ int	main(int ac ,char **av, char **env)
     char *args[20] = {"export","Y=+=99","X=300","X=1","X+=2","X+=99","Z====7", NULL};
     char *args2[20] = {"unset", "_x=1", "Z","Y", "x0", NULL};
 	my_env = ft_getvenv(env);
-    export(&my_env, args);
-    unset(&my_env, args2);
-    	ft_print_export(my_env);
 	// int len = ft_envsize(my_env);
 	// ft_printf_fd(1, "--[%d]--\n", len);
 	// ft_env(my_env);
-	// if (ac != 1)
-	// 	return (1);
-	// while (1)
-	// {
-	// 	lineptr = readline(prompt);
-	// 	if (!lineptr)
-    // 		break ;
-	// 	if (*lineptr)
-	// 	{
-	// 		add_history(lineptr);
-	// 		token = tokenizer(lineptr);
-	// 	}
-	// 	free(lineptr);
-	// 	tree = parser(&token);
-	// 	if (!tree)
-	// 		break ;
-	// 	// displayTree(tree,0);
-	// 	// exec(tree, my_env);
-	// 	gc(0, 1);
-	// }
-	// exit(g_st);
+	if (ac != 1)
+		return (1);
+	while (1)
+	{
+		lineptr = readline(prompt);
+		if (!lineptr)
+    		break ;
+		if (*lineptr)
+		{
+			add_history(lineptr);
+			token = tokenizer(lineptr);
+		}
+		free(lineptr);
+		tree = parser(&token);
+		if (!tree)
+			break ;
+		displayTree(tree,0);
+		exec(tree, my_env);
+		gc(0, 1);
+	}
+	exit(g_st);
 }
 
 

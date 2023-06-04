@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:09:44 by azari             #+#    #+#             */
-/*   Updated: 2023/06/03 14:07:35 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/04 15:23:39 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_export_node(t_env **env, char **node, int def, int flag)
 	free(node[0]);
 	if (!flag)
 		return (srch->val = node[1], free(oval));
-	return (srch->val = ft_strjoin(oval, node[1]), free(oval));
+	return (srch->val = ft_join(oval, node[1]), free(oval));
 }
 
 void	export(t_env **env, char **args)

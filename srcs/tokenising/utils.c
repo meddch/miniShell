@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:58:06 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/21 16:35:31 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/03 12:48:31 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	new_lex(t_lex *lex)
 	return ;
 }
 
-//refactor
+
 int	token_flag(char c, int flag)
 {
 	char	*str;

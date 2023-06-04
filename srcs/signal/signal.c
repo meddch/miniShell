@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 05:52:20 by azari             #+#    #+#             */
-/*   Updated: 2023/06/04 15:24:56 by azari            ###   ########.fr       */
+/*   Created: 2023/06/03 22:30:25 by mechane           #+#    #+#             */
+/*   Updated: 2023/06/04 00:44:41 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/builtins.h"
+#include "../../include/minishel.h"
 
-
-void	ft_putstrr(char *str)
+void	*inter_handler(int seg)
 {
-	write(1, str, ft_strlen(str));
-	write(1, "\n", 1);
-}
-
-void	pwd(void)
-{
-	char	path[PATH_MAX];
-
-	if (getcwd(path, sizeof(path)))
-		ft_putstrr(path);
+	// printf("%d\n",seg);
+	if (seg != SIGINT)
+		return (NULL);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	set_status(1);
+    return (NULL);
 }

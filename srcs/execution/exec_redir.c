@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/31 19:46:41 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/03 11:59:26 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,15 @@
 int	xpand_h_doc(t_env *env, int fd_in)
 {
 	int		fd[2];
-	char	*gnl;
+	char	*line;
 
-	if (pipe(fd) == -1)
-		return (perror("pipe"), exit(1), 0);
-	gnl = expansion(env, get_next_line(fd_in));
-	while (gnl)
+	ft_pipe(fd);
+	line = expansion(env, get_next_line(fd_in));
+	while (line)
 	{
-		write(fd[1], gnl, ft_strlen(gnl));
-		free(gnl);
-		gnl = expansion(env, get_next_line(fd_in));
+		write(fd[1], line, ft_strlen(line));
+		free(line);
+		line = expansion(env, get_next_line(fd_in));
 	}
 	return (close(fd[1]), fd[0]);
 }
@@ -35,12 +34,12 @@ char	**get_filename(t_token *file, t_env *env)
 	int		size;
 	char	**file_name;
 	
-	i = -1;
+	i = 0;
 	apply_exp(&file, env);
 	apply_wc(&file);
 	size = token_size(file);
 	file_name = gc(sizeof(char *)*(size + 1), 0);
-	while (file)
+	while (file && file->type == WORD)
 	{
 		file_name[i] = ft_strdup(file->data);
 		while (file->sub)
@@ -51,12 +50,12 @@ char	**get_filename(t_token *file, t_env *env)
 		file = file->next;
 		i++;
 	}
-	file_name[i] = NULL;
+	file_name[size] = NULL;
 	return (file_name);
 }
 
 
-bool	dup_to(t_tree *tree, t_env *env)
+bool	dup_to(t_tree *tree, t_env *env, int flag)
 {
 	t_redir	*redir;
 	int		fd;
@@ -66,38 +65,52 @@ bool	dup_to(t_tree *tree, t_env *env)
 	fd = 0;
 	redir = (t_redir *)tree;
 	to_dup = STDIN_FILENO;
-	((redir->node_type & (ROUT | APPEND))) && (to_dup = STDOUT_FILENO);
-	if (redir->node_type & (RIN | ROUT | APPEND))
+	((redir->redir_type & (ROUT | APPEND))) && (to_dup = STDOUT_FILENO);
+	if (redir->redir_type & (RIN | ROUT | APPEND))
 	{
 		file_name = get_filename(redir->file, env);
 		if (file_name[1])
-			return (printf("ambiguous redirect\n"), false); // use fd_printf and exit(1)
-		if ((fd = open(*file_name, redir->flags, 0664)) == -1 || dup2(fd, to_dup) == -1)
-			return (false); // create ft_open to handle error and fd_print error + exit(1)  // create ft-dup to handle error and exit(1)
-		close(fd);
+			return (ft_printf_fd(2, "ambiguous redirect\n"), exit(1), false);
+		fd = open(*file_name, redir->flags, 0664);
+		if (fd == -1)
+			return (ft_printf_fd(2, "%s : No such file or directory\n", *file_name), exit(1), false);
+		if (flag == 0)
+			ft_dup2(fd, to_dup);
 		return (true);
 	}
 	if (redir->file->h_doc && !redir->file->sub)
-		fd = xpand_h_doc(env, redir->fd_in);
-	dup2(fd, to_dup);// create ft-dup to handle error and exit(1)
-	return (true);
+		{
+			fd = xpand_h_doc(env, redir->fd_in);
+			return (ft_dup2(fd, to_dup), true);
+		}
+	return (dup2(redir->fd_in, to_dup), true);
 }
 
 
 
-void	exec_redir(t_tree *tree, t_env *env)
+void	exec_redir(t_tree *tree, t_env **env)
 {
-	// int		status;
 	pid_t	pid;
+	int		flag;
+	int		status;
 	
-	pid = fork(); // fork function that protect fail
-	if (pid == 0)
+	flag = 0;
+	pid = ft_fork();
+	if (!pid)
 	{
 		while (tree && tree->node_type == NODE_REDIR)
-			if (dup_to(tree, env) == false)
-				break ;
-		exec(tree, env);
+		{
+			if (dup_to(tree, *env, flag) == false)
+			{	
+				tree = ((t_redir *)tree)->cmdtree;
+				return ;
+			}
+			flag = 1;
+			tree = ((t_redir *)tree)->cmdtree;
+		}
+		exec_cmd(((t_cmd *)tree), env);
 		exit(0);
 	}
-	waitpid(pid, &g_st, 0);
+	waitpid(pid, &status, 0);
+	set_status(status);
 }
