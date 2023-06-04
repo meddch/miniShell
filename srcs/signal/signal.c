@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 22:30:25 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 22:53:47 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 00:44:41 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*inter_handler(int seg)
 {
-	printf("%d\n",seg);
+	// printf("%d\n",seg);
 	if (seg != SIGINT)
 		return (NULL);
 	rl_on_new_line();
