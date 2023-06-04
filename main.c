@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 14:20:57 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/04 11:58:37 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int ac ,char **av, char **env)
 	(void)av;
 	t_env	*my_env;
     char *args[20] = {"export","Y=+=99","X=300","X=1","X+=2","X+=99","Z====7", NULL};
-    char *args2[20] = {"unset", "+Y2", "", "x0", NULL};
+    char *args2[20] = {"unset", "_x=1", "Z","Y", "x0", NULL};
 	my_env = ft_getvenv(env);
     export(&my_env, args);
     unset(&my_env, args2);

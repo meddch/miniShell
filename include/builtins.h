@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:22:32 by azari             #+#    #+#             */
-/*   Updated: 2023/06/02 20:04:31 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/04 11:56:25 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ void	ft_env(t_env *virt);
 void	echo(char **args);
 t_env	*ft_srchenv(t_env *env, char *var);
 void	ft_export_node(t_env **env, char **node, int def, int flag);
+int		ft_check(char *id);
 #endif
