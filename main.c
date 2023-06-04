@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 22:52:43 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 16:27:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int	main(int ac ,char **av, char **env)
 	(void)av;
 	my_env = ft_getvenv(env);
     rl_catch_signals = 0;
-    signal(SIGINT, inter_handler(SIGINT));
+    signal(SIGQUIT, SIG_IGN);
+    signal(SIGINT, inter_handler);
     g_st = 0;
 	if (ac != 1)
 		return (1);
@@ -100,16 +101,21 @@ int	main(int ac ,char **av, char **env)
 		tree = NULL;
 		token = NULL;
         lineptr = readline(prompt);
+        if (!lineptr)
+            {
+                ft_printf_fd(1, "exit");
+                exit(0);
+            }
         if (lineptr && *lineptr)
 		{
 			add_history(lineptr);
 			token = tokenizer(lineptr);
-		free(lineptr);
-		// print_token(token);
-		tree = parser(&token);
-        // displayTree(tree,0);
-		exec(tree, &my_env);
-		gc(0, 1);
+		    free(lineptr);
+		    // print_token(token);
+		    tree = parser(&token);
+            // displayTree(tree,0);
+		    exec(tree, &my_env);
+		    gc(0, 1);
 		}
 	}
 	exit(g_st);

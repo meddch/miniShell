@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:53:09 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 09:39:52 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 16:40:15 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	ft_dup2(int dst, int src);
 pid_t	ft_fork(void);
 int     ft_pipe(int fildes[2]);
 void	set_status(int status);
-int     get_status(void);
+void	check_status(int status);
 #endif

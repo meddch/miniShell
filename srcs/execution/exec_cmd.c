@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 19:52:05 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 18:07:42 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,18 @@ char	**get_cmdline(t_cmd *tree, t_env *env)
 	cmd[i] = NULL;
 	return (cmd);
 }
-
+void sig_hand(int sig)
+{
+	if (sig == SIGINT)
+	{
+		write(1,"",1);
+	}
+	if (sig == SIGQUIT)
+	{
+		write(1,"Quit: 3",7);
+	}
+	exit(120 + sig);
+}
 char	**switch_env(t_env *myenv)
 {
 	int		i;
@@ -100,6 +111,17 @@ char	**switch_env(t_env *myenv)
 	return (env);
 }
 
+void sig_ch(pid_t pid)
+{
+	if (pid == 0)
+	{
+		signal(SIGINT, sig_hand);
+		signal(SIGQUIT, sig_hand);
+	}
+	else
+		signal(SIGINT, SIG_IGN);
+}
+
 void	exec_cmd(t_cmd *tree, t_env **env)
 {
 	pid_t pid;
@@ -108,23 +130,30 @@ void	exec_cmd(t_cmd *tree, t_env **env)
 	int		status;
 
 	cmdline = get_cmdline(tree, *env);
-	if (!cmdline)
-		return ;
-	if (is_builtin(cmdline[0], cmdline, env))
+	if (!cmdline || is_builtin(cmdline[0], cmdline, env))
 		return ;
 	cmd = get_cmd_path(cmdline[0], *env);
 	if (!cmd)
-		return (exit(1)) ; // set exit status
+		return (exit(1));
 	pid = ft_fork();
+	sig_ch(pid);
 	if (pid == 0)
 	{
 		execve(cmd, cmdline, switch_env(*env));
 		ft_printf_fd(2, " %s : command not found\n", cmdline[0]);
 		if (errno == ENOENT)
 			exit(127);
-		if (errno == EACCES)
-			exit(126);
+		exit (1);
 	}
 	if (wait(&status) == pid)
-		set_status(status);
+		check_status(status);
+	if (status == SIGINT || status == SIGQUIT)
+	{
+		if (status == SIGQUIT)
+			ft_putendl_fd("Quit: 3", STDOUT_FILENO);
+		else
+			ft_putendl_fd("", STDOUT_FILENO);
+	}
+	// signal(status, sig_hand);
+	// signal(status, sig_hand);
 }

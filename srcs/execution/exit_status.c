@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:15:58 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 12:00:32 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 18:05:02 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	set_status(int status)
 {
-	g_st = status / 256;
+	g_st = status * 256;
 }
 
-int	get_status(void)
+void	check_status(int status)
 {
-	if (WIFEXITED(g_st))
-		return (g_st = WEXITSTATUS(g_st));
-	return (1);
+	if (WIFEXITED(status))
+		(g_st = WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		g_st = 128 + WTERMSIG(status);
 }
