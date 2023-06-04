@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 21:47:42 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 12:40:35 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 20:04:22 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
-void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char**				ft_split_set(char* str, char* delimiter_set);
 char				*ft_strjoin_sp(char  *s1, char *s2, char c);

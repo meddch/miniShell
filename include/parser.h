@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 17:48:38 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 16:26:59 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 19:58:43 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ t_tree	*constract_sub(t_tree *tree);
 t_tree	*constract_pipe(t_tree *left, t_tree *right);
 t_tree	*new_redir(t_tree *tree);
 t_token	*copy_token(t_token **tok);
-bool	fill_redir(t_redir *redir, t_flag redir_type, t_token *filenode);
 t_tree	*parser(t_token **tok);
 t_tree *parse_pipeline(t_token **token);
 t_tree *parse_block(t_token **token);

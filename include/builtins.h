@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:22:32 by azari             #+#    #+#             */
-/*   Updated: 2023/06/03 13:57:53 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 20:03:33 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_delnode(t_env **env, char *var);
 int		ft_catch_flag(char **args, int i);
 void	export(t_env **env, char **args);
 void	ft_putnbr__fd(long val, int fd);
-void	ft_putendl__fd(char *s, int fd);
+int		ft_putendl_fd(char *s, int fd);
 void	unset(t_env **env, char **arg);
 void	ft_putstr__fd(char *s, int fd);
 void	ft_print_export(t_env *env);

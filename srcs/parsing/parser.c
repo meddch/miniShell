@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 16:53:24 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 19:57:32 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,10 @@ t_tree	*parser(t_token **token)
 	tree = parse_block(token);
 	if (!tree || (*token)->type != END)
 	{
-		if (!(((*token)->type) & (WORD | END)))
+		if (!(((*token)->type) & (WORD | END | SIGIGNOR)))
 			ft_printf_fd(2, "syntax error near unexpected token `%s'\n", (*token)->data);
+		else if ((*token)->type == SIGIGNOR)
+			return (NULL);
 		else
 			ft_printf_fd(2, "syntax error near unexpected token `newline'\n");
 		set_status(258);

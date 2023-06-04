@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/04 18:07:42 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 20:05:06 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,13 +147,6 @@ void	exec_cmd(t_cmd *tree, t_env **env)
 	}
 	if (wait(&status) == pid)
 		check_status(status);
-	if (status == SIGINT || status == SIGQUIT)
-	{
-		if (status == SIGQUIT)
-			ft_putendl_fd("Quit: 3", STDOUT_FILENO);
-		else
-			ft_putendl_fd("", STDOUT_FILENO);
-	}
-	// signal(status, sig_hand);
-	// signal(status, sig_hand);
+	(status == SIGQUIT) && (ft_putendl_fd("Quit: 3", STDOUT_FILENO));
+	(status == SIGINT) && (ft_putendl_fd("", STDOUT_FILENO));
 }
