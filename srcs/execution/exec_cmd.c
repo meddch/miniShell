@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/04 20:05:06 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/04 20:41:32 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,7 @@ void	exec_cmd(t_cmd *tree, t_env **env)
 	{
 		execve(cmd, cmdline, switch_env(*env));
 		ft_printf_fd(2, " %s : command not found\n", cmdline[0]);
-		if (errno == ENOENT)
-			exit(127);
-		exit (1);
+		exit(127);
 	}
 	if (wait(&status) == pid)
 		check_status(status);
