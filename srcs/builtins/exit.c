@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_status.c                                      :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 11:15:58 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/05 15:31:56 by mechane          ###   ########.fr       */
+/*   Created: 2023/06/05 15:50:52 by azari             #+#    #+#             */
+/*   Updated: 2023/06/05 16:15:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
-void	set_status(int status)
+void	ft_exit(void) // to redo 
 {
-	g_st = status / 256;
-}
-
-void	check_status(int status)
-{
-	if (WIFEXITED(status))
-		(g_st = WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
-		g_st = 128 + WTERMSIG(status);
+	printf("exit\n");
+	exit(0);	
 }

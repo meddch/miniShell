@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:37:24 by azari             #+#    #+#             */
-/*   Updated: 2023/06/04 20:03:10 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 16:01:46 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_putendl_fd(char *s, int fd)
 		return (0);
 	write(fd, s, ft__strlen(s));
 	write(fd, "\n", 1);
-	return (1);
+	return (0);
 }
 void ft_putstr(char *str)
 {

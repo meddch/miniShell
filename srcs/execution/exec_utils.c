@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 19:53:26 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 16:03:11 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ bool	is_builtin(char *cmd, char **argv, t_env **env)
 {
 	if (!ft_strcmp(cmd, "echo"))
 		return (echo(argv), true);
-	// else if (!ft_strcmp(cmd, "cd")
-	// 	return (cd(argv), true);
+	else if (!ft_strcmp(cmd, "cd"))
+		return (cd(env ,argv), true);
 	else if (!ft_strcmp(cmd, "pwd"))
 		return (pwd(), true);
 	else if (!ft_strcmp(cmd, "export"))
@@ -43,8 +43,8 @@ bool	is_builtin(char *cmd, char **argv, t_env **env)
 		return (unset(env, argv), true);
 	else if (!ft_strcmp(cmd, "env"))
 		return (ft_env(*env), true);
-	// else if (!ft_strcmp(cmd, "exit"))
-	// 	return (ft_exit(argv), true);
+	else if (!ft_strcmp(cmd, "exit"))
+		return (ft_exit(), true);
 	return (false);
 }
 

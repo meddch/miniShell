@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sub.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:32:18 by azari             #+#    #+#             */
-/*   Updated: 2023/06/03 13:13:17 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 13:26:34 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,28 @@ char	*ft_sub(char const *s, unsigned int start, size_t len)
 		return (sub);
 	}
 	return (0);
+}
+
+char	*ft_stdup( const char *source)
+{
+	char	*ptr;
+	int		len ;
+	int		i;
+
+	i = 0;
+	if (!source)
+		return (ft_stdup(""));
+	while (source[i] != '\0')
+		i++;
+	ptr = malloc((i + 1) * sizeof(char));
+	len = i ;
+	if (ptr == NULL)
+		return (NULL);
+	while (i)
+	{
+		*ptr++ = *source++;
+		i--;
+	}
+	*ptr = '\0';
+	return (ptr - len);
 }

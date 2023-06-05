@@ -6,11 +6,11 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:09:44 by azari             #+#    #+#             */
-/*   Updated: 2023/06/03 13:56:09 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 16:06:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/builtins.h"
+#include "../../include/minishel.h"
 
 void	ft_print_export(t_env *env)
 {

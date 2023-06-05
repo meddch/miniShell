@@ -6,11 +6,11 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:16:35 by azari             #+#    #+#             */
-/*   Updated: 2023/06/03 13:44:59 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 16:15:15 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/builtins.h"
+#include "../../include/minishel.h"
 
 int	ft_catch_flag(char **args, int i)
 {
@@ -35,6 +35,7 @@ void	echo(char **args)
 	int	i;
 	int	flag;
 
+	set_status(0);
 	if (!args[1])
 		return ((void)write(1, "\n", 1));
 	i = 1;

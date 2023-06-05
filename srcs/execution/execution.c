@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:54:14 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/04 18:01:47 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 15:29:17 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	exec(t_tree *tree, t_env **env)
 {
+	
+	signal(SIGINT, SIG_IGN);
 	if (!tree)
 		return ;
 	if (tree->node_type == NODE_AND || (tree->node_type == NODE_OR))
