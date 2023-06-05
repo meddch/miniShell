@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:47:05 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/05 18:55:15 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 19:05:30 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,14 @@ void	exp_help(t_env *env, char *to_expand, t_token **expand)
 t_token	*expand_sub(t_env *env, char *to_expand, int dq_flag)
 {
 	t_token	*expand;
-	// char	**hold;
 	int		i;
 	
 	i = 0;
 	expand = NULL;
-	(void)dq_flag;
-	// if(dq_flag)
-	// {	
-	// 	hold = ft_split_set(expansion(env, to_expand), WHITESPACE);
-	// 	if (!hold[i])
-	// 		add_back_sub(&expand, new_tok(WORD, 0, 0, ft_strdup("")));
-	// 	while (hold[i])
-	// 	{
-	// 		add_back_sub(&expand, new_tok(WORD, 0, 0, hold[i]));
-	// 		i++;
-	// 	}
-	// }
-	// else
+	if (dq_flag)
 		add_back_sub(&expand, new_tok(WORD, 0, 0,expansion(env, to_expand)));
+	else
+		add_back_sub(&expand, new_tok(WORD, 0, 0,ft_strdup(to_expand)));
 	return (expand);
 }
 
