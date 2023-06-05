@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:09:44 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 19:42:09 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 20:53:43 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_export_node(t_env **env, char **node, int def, int flag)
 	free(node[0]);
 	if (!flag)
 		return (srch->val = node[1], free(oval));
-	return (srch->val = ft_join(oval, node[1]), free(oval));
+	return (srch->val = ft_join(oval, node[1]), (void)0);
 }
 
 void	export(t_env **env, char **args)

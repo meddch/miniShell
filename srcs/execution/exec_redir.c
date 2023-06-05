@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 11:59:26 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 21:54:46 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**get_filename(t_token *file, t_env *env)
 }
 
 
-bool	dup_to(t_tree *tree, t_env *env, int flag)
+bool	dup_to(t_tree *tree, t_env *env, int *flag_in, int *flag_out)
 {
 	t_redir	*redir;
 	int		fd;
@@ -74,8 +74,16 @@ bool	dup_to(t_tree *tree, t_env *env, int flag)
 		fd = open(*file_name, redir->flags, 0664);
 		if (fd == -1)
 			return (ft_printf_fd(2, "%s : No such file or directory\n", *file_name), exit(1), false);
-		if (flag == 0)
-			ft_dup2(fd, to_dup);
+		if ((*(flag_in) == 1) && redir->redir_type == RIN)
+			{
+				ft_dup2(fd, to_dup);
+				*flag_in = 0;
+			}
+		if ((*flag_out == 1) && redir->redir_type == ROUT)
+			{
+				ft_dup2(fd, to_dup);
+				*flag_out = 0;
+			}
 		return (true);
 	}
 	if (redir->file->h_doc && !redir->file->sub)
@@ -91,21 +99,22 @@ bool	dup_to(t_tree *tree, t_env *env, int flag)
 void	exec_redir(t_tree *tree, t_env **env)
 {
 	pid_t	pid;
-	int		flag;
+	int		flag_in;
+	int		flag_out;
 	int		status;
 	
-	flag = 0;
+	flag_in = 1;
+	flag_out = 1;
 	pid = ft_fork();
 	if (!pid)
 	{
 		while (tree && tree->node_type == NODE_REDIR)
 		{
-			if (dup_to(tree, *env, flag) == false)
+			if (dup_to(tree, *env, &flag_in, &flag_out) == false)
 			{	
 				tree = ((t_redir *)tree)->cmdtree;
 				return ;
 			}
-			flag = 1;
 			tree = ((t_redir *)tree)->cmdtree;
 		}
 		exec_cmd(((t_cmd *)tree), env);
