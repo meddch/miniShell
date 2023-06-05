@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 11:15:58 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/05 15:31:56 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 19:46:41 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_status(int status)
 {
-	g_st = status / 256;
+	g_st = status;
 }
 
 void	check_status(int status)

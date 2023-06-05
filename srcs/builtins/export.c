@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:09:44 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 16:06:23 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 19:42:09 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ void	export(t_env **env, char **args)
 		check = ft_check_id(args[i]);
 		node = ft_get_varval(args[i]);
 		if (!check)
-			ft_printf_fd(2, "export: `%s': not a valid identifier\n", args[i]);
+			{
+				set_status(1);
+				ft_printf_fd(2, "export: `%s': not a valid identifier\n", args[i]);
+			}
 		else if (check == -1)
 			ft_export_node(env, node, 1, 1);
 		else if (check && !ft_strchr(args[i], '='))

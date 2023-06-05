@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:22:32 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 16:02:35 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 19:55:06 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	ft_env(t_env *virt);
 void	echo(char **args);
 void	pwd(void);
 void	cd(t_env **env, char **args);
-void	ft_runcd(t_env **env, char *path, char *err_str);
 void	ft_update_paths(t_env **env, char *var, char *val);
 char	*ft_getpath(t_env *env, char *var);
 char	*ft_stdup( const char *source);

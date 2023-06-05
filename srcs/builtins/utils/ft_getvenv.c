@@ -6,12 +6,13 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:28:09 by azari             #+#    #+#             */
-/*   Updated: 2023/06/03 13:12:57 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 20:22:05 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/builtins.h"
 
+// if !env add PATH + OLDPWD + SHELLVL
 char	*get_var(char *line)
 {
 	char	*var;
