@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/05 15:10:52 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 16:28:14 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int ac ,char **av, char **env)
 	t_env	*my_env;
 	
 	(void)av;
-	my_env = ft_getvenv(env);
+	my_env = ft_getvenv(env); //oldpwd
     rl_catch_signals = 0;
     g_st = 0;
 	if (ac != 1)

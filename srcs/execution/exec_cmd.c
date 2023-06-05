@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/05 16:01:12 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 18:51:38 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	apply_exp(t_token **token, t_env *env)
 	exp = NULL;
 	while(tmp && (tmp->type == WORD))
 	{
-		add_back_tok(&exp, expand_node(env, tmp->data, (tmp->h_doc == 0)));
+		add_back_tok(&exp, expand_node(env, tmp->data, ((tmp->xpand == 1)), (tmp->h_doc == 1)));
 		while(tmp->sub)
 		{
-			add_back_sub(&exp, expand_sub(env, tmp->sub->data, (tmp->sub->h_doc == 0)));
+			add_back_sub(&exp, expand_sub(env, tmp->sub->data, (tmp->sub->xpand == 1)));
 			tmp->sub = tmp->sub->sub;
 		}
 		tmp = tmp->next;

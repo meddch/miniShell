@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:00:10 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 16:07:46 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/05 16:32:06 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	ft_runcd(t_env **env, char *path, char *err_str)
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		return (set_status(1), chdir(path), ft_printf_fd(2, "cd: error \
-		retrieving current directory: getcwd: cannot access\
-		parent directories: No such file or directory\n"));
+retrieving current directory: getcwd: cannot access\
+  parent directories: No such file or directory\n"));
 	cd = chdir(path);
 	if (cd == -1)
 		return (set_status(1), perror(path));
