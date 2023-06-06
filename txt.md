@@ -1,6 +1,4 @@
-<!-- <cmdline>	::= <block>
-		| <block> (";" | "&") <cmdline>
-
+<!--
 <block>		::= <pipeline> {("&&" | "||") <pipeline>}
 
 <pipeline>	::= <command> {"|" <command>}
