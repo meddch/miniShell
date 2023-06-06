@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:40:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/04 19:58:10 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 10:48:05 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ bool	fill_redir(t_redir *redir, t_flag redir_type, t_token **filenode)
 	else if (redir_type == HEREDOC)
 		redir->fd_in = heredoc(join_delim(*filenode));
 	if (redir_type == HEREDOC && redir->fd_in == -1)
-		return ((*filenode)->type = SIGIGNOR , NULL);
+		return ((*filenode)->type = INTER_SIG , NULL);
 	return (true);
 
 	
