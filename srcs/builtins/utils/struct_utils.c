@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   struct_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:32:30 by azari             #+#    #+#             */
-/*   Updated: 2023/06/02 20:39:08 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/06 18:52:11 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/builtins.h"
-
 
 void	ft_envadd_back(t_env **lst, t_env *new)
 {
@@ -35,9 +34,9 @@ t_env	*ft_env_new(char *evar, char *eval)
 	new = (t_env *)malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
-	new->var = evar;
-	new->val = eval;
-	new->def= 0; 
+	new->var = ft_stdup(evar);
+	new->val = ft_stdup(eval);
+	new->def = 0;
 	new->next = NULL;
 	return (new);
 }

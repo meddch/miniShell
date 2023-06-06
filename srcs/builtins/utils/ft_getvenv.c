@@ -6,13 +6,12 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:28:09 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 20:22:05 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 18:41:03 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/builtins.h"
 
-// if !env add PATH + OLDPWD + SHELLVL
 char	*get_var(char *line)
 {
 	char	*var;
@@ -43,11 +42,21 @@ char	*get_val(char *line)
 
 t_env	*ft_getvenv(char **env)
 {
-    t_env	*virt;
+	t_env	*virt;
+	t_env	*node;
 	int		i;
+
 	virt = NULL;
 	i = -1;
+	if (!env || !*env)
+	{
+		ft_envadd_back(&virt, ft_env_new("PATH", PATH));
+		return (virt);
+	}
 	while (env[++i])
 		ft_envadd_back(&virt, ft_env_new(get_var(env[i]), get_val(env[i])));
+	node = ft_srchenv(virt, SHLVL);
+	node->val = ft_stdup(ft_iitoa(ft_atoi(node->val) + 1));
+	ft_delnode(&virt, OLDPWD);
 	return (virt);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sub.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:32:18 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 13:26:34 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/06 19:11:24 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_stdup( const char *source)
 
 	i = 0;
 	if (!source)
-		return (ft_stdup(""));
+		return (NULL);
 	while (source[i] != '\0')
 		i++;
 	ptr = malloc((i + 1) * sizeof(char));
@@ -57,4 +57,50 @@ char	*ft_stdup( const char *source)
 	}
 	*ptr = '\0';
 	return (ptr - len);
+}
+
+static int	count_digits(long c)
+{
+	int	i;
+
+	i = 0;
+	if (c < 0)
+		i++;
+	if (c == 0)
+		return (1);
+	while (c != 0)
+	{
+		c /= 10;
+		i++;
+	}
+	return (i);
+}
+
+char	*ft_iitoa(int n)
+{
+	int		i;
+	int		cnt;
+	char	*nbr;
+	long	x;
+
+	i = 0;
+	x = n;
+	cnt = count_digits(n);
+	nbr = (char *)malloc((cnt + 1) * sizeof(char));
+	if (!nbr)
+		return (0);
+	if (x < 0)
+	{
+		nbr[0] = '-';
+		i = 1;
+		x *= (-1);
+	}
+	nbr[cnt] = '\0';
+	while (cnt > i)
+	{
+		cnt--;
+		nbr[cnt] = (x % 10) + 48;
+		x /= 10;
+	}
+	return (nbr);
 }

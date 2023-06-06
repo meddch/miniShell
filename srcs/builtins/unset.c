@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:15:28 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 16:19:07 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 18:48:16 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_delnode(t_env **env, char *var)
 		cur = cur->next;
 	}
 }
+
 int	ft_check(char *id)
 {
 	int	index;

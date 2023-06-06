@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 05:52:20 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 16:17:13 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 20:01:36 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ void	ft_putstrr(char *str)
 	write(1, "\n", 1);
 }
 
-void	pwd(void)
+void	pwd(t_env *env)
 {
-	char	path[PATH_MAX];
-
 	set_status(1);
-	if (getcwd(path, sizeof(path)))
-		return (set_status(0) , ft_putstrr(path));
+	if (ft_srchenv(env, PWD))
+		return (set_status(0), ft_putstrr(ft_srchenv(env, PWD)->val));
 }

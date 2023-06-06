@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:16:35 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 16:15:15 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 18:29:35 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_catch_flag(char **args, int i)
 	{
 		j = 0;
 		if (args[i][j] != '-')
+			return (i);
+		else if (args[i][j] == '-' && !args[i][j + 1])
 			return (i);
 		else if (args[i][j] == '-')
 			while (args[i][++j])
