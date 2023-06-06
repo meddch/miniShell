@@ -1,6 +1,7 @@
 /.vscode
 minishell
 *.o
+*.a
 test.c
 a.out
 .vscode

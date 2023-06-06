@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 11:28:41 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 15:37:53 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,20 @@ bool	dup_to(t_tree *tree, t_env *env, int *flag_in, int *flag_out)
 	char	**file_name;
 	int		to_dup;
 	
-	fd = 0;
 	redir = (t_redir *)tree;
 	to_dup = STDIN_FILENO;
 	((redir->redir_type & (ROUT | APPEND))) && (to_dup = STDOUT_FILENO);
 	if (redir->redir_type & (RIN | ROUT | APPEND))
 	{
 		file_name = get_filename(redir->file, env);
-		if (file_name[1])
-			return (ft_printf_fd(2, "ambiguous redirect\n"), exit(1), false);
+		(file_name[1]) && (ft_printf_fd(2, "ambiguous redirect\n"), exit(1), false);
 		fd = open(*file_name, redir->flags, 0664);
 		if (fd == -1)
 			return (ft_printf_fd(2, "%s : No such file or directory\n", *file_name), exit(1), false);
 		if ((*(flag_in) == 1) && ((redir->redir_type) == RIN))
-			{
-				ft_dup2(fd, to_dup);
-				*flag_in = 0;
-			}
+			return (ft_dup2(fd, to_dup), *flag_in = 0, true);
 		if ((*flag_out == 1) && ((redir->redir_type) & (ROUT | APPEND)))
-			{
-				ft_dup2(fd, to_dup);
-				*flag_out = 0;
-			}
-		return (true);
+			return (ft_dup2(fd, to_dup), *flag_out = 0, true);
 	}
 	if (redir->file->h_doc && !redir->file->sub)
 		fd = xpand_h_doc(env, redir->fd_in);
