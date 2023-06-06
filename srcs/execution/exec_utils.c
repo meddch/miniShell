@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 19:52:50 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 21:58:58 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*get_cmd_path(char *arg, t_env *env)
 	char	**paths;
 	t_env	*tmp;
 
-	i = -1;
+	i = 0;
 	if (!arg)
 		return (NULL);
 	if (*arg && *arg == '/' && !access(arg, X_OK))
@@ -64,13 +64,14 @@ char	*get_cmd_path(char *arg, t_env *env)
 		return (set_status(127), ft_printf_fd(2,
 				"%s : No such file or directory\n", arg), NULL);
 	paths = ft_split(tmp->val, ':');
-	while (paths[++i])
+	while (paths[i])
 	{
 		new_arg = ft_strjoin_sp(paths[i], arg, '/');
 		if (!access(new_arg, X_OK))
 			return (new_arg);
+		i++;
 	}
-	return (paths[0]);
+	return (arg);
 }
 
 char	**switch_env(t_env *myenv)

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:50:52 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 20:06:28 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 22:08:03 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ void	ft_exit(char **args)
 {
 	if (!args[1])
 		return (write(2, "exit\n", 5), ft_code_exit(0));
-	if (!ft_digit(args[1]))
-		return (ft_printf_fd(2, "exit: %s: numeric argument required",
+	if (!ft_digit(args[1]) || ft_strlen(args[1]) > 19)
+		return (ft_printf_fd(2, "exit: %s: numeric argument required\n",
 				args[1]), ft_code_exit(255));
 	else if (args[2])
 		return (set_status(1), ft_printf_fd(2, "exit\nexit: too many \
 arguments\n"));
 	else
-		ft_code_exit(ft_atoi(args[2]));
+	{
+		write(1, "exit\n", 6);
+		ft_code_exit(ft_atoi(args[1]));
+	}
 }
