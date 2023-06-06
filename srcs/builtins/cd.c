@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:00:10 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 20:06:23 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 22:35:16 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_update_paths(t_env **env, char *var, char *val)
 		return (ft_envadd_back(env, ft_env_new(var, val)));
 	del = node->val;
 	node->val = ft_stdup(val);
+	free(del);
 }
 
 void	ft_runcd(t_env **env, char *path, char *err_str, int flag)

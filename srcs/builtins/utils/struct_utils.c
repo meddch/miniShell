@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:32:30 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 20:06:17 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 22:48:59 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_env	*ft_env_new(char *evar, char *eval)
 	new->val = ft_stdup(eval);
 	new->def = 0;
 	new->next = NULL;
-	return (new);
+	return (free(evar), free(eval), new);
 }
 
 int	ft_envsize(t_env *env)

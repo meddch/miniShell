@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getvenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:28:09 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 22:19:20 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 22:51:39 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,22 @@ char	*get_val(char *line)
 char	*ft_inc_shlvl(char *val)
 {
 	if (ft_atoi(val) == 999)
-		return (ft_stdup(""));
+		return (free(val), ft_stdup(""));
 	else if (ft_atoi(val) > 999)
 	{
 		ft_printf_fd(2, "warning: shell level (%d) too high, \
 resetting to 1\n", ft_atoi(val) + 1);
-		return (ft_stdup("1"));
+		return (free(val), ft_stdup("1"));
 	}
 	else
-		return (ft_stdup(ft_itoa(ft_atoi(val) + 1)));
+		return (free(val), ft_stdup(ft_itoa(ft_atoi(val) + 1)));
 }
 
 t_env	*ft_getvenv(char **env)
 {
 	t_env	*virt;
 	t_env	*node;
+	char	*oval;
 	int		i;
 
 	virt = NULL;
@@ -71,7 +72,8 @@ t_env	*ft_getvenv(char **env)
 	while (env[++i])
 		ft_envadd_back(&virt, ft_env_new(get_var(env[i]), get_val(env[i])));
 	node = ft_srchenv(virt, SHLVL);
-	node->val = ft_inc_shlvl(node->val);
+	oval = node->val;
+	node->val = ft_inc_shlvl(oval);
 	ft_delnode(&virt, OLDPWD);
 	return (virt);
 }

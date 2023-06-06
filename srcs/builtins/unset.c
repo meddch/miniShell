@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:15:28 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 20:06:40 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 22:57:33 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	ft_delnode(t_env **env, char *var)
 		if (cur->next == unset)
 		{
 			cur->next = unset->next;
+			free (unset->var);
+			unset->var = NULL;
+			free (unset->val);
+			unset->val = NULL;
 			free (unset);
 		}
 		cur = cur->next;

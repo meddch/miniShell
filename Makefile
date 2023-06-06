@@ -4,9 +4,9 @@ GREEN = \033[0;32m
 BLUE = \033[0;34m
 NAME = minishell
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address 
-LDFLAGS ="-L/Users/mechane/.brew/opt/readline/lib"
-CPPFLAGS ="-I/Users/mechane/.brew/opt/readline/include"
+CFLAGS = -Wall -Wextra -Werror 
+LDFLAGS ="-L/Users/azari/.brew/opt/readline/lib"
+CPPFLAGS ="-I/Users/azari/.brew/opt/readline/include"
 
 HEADER =   include/tokenizer.h include/minishell.h include/parser.h libft/libft.h include/gc.h
 

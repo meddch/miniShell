@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:09:44 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 22:27:56 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 22:36:56 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ void	ft_export_node(t_env **env, char **node, int def, int flag)
 	oval = srch->val;
 	free(node[0]);
 	if (!flag)
-		return (srch->val = node[1], free(oval));
-	return (srch->val = ft_join(oval, node[1]), (void)0);
+		return (srch->val = node[1], free(oval), free(node[1]));
+	return (srch->val = ft_join(oval, node[1]), free(oval),
+	free(node[1]));
 }
 
 void	export(t_env **env, char **args)
