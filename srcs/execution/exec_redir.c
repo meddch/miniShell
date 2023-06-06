@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 16:19:53 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 17:59:42 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,31 @@ char	**get_filename(t_token *file, t_env *env)
 
 bool	dup_to(t_tree *tree, t_env *env, int *flag_in, int *flag_out)
 {
-	t_redir	*redir;
+	t_redir	*r;
 	int		fd;
 	char	**file_name;
 	int		to_dup;
 
-	redir = (t_redir *)tree;
+	r = (t_redir *)tree;
 	to_dup = STDIN_FILENO;
-	((redir->redir_type & (ROUT | APPEND))) && (to_dup = STDOUT_FILENO);
-	if (redir->redir_type & (RIN | ROUT | APPEND))
+	((r->redir_type & (ROUT | APPEND))) && (to_dup = STDOUT_FILENO);
+	if (r->redir_type & (RIN | ROUT | APPEND))
 	{
-		file_name = get_filename(redir->file, env);
+		file_name = get_filename(r->file, env);
 		(file_name[1]) && (ft_printf_fd(2,
 			"ambiguous redirect\n"), exit(1), false);
-		fd = open(*file_name, redir->flags, 0664);
+		fd = open(*file_name, r->flags, 0664);
 		(fd == -1) && (ft_printf_fd(2, "%s : No such file or directory\n",
 					*file_name), exit(1), false);
-		if ((*(flag_in) == 1) && ((redir->redir_type) == RIN))
+		if ((*(flag_in) == 1) && ((r->redir_type) == RIN))
 			return (ft_dup2(fd, to_dup), *flag_in = 0, true);
-		if ((*flag_out == 1) && ((redir->redir_type) & (ROUT | APPEND)))
+		if ((*flag_out == 1) && ((r->redir_type) & (ROUT | APPEND)))
 			return (ft_dup2(fd, to_dup), *flag_out = 0, true);
 	}
-	if (redir->file->h_doc && !redir->file->sub)
-		fd = xpand_h_doc(env, redir->fd_in);
-	if (*flag_in == 1 && redir->redir_type == HEREDOC)
+	(r->file->h_doc && !r->file->sub) && (fd = xpand_h_doc(env, r->fd_in));
+	if (*flag_in == 1 && r->redir_type == HEREDOC)
 		return (*flag_in = 0, ft_dup2(fd, to_dup), true);
+	return (true);
 }
 
 void	exec_redir(t_tree *tree, t_env **env)

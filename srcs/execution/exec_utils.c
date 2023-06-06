@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 16:20:53 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 18:06:24 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	is_builtin(char *cmd, char **argv, t_env **env)
 	else if (!ft_strcmp(cmd, "env"))
 		return (ft_env(*env), true);
 	else if (!ft_strcmp(cmd, "exit"))
-		return (ft_exit(), true);
+		return (ft_exit(argv), true);
 	return (false);
 }
 

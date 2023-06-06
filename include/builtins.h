@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:22:32 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 16:35:38 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 18:07:10 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ void	cd(t_env **env, char **args);
 void	ft_update_paths(t_env **env, char *var, char *val);
 char	*ft_getpath(t_env *env, char *var);
 char	*ft_stdup( const char *source);
-void	ft_exit(void);
+void	ft_exit(char **argv);
 #endif

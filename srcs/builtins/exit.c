@@ -6,13 +6,13 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:50:52 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 16:15:23 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 18:06:51 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
-void	ft_exit(void) // to redo 
+void	ft_exit(char **argv) 
 {
 	printf("exit\n");
 	exit(0);	
