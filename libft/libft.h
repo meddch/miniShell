@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 21:47:42 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/04 20:04:22 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:40:10 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-
 
 void				*ft_malloc(size_t size);
 void				*ft_memset(void *dest, int c, size_t n);
@@ -55,7 +54,7 @@ void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-char**				ft_split_set(char* str, char* delimiter_set);
-char				*ft_strjoin_sp(char  *s1, char *s2, char c);
+char				**ft_split_set(char *str, char *delimiter_set);
+char				*ft_strjoin_sp(char *s1, char *s2, char c);
 
 #endif

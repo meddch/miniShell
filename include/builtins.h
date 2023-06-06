@@ -6,23 +6,23 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:22:32 by azari             #+#    #+#             */
-/*   Updated: 2023/06/05 19:55:06 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:35:38 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-#define HOME "HOME"
-#define PWD "PWD"
-#define OLDPWD "OLDPWD"
-#define D_X "declare -x"
+# define HOME "HOME"
+# define PWD "PWD"
+# define OLDPWD "OLDPWD"
+# define D_X "declare -x"
 
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <limits.h>
+# include <stdarg.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <limits.h>
 # include "../libft/libft.h"
 
 typedef struct s_env

@@ -6,12 +6,11 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 16:05:27 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:20:53 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
-
 
 t_env	*ft_lstchr(t_env *lst, char *variable)
 {
@@ -34,7 +33,7 @@ bool	is_builtin(char *cmd, char **argv, t_env **env)
 	if (!ft_strcmp(cmd, "echo"))
 		return (echo(argv), true);
 	else if (!ft_strcmp(cmd, "cd"))
-		return (cd(env ,argv), true);
+		return (cd(env, argv), true);
 	else if (!ft_strcmp(cmd, "pwd"))
 		return (pwd(), true);
 	else if (!ft_strcmp(cmd, "export"))
@@ -47,8 +46,6 @@ bool	is_builtin(char *cmd, char **argv, t_env **env)
 		return (ft_exit(), true);
 	return (false);
 }
-
-
 
 char	*get_cmd_path(char *arg, t_env *env)
 {
@@ -64,7 +61,8 @@ char	*get_cmd_path(char *arg, t_env *env)
 		return (arg);
 	tmp = ft_lstchr(env, "PATH");
 	if (!tmp)
-		return (set_status(127), ft_printf_fd(2, "%s : No such file or directory\n", arg), NULL);
+		return (set_status(127), ft_printf_fd(2,
+				"%s : No such file or directory\n", arg), NULL);
 	paths = ft_split(tmp->val, ':');
 	while (paths[++i])
 	{
@@ -74,6 +72,7 @@ char	*get_cmd_path(char *arg, t_env *env)
 	}
 	return (paths[0]);
 }
+
 char	**switch_env(t_env *myenv)
 {
 	int		i;
@@ -92,9 +91,11 @@ char	**switch_env(t_env *myenv)
 	}
 	return (env);
 }
+
 bool	is_dir(char	*file)
 {
-	struct stat path_stat;
+	struct stat	path_stat;
+
 	stat(file, &path_stat);
 	if (S_ISDIR(path_stat.st_mode))
 		return (ft_printf_fd(2, " %s : is a directory\n", file), true);

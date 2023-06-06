@@ -6,12 +6,12 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:55:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 10:48:21 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:43:54 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZER_H
-#define TOKENIZER_H
+# define TOKENIZER_H
 
 # include <stdio.h>
 # include <readline/readline.h>
@@ -46,7 +46,7 @@ typedef enum e_flag
 }	t_flag;
 
 typedef struct s_token{
-	struct s_token 	*next;
+	struct s_token	*next;
 	struct s_token	*sub;
 	char			*data;
 	t_flag			type;
@@ -54,7 +54,8 @@ typedef struct s_token{
 	bool			h_doc;
 }t_token;
 
-typedef	struct s_lex{
+typedef struct s_lex
+{
 	int			is_d;
 	t_token		*token;
 	t_token		*tmp;
@@ -70,7 +71,7 @@ int		add_back_tok(t_token **tok, t_token *new);
 int		whitespaces(t_lex *lex, char **line);
 char	*get_q_token(char **cmd, int flag);
 char	*get_word(char **cmd);
-int 	check_w_token(t_lex *lex, char	**line);
+int		check_w_token(t_lex *lex, char	**line);
 void	new_lex(t_lex *lex);
 int		check_token(t_lex *lex, char **line);
 void	check_quotes(t_lex *lex, char **line);

@@ -6,13 +6,13 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 12:39:01 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/29 12:40:20 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:42:43 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin_sp(char  *s1, char *s2, char c)
+char	*ft_strjoin_sp(char *s1, char *s2, char c)
 {
 	int		i;
 	int		j;

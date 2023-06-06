@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 13:45:39 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:16:43 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 void	apply_exp(t_token **token, t_env *env)
 {
 	t_token	*tmp;
-	t_token *exp;
-	
+	t_token	*exp;
+
 	tmp = *token;
 	exp = NULL;
-	while(tmp && (tmp->type == WORD))
+	while (tmp && (tmp->type == WORD))
 	{
-		add_back_tok(&exp, expand_node(env, tmp->data, ((tmp->xpand == 1)), (tmp->h_doc == 1)));
-		while(tmp->sub)
+		add_back_tok(&exp, expand_node(env, tmp->data,
+				((tmp->xpand == 1)), (tmp->h_doc == 1)));
+		while (tmp->sub)
 		{
-			add_back_sub(&exp, expand_sub(env, tmp->sub->data, (tmp->sub->xpand == 1)));
+			add_back_sub(&exp, expand_sub(env, tmp->sub->data,
+					(tmp->sub->xpand == 1)));
 			tmp->sub = tmp->sub->sub;
 		}
 		tmp = tmp->next;
@@ -32,17 +34,17 @@ void	apply_exp(t_token **token, t_env *env)
 	(*token) = exp;
 }
 
-void 	apply_wc(t_token **token)
+void	apply_wc(t_token **token)
 {
 	t_token	*tmp;
-	t_token *exp;
-	
+	t_token	*exp;
+
 	tmp = *token;
 	exp = NULL;
-	while(tmp && (tmp->type == WORD))
+	while (tmp && (tmp->type == WORD))
 	{
 		add_back_tok(&exp, expanand_wc(tmp->data));
-		while(tmp->sub)
+		while (tmp->sub)
 		{
 			add_back_sub(&exp, expanand_wc(tmp->sub->data));
 			tmp->sub = tmp->sub->sub;
@@ -52,20 +54,19 @@ void 	apply_wc(t_token **token)
 	(*token) = exp;
 }
 
-
 char	**get_cmdline(t_cmd *tree, t_env *env)
 {
 	t_token	*cmdlist;
 	char	**cmd;
 	int		i;
 	int		size;
-	
+
 	i = 0;
 	cmdlist = tree->list;
 	apply_exp(&cmdlist, env);
 	apply_wc(&cmdlist);
 	size = token_size(cmdlist);
-	cmd = gc(sizeof(char *)*(size + 1), 0);
+	cmd = gc(sizeof(char *) * (size + 1), 0);
 	while (cmdlist)
 	{
 		cmd[i] = ft_strdup(cmdlist->data);
@@ -80,9 +81,10 @@ char	**get_cmdline(t_cmd *tree, t_env *env)
 	cmd[i] = NULL;
 	return (cmd);
 }
+
 void	exec_cmd(t_cmd *tree, t_env **env)
 {
-	pid_t pid;
+	pid_t	pid;
 	char	**cmdline;
 	char	*cmd;
 	int		status;

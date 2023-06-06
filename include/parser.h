@@ -6,14 +6,14 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 17:48:38 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/04 19:58:43 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:38:18 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "../include/minishel.h"
+# include "../include/minishel.h"
 
 # define NODE_AND	0
 # define NODE_OR	1	
@@ -37,11 +37,10 @@ typedef struct s_connector
 typedef struct s_subsh
 {
 	t_flag	node_type;
-	t_tree *subsh;
+	t_tree	*subsh;
 }				t_subsh;
 
-
-typedef struct s_redir 
+typedef struct s_redir
 {
 	int			node_type;
 	t_flag		redir_type;
@@ -49,7 +48,7 @@ typedef struct s_redir
 	int			fd_in;
 	int			fd_out;
 	t_token		*file;
-	t_tree	*cmdtree;
+	t_tree		*cmdtree;
 }				t_redir;
 
 typedef struct s_cmd
@@ -64,9 +63,9 @@ t_tree	*constract_pipe(t_tree *left, t_tree *right);
 t_tree	*new_redir(t_tree *tree);
 t_token	*copy_token(t_token **tok);
 t_tree	*parser(t_token **tok);
-t_tree *parse_pipeline(t_token **token);
-t_tree *parse_block(t_token **token);
-t_tree *parse_sub(t_token **token);
+t_tree	*parse_pipeline(t_token **token);
+t_tree	*parse_block(t_token **token);
+t_tree	*parse_sub(t_token **token);
 t_tree	*parse_cmd(t_token **token);
 t_tree	*parse_redir(t_tree *cmdtree, t_token **token);
 t_tree	*new_cmd(void);

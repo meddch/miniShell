@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 17:54:26 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/23 11:42:32 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:28:54 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 t_tree	*constract_block(int type, t_tree *left, t_tree *right)
 {
-	t_connector *n;
+	t_connector	*n;
+
 	n = gc(sizeof(t_connector), 0);
-	return(n->node_type = type, n->left = left, n->right = right, (t_tree *)n);
+	return (n->node_type = type, n->left = left, n->right = right, (t_tree *)n);
 }
 
 t_tree	*constract_pipe(t_tree *left, t_tree *right)
 {
-	t_connector *n;
+	t_connector	*n;
+
 	n = gc(sizeof(t_connector), 0);
-	return(n->node_type = NODE_PIPE, n->left = left, n->right = right, (t_tree *)n);
+	return (n->node_type = NODE_PIPE, n->left = left,
+		n->right = right, (t_tree *)n);
 }
 
 t_tree	*constract_sub(t_tree *tree)
@@ -58,4 +61,3 @@ t_tree	*new_cmd(void)
 	cmd->list = NULL;
 	return ((t_tree *)cmd);
 }
-

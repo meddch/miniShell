@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:58:06 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 12:48:31 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:32:47 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	new_lex(t_lex *lex)
 	lex->is_d = 0;
 	return ;
 }
-
 
 int	token_flag(char c, int flag)
 {
@@ -57,7 +56,7 @@ char	*get_q_token(char **cmd, int flag)
 	char	q;
 	char	*s;
 	char	*tok;
-	
+
 	s = *cmd;
 	if (flag)
 		q = '\"';
@@ -74,6 +73,7 @@ char	*get_word(char **cmd)
 {
 	char	*s;
 	char	*tok;
+
 	s = *cmd;
 	while (*s && !ft_strchr("\"\'|<>&() \t", *s))
 		s++;
@@ -84,12 +84,12 @@ char	*get_word(char **cmd)
 
 int	whitespaces(t_lex *lex, char **line)
 {
-	char *cmd;
-	
+	char	*cmd;
+
 	cmd = *line;
 	while (*cmd && ft_strchr(WHITESPACE, *cmd))
 		cmd++;
 	lex->spc = true;
 	*line = cmd;
-	return(0);
+	return (0);
 }

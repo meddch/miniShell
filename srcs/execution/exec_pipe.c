@@ -6,12 +6,11 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 13:22:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/05 19:42:50 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:17:16 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
-
 
 pid_t	run_pipe(t_tree *tree, t_env **env, int fd[2], int node)
 {
@@ -54,5 +53,6 @@ void	exec_pipe(t_tree *tree, t_env **env)
 	if (wait(&status) == pid[1])
 		check_status(status);
 	set_status(status);
-	while (wait(NULL) != -1);
+	while (wait(NULL) != -1)
+		;
 }

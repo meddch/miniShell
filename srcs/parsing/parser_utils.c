@@ -6,17 +6,18 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:40:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 10:48:05 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:26:26 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../include/minishel.h"
+#include "../../include/minishel.h"
 
 void	signal_herdoc(int sig)
 {
 	(void)sig;
 	close(STDIN_FILENO);
 }
+
 void	open_stdin(int fd[2])
 {
 	int	fd_p;
@@ -57,7 +58,7 @@ int	heredoc(char *delim)
 
 bool	fill_redir(t_redir *redir, t_flag redir_type, t_token **filenode)
 {
-	t_token *hold;
+	t_token	*hold;
 
 	hold = *filenode;
 	if (redir_type == RIN && hold->type != WORD)
@@ -77,10 +78,8 @@ bool	fill_redir(t_redir *redir, t_flag redir_type, t_token **filenode)
 	else if (redir_type == HEREDOC)
 		redir->fd_in = heredoc(join_delim(*filenode));
 	if (redir_type == HEREDOC && redir->fd_in == -1)
-		return ((*filenode)->type = INTER_SIG , NULL);
+		return ((*filenode)->type = INTER_SIG, NULL);
 	return (true);
-
-	
 }
 
 t_tree	*parse_redir(t_tree *cmdtree, t_token **token)
@@ -98,9 +97,9 @@ t_tree	*parse_redir(t_tree *cmdtree, t_token **token)
 		if ((*token)->type != WORD)
 			return (NULL);
 		tree = new_redir(tree);
-		if (!fill_redir((t_redir *)tree , redir_typ, token))
+		if (!fill_redir((t_redir *)tree, redir_typ, token))
 			return (NULL);
-		(*token)= (*token)->next;
+		(*token) = (*token)->next;
 	}
 	return (tree);
 }

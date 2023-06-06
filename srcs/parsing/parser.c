@@ -6,55 +6,56 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:04:12 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 10:54:06 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:28:05 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
-t_tree *parse_block(t_token **token)
+t_tree	*parse_block(t_token **token)
 {
-	t_tree *tree;
-	
+	t_tree	*tree;
+
 	if (!(*token) || (*token)->type == END)
 		return (NULL);
 	tree = parse_pipeline(token);
 	if (!tree)
 		return (NULL);
-	while((*token) && ((*token)->type & (AND | OR)))
+	while ((*token) && ((*token)->type & (AND | OR)))
 	{
-		((*token)->type == AND) && (tree = constract_block(NODE_AND, tree, NULL));
+		((*token)->type == AND) && (tree = constract_block(NODE_AND,
+				tree, NULL));
 		((*token)->type == OR) && (tree = constract_block(NODE_OR, tree, NULL));
 		*token = (*token)->next;
 		((t_connector *)tree)->right = parse_pipeline(token);
-		if(!((t_connector *)tree)->right)
+		if (!((t_connector *)tree)->right)
 			return (NULL);
 	}
-	return(tree);
+	return (tree);
 }
-t_tree *parse_pipeline(t_token **token)
+
+t_tree	*parse_pipeline(t_token **token)
 {
-	t_tree *tree;
+	t_tree	*tree;
 
 	if (!(*token) || (*token)->type == END)
 		return (NULL);
 	tree = parse_sub(token);
 	if (!tree)
 		return (NULL);
-	while((*token) && (*token)->type == PIPE)
+	while ((*token) && (*token)->type == PIPE)
 	{
 		*token = (*token)->next;
-		tree = constract_pipe(tree, parse_sub(token));	
-		if(!((t_connector *)tree)->right)
+		tree = constract_pipe(tree, parse_sub(token));
+		if (!((t_connector *)tree)->right)
 			return (NULL);
 	}
-	return(tree);
+	return (tree);
 }
 
-
-t_tree *parse_sub(t_token **token)
+t_tree	*parse_sub(t_token **token)
 {
-	t_tree *tree;
+	t_tree	*tree;
 
 	if (!(*token) || (*token)->type == END)
 		return (NULL);
@@ -62,7 +63,7 @@ t_tree *parse_sub(t_token **token)
 	{
 		*token = (*token)->next;
 		tree = constract_sub(parse_block(token));
-		if(!((t_subsh *)tree)->subsh || (*token)->type != CPAR)
+		if (!((t_subsh *)tree)->subsh || (*token)->type != CPAR)
 			return (NULL);
 		*token = (*token)->next;
 		return (parse_redir(tree, token));
@@ -70,13 +71,12 @@ t_tree *parse_sub(t_token **token)
 	return (parse_cmd(token));
 }
 
-
 t_tree	*parse_cmd(t_token **token)
 {
 	t_tree	*tree;
 	t_cmd	*tmp;
-	t_token *cpy_token;
-	
+	t_token	*cpy_token;
+
 	if (!(*token))
 		return (NULL);
 	tree = new_cmd();
@@ -99,19 +99,18 @@ t_tree	*parse_cmd(t_token **token)
 	return (tree);
 }
 
-
-
 t_tree	*parser(t_token **token)
 {
 	t_tree	*tree;
 
 	if (!*token || (*token)->type == END)
-			return (NULL);
+		return (NULL);
 	tree = parse_block(token);
 	if (!tree || (*token)->type != END)
 	{
 		if (!(((*token)->type) & (WORD | END | INTER_SIG)))
-			ft_printf_fd(2, "syntax error near unexpected token `%s'\n", (*token)->data);
+			ft_printf_fd(2, "syntax error near unexpected token `%s'\n",
+				(*token)->data);
 		else if ((*token)->type == INTER_SIG)
 			return (NULL);
 		else

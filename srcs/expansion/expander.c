@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:47:05 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/05 19:05:30 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:25:15 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ char	*expansion(t_env *env, char	*to_expand)
 {
 	char	*expanded;
 	char	*tmp;
-	
+
 	if (!to_expand)
 		return (NULL);
 	expanded = NULL;
-	while(*to_expand)
+	while (*to_expand)
 	{
 		if (*to_expand == '$' && (*to_expand + 1))
 		{
@@ -28,9 +28,9 @@ char	*expansion(t_env *env, char	*to_expand)
 			if (*to_expand == '?')
 			{
 				tmp = ft_itoa(g_st);
-				to_expand++;		
-			}	
-			else	
+				to_expand++;
+			}
+			else
 				tmp = expand_var(&to_expand, env);
 		}
 		else
@@ -48,10 +48,10 @@ void	exp_help(t_env *env, char *to_expand, t_token **expand)
 	i = 0;
 	hold = ft_split_set(expansion(env, to_expand), WHITESPACE);
 	if (!hold || !hold[i])
-		{
-			add_back_tok(expand, new_tok(WORD, 0, 0, ft_strdup("")));
-			return ;
-		}
+	{
+		add_back_tok(expand, new_tok(WORD, 0, 0, ft_strdup("")));
+		return ;
+	}
 	while (hold[i])
 	{
 		add_back_tok(expand, new_tok(WORD, 0, 0, hold[i]));
@@ -63,28 +63,26 @@ t_token	*expand_sub(t_env *env, char *to_expand, int dq_flag)
 {
 	t_token	*expand;
 	int		i;
-	
+
 	i = 0;
 	expand = NULL;
 	if (dq_flag)
-		add_back_sub(&expand, new_tok(WORD, 0, 0,expansion(env, to_expand)));
+		add_back_sub(&expand, new_tok(WORD, 0, 0, expansion(env, to_expand)));
 	else
-		add_back_sub(&expand, new_tok(WORD, 0, 0,ft_strdup(to_expand)));
+		add_back_sub(&expand, new_tok(WORD, 0, 0, ft_strdup(to_expand)));
 	return (expand);
 }
 
-
-t_token	*expand_node(t_env	*env, char	*to_expand, int	dq_flag, int h_doc)
+t_token	*expand_node(t_env *env, char *to_expand, int dq_flag, int h_doc)
 {
 	t_token	*expand;
-	
+
 	expand = NULL;
-	
-	if(!dq_flag)
-		add_back_tok(&expand, new_tok(WORD, 0, 0,ft_strdup(to_expand)));
-	else if(dq_flag && h_doc)
+	if (!dq_flag)
+		add_back_tok(&expand, new_tok(WORD, 0, 0, ft_strdup(to_expand)));
+	else if (dq_flag && h_doc)
 		exp_help(env, to_expand, &expand);
 	else
-		add_back_tok(&expand, new_tok(WORD, 0, 0,expansion(env, to_expand)));
+		add_back_tok(&expand, new_tok(WORD, 0, 0, expansion(env, to_expand)));
 	return (expand);
 }

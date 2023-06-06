@@ -6,41 +6,41 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:24:33 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/01 15:46:47 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:42:16 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int is_delimiter(char c, char* delimiter_set) {
- 
-    int	i;
+int	is_delimiter(char c, char *delimiter_set)
+{
+	int	i;
 
 	i = 0;
-	while (delimiter_set[i] != '\0') 
+	while (delimiter_set[i] != '\0')
 	{
-        if (c == delimiter_set[i])
-            return 1;
+		if (c == delimiter_set[i])
+			return (1);
 		i++;
-    }
-    return 0;
+	}
+	return (0);
 }
 
 int	num_word(char	*delimiter_set, char *str)
 {
-	int count;
-	int len;
+	int	count;
+	int	len;
 
 	len = 0;
 	count = 0;
-    while (str[len] != '\0')
+	while (str[len] != '\0')
 	{
 		if (is_delimiter(str[len], delimiter_set))
-        	count++;
+			count++;
 		len++;
-    }
-    count++;
-	return (count); 
+	}
+	count++;
+	return (count);
 }
 
 static int	word_len(const char *str, char *c)

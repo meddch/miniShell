@@ -6,33 +6,33 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:34:33 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/02 08:47:20 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:23:55 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
-char    *get_env_variable(t_env *env, char *var)
+char	*get_env_variable(t_env *env, char *var)
 {
-    t_env	*current;
+	t_env	*current;
 
 	if (!env)
 		return (NULL);
-    current = env;
+	current = env;
 	while (current)
 	{
-        if (!ft_strcmp(current->var, var))
+		if (!ft_strcmp(current->var, var))
 			return (current->val);
-        current = current->next;
-    }
-    return (NULL);
+		current = current->next;
+	}
+	return (NULL);
 }
 
 char	*get_valid_var(char **to_check)
 {
 	char	*var;
 	char	*tmp;
-	
+
 	var = *to_check;
 	tmp = var;
 	if (!var || (!ft_isalpha(*var) && (*var) != '_'))
@@ -48,11 +48,11 @@ char	*get_non_var(char **to_check)
 {
 	char	*tmp;
 	char	*hold;
-	
+
 	tmp = *to_check;
-	while(*tmp && *tmp != '$')
+	while (*tmp && *tmp != '$')
 		tmp++;
-	hold = ft_strndup((*to_check), (tmp ));
+	hold = ft_strndup((*to_check), tmp);
 	(*to_check) = tmp;
 	return (hold);
 }

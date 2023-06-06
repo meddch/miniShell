@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:54:00 by mechane           #+#    #+#             */
-/*   Updated: 2023/05/05 12:01:29 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:43:17 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ char	*ft_strndup(char *start, char *end)
 {
 	char	*ptr;
 	int		len ;
-	int i;
+	int		i;
 
 	if (!start)
 		return (NULL);
-	len = i = ft_strlen(start) - ft_strlen(end);
+	len = ft_strlen(start) - ft_strlen(end);
+	i = ft_strlen(start) - ft_strlen(end);
 	ptr = ft_malloc((len + 1) * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
