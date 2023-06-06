@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:56:44 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 13:45:16 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 14:15:30 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+#include <sys/stat.h>
 
 int g_st;
 void	inter_handler(int seg);

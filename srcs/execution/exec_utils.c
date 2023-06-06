@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 13:46:03 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 14:18:37 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,9 @@ char	**switch_env(t_env *myenv)
 }
 bool	is_dir(char	*file)
 {
-	int fd;
-
-	fd = open (file, O_RDONLY, 0644);
-	if (fd != -1)
+	struct stat path_stat;
+	stat(file, &path_stat);
+	if (S_ISDIR(path_stat.st_mode))
 		return (ft_printf_fd(2, " %s : is a directory\n", file), true);
-	close(fd);
 	return (false);
 }
