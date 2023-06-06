@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 11:29:29 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:56:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,14 @@ void print_token(t_token *token)
 
 int	main(int ac ,char **av, char **env)
 {	
-	
 	t_tree	*tree;
 	t_token	*token;
 	char *prompt = "(minishell)-$ ";
 	char *lineptr;
-	(void)ac;
 	t_env	*my_env;
 	
 	(void)av;
-	my_env = ft_getvenv(env); //oldpwd
+	my_env = ft_getvenv(env);
     rl_catch_signals = 0;
     g_st = 0;
 	if (ac != 1)
@@ -102,20 +100,14 @@ int	main(int ac ,char **av, char **env)
         lineptr = readline(prompt);
         if (!lineptr)
             return (ft_printf_fd(1, "exit"), 0);
-        if (lineptr && *lineptr)
-		{
-			add_history(lineptr);
-			token = tokenizer(lineptr);
-		    free(lineptr);
-		    // print_token(token);
-		    tree = parser(&token);
-            // displayTree(tree,0);
-		    exec(tree, &my_env);
-		    gc(0, 1);
-		}
+		add_history(lineptr);
+		token = tokenizer(lineptr);
+		free(lineptr);
+		tree = parser(&token);
+		exec(tree, &my_env);
+		gc(0, 1);
 	}
 	exit(g_st);
-
 }
 
 

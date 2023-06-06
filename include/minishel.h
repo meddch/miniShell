@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:56:44 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/04 16:24:59 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:45:16 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,7 @@
 
 int g_st;
 void	inter_handler(int seg);
+void    sig_hand(int sig);
+void    sig_ch(pid_t pid);
+
 #endif

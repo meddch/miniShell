@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:57:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/03 20:53:03 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:54:06 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,13 @@ int check_w_token(t_lex *lex, char	**line)
 	*line = cmd;
 	return(0);
 }
-
-
+t_token	*last_sub_tok(t_token *tok)
+{
+	while (tok)
+	{
+		if (tok->sub == NULL)
+			break ;
+		tok = tok->sub;
+	}
+	return (tok);
+}

@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:18:15 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/05 18:51:38 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:45:39 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,48 +80,6 @@ char	**get_cmdline(t_cmd *tree, t_env *env)
 	cmd[i] = NULL;
 	return (cmd);
 }
-void sig_hand(int sig)
-{
-	if (sig == SIGINT)
-	{
-		write(1,"",1);
-	}
-	if (sig == SIGQUIT)
-	{
-		write(1,"Quit: 3",7);
-	}
-	exit(120 + sig);
-}
-char	**switch_env(t_env *myenv)
-{
-	int		i;
-	int		len;
-	char	**env;
-
-	i = 0;
-	len = ft_envsize(myenv);
-	env = gc(sizeof(char *) * (len + 1), 0);
-	env[len] = 0;
-	while (myenv)
-	{
-		(env[i++] = ft_strjoin_sp(myenv->var,
-					myenv->val, '='));
-		myenv = myenv->next;
-	}
-	return (env);
-}
-
-void sig_ch(pid_t pid)
-{
-	if (pid == 0)
-	{
-		signal(SIGINT, sig_hand);
-		signal(SIGQUIT, sig_hand);
-	}
-	else
-		signal(SIGINT, SIG_IGN);
-}
-
 void	exec_cmd(t_cmd *tree, t_env **env)
 {
 	pid_t pid;
@@ -134,12 +92,14 @@ void	exec_cmd(t_cmd *tree, t_env **env)
 		return ;
 	cmd = get_cmd_path(cmdline[0], *env);
 	if (!cmd)
-		return (exit(1));
+		return ;
 	pid = ft_fork();
 	sig_ch(pid);
 	if (pid == 0)
 	{
 		execve(cmd, cmdline, switch_env(*env));
+		if (is_dir(cmdline[0]) == true)
+			exit(126);
 		ft_printf_fd(2, " %s : command not found\n", cmdline[0]);
 		exit(127);
 	}

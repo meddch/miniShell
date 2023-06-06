@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/05 16:03:11 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:46:03 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*get_cmd_path(char *arg, t_env *env)
 		return (arg);
 	tmp = ft_lstchr(env, "PATH");
 	if (!tmp)
-		return (ft_printf_fd(2, "%s : No such file or directory\n", arg), NULL);
+		return (set_status(127), ft_printf_fd(2, "%s : No such file or directory\n", arg), NULL);
 	paths = ft_split(tmp->val, ':');
 	while (paths[++i])
 	{
@@ -73,4 +73,32 @@ char	*get_cmd_path(char *arg, t_env *env)
 			return (new_arg);
 	}
 	return (paths[0]);
+}
+char	**switch_env(t_env *myenv)
+{
+	int		i;
+	int		len;
+	char	**env;
+
+	i = 0;
+	len = ft_envsize(myenv);
+	env = gc(sizeof(char *) * (len + 1), 0);
+	env[len] = 0;
+	while (myenv)
+	{
+		(env[i++] = ft_strjoin_sp(myenv->var,
+					myenv->val, '='));
+		myenv = myenv->next;
+	}
+	return (env);
+}
+bool	is_dir(char	*file)
+{
+	int fd;
+
+	fd = open (file, O_RDONLY, 0644);
+	if (fd != -1)
+		return (ft_printf_fd(2, " %s : is a directory\n", file), true);
+	close(fd);
+	return (false);
 }

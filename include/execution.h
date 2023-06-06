@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:53:09 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/04 16:40:15 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:46:33 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 #include "parser.h"
 #include <errno.h>
-// #include <sys/wait.h>
 
 
 void	exec(t_tree *tree, t_env **env);
@@ -38,4 +37,7 @@ pid_t	ft_fork(void);
 int     ft_pipe(int fildes[2]);
 void	set_status(int status);
 void	check_status(int status);
+bool	is_dir(char	*file);
+char	**switch_env(t_env *myenv);
+
 #endif
