@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:00:10 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 22:35:16 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/07 11:17:53 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_getpath(t_env *env, char *var)
 	return (path->val);
 }
 
-void	ft_update_paths(t_env **env, char *var, char *val)
+void	ft_update_paths(t_env **env, char *var, char *val, int flag)
 {
 	t_env	*node;
 	char	*del;
@@ -31,10 +31,11 @@ void	ft_update_paths(t_env **env, char *var, char *val)
 		return ;
 	node = ft_srchenv(*env, var);
 	if (!node)
-		return (ft_envadd_back(env, ft_env_new(var, val)));
+		return (ft_envadd_back(env, ft_env_new(var, val, flag)), ft_free(val));
 	del = node->val;
+	ft_free(del);
+	ft_free(val);
 	node->val = ft_stdup(val);
-	free(del);
 }
 
 void	ft_runcd(t_env **env, char *path, char *err_str, int flag)
@@ -48,19 +49,19 @@ void	ft_runcd(t_env **env, char *path, char *err_str, int flag)
 	if (!pwd)
 	{
 		chdir(path);
-		ft_update_paths(env, PWD, getcwd(NULL, 0));
-		ft_update_paths(env, OLDPWD, pwd);
+		ft_update_paths(env, PWD, getcwd(NULL, 0), 0);
+		ft_update_paths(env, OLDPWD, pwd, 0);
 		return (set_status(1), ft_printf_fd(2, "cd: error \
 retrieving current directory: getcwd: cannot access\
   parent directories: No such file or directory\n"));
 	}
 	cd = chdir(path);
 	if (cd == -1 && !flag)
-		return (set_status(1), perror(path));
+		return (set_status(1), ft_free(pwd), perror(path));
 	if (flag < 0)
 		printf("%s\n", path);
-	ft_update_paths(env, PWD, getcwd(NULL, 0));
-	ft_update_paths(env, OLDPWD, pwd);
+	ft_update_paths(env, PWD, getcwd(NULL, 0), 0);
+	ft_update_paths(env, OLDPWD, pwd, 0);
 }
 
 void	cd(t_env **env, char **args)

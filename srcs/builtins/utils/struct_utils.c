@@ -6,7 +6,7 @@
 /*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:32:30 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 22:48:59 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/07 12:14:18 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_envadd_back(t_env **lst, t_env *new)
 	tmp->next = new;
 }
 
-t_env	*ft_env_new(char *evar, char *eval)
+t_env	*ft_env_new(char *evar, char *eval, int flag)
 {
 	t_env		*new;
 
@@ -38,7 +38,8 @@ t_env	*ft_env_new(char *evar, char *eval)
 	new->val = ft_stdup(eval);
 	new->def = 0;
 	new->next = NULL;
-	return (free(evar), free(eval), new);
+	(flag) && (ft_free(eval), ft_free(evar), flag += 0);
+	return (new);
 }
 
 int	ft_envsize(t_env *env)
@@ -69,4 +70,10 @@ t_env	*ft_srchenv(t_env *env, char *var)
 		env = env->next;
 	}
 	return (NULL);
+}
+
+void	ft_free(void *ptr)
+{
+	free(ptr);
+	ptr = NULL;
 }

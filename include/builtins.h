@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:22:32 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 19:52:25 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/07 11:15:27 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
+void	ft_update_paths(t_env **env, char *var, char *val, int flag);
 void	ft_export_node(t_env **env, char **node, int def, int flag);
 char	*ft_sub(char const *s, unsigned int start, size_t len);
-void	ft_update_paths(t_env **env, char *var, char *val);
+t_env	*ft_env_new(char *evar, char *eval, int flag);
 void	ft_printf_fd(int fd, const char *str, ...);
 char	*ft_join(char const *s1, char const *s2);
 char	*ft_join(const char *s1, const char *s2);
 void	ft_envadd_back(t_env **lst, t_env *new);
-t_env	*ft_env_new(char *evar, char *eval);
 t_env	*ft_envchr(t_env *env, char *find);
 void	ft_delnode(t_env **env, char *var);
 t_env	*ft_srchenv(t_env *env, char *var);
@@ -67,6 +67,7 @@ char	*get_val(char *line);
 char	*get_var(char *line);
 void	ft_env(t_env *virt);
 int		ft_digit(char *str);
+void	ft_free(void *ptr);
 int		ft_check(char *id);
 void	echo(char **args);
 char	*ft_iitoa(int n);
