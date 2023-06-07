@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:09:44 by azari             #+#    #+#             */
-/*   Updated: 2023/06/07 14:50:48 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/07 18:56:00 by azari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	export(t_env **env, char **args)
 	char	**node;
 
 	i = 0;
-	if (!args[1] || (!args[1][0] && !args[2]))
+	if (!args[1])
 		return (ft_print_export(*env));
 	while (args[++i])
 	{
