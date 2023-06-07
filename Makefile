@@ -5,7 +5,7 @@ GREEN = \033[0;32m
 BLUE = \033[0;34m
 NAME = minishell
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
 LDFLAGS ="-L/Users/$(USER)/.brew/opt/readline/lib"
 CPPFLAGS ="-I/Users/$(USER)/.brew/opt/readline/include"
 
