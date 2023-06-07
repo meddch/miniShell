@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getvenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:28:09 by azari             #+#    #+#             */
-/*   Updated: 2023/06/07 11:18:34 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/07 14:47:26 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ t_env	*ft_getvenv(char **env)
 	i = -1;
 	if (!env || !*env)
 	{
-		ft_envadd_back(&virt, ft_env_new("PATH", PATH, 1));
-		ft_envadd_back(&virt, ft_env_new("SHLVL", "1", 1));
+		ft_envadd_back(&virt, ft_env_new("PATH", PATH, 0));
+		ft_envadd_back(&virt, ft_env_new("SHLVL", "1", 0));
 		return (virt);
 	}
 	while (env[++i])

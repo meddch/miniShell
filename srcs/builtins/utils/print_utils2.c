@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:55:42 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 20:06:08 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/07 14:42:23 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_join(const char *s1, const char *s2)
 		return (NULL);
 	if (!s1)
 	{
-		newstr = ft_strdup(s2);
+		newstr = ft_stdup(s2);
 		return (newstr);
 	}
 	s1_len = ft_strlen(s1);
