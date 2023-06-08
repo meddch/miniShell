@@ -1,11 +1,11 @@
 CC = cc
-USER = azari
+USER = mechane
 RED = \033[0;31m
 GREEN = \033[0;32m
 BLUE = \033[0;34m
 NAME = minishell
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror -g
 LDFLAGS ="-L/Users/$(USER)/.brew/opt/readline/lib"
 CPPFLAGS ="-I/Users/$(USER)/.brew/opt/readline/include"
 

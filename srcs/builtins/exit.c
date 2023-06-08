@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:50:52 by azari             #+#    #+#             */
-/*   Updated: 2023/06/06 22:08:03 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/08 16:44:13 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_code_exit(int e_code)
 {
-	rl_clear_history();
 	exit(e_code);
 }
 

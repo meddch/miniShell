@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:47:05 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/07 18:43:55 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/08 16:45:12 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	exp_help(t_env *env, char *to_expand, t_token **expand)
 	int		i;
 
 	i = 0;
-		
 	hold = ft_split_set(expansion(env, to_expand), WHITESPACE);
 	if (!hold || !hold[i])
 		return ;
