@@ -6,17 +6,19 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:52:19 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 17:59:42 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/09 14:57:11 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishel.h"
 
-int	xpand_h_doc(t_env *env, int fd_in)
+int	xpand_h_doc(t_env *env, int fd_in, int flag)
 {
 	int		fd[2];
 	char	*line;
 
+	if (!flag)
+		return (fd_in);
 	ft_pipe(fd);
 	line = expansion(env, get_next_line(fd_in));
 	while (line)
@@ -77,7 +79,7 @@ bool	dup_to(t_tree *tree, t_env *env, int *flag_in, int *flag_out)
 		if ((*flag_out == 1) && ((r->redir_type) & (ROUT | APPEND)))
 			return (ft_dup2(fd, to_dup), *flag_out = 0, true);
 	}
-	(r->file->h_doc && !r->file->sub) && (fd = xpand_h_doc(env, r->fd_in));
+	fd = xpand_h_doc(env, r->fd_in, ((r->file->h_doc && !r->file->sub)));
 	if (*flag_in == 1 && r->redir_type == HEREDOC)
 		return (*flag_in = 0, ft_dup2(fd, to_dup), true);
 	return (true);
