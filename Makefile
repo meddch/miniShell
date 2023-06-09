@@ -5,11 +5,11 @@ GREEN = \033[0;32m
 BLUE = \033[0;34m
 NAME = minishell
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror 
 LDFLAGS ="-L/Users/$(USER)/.brew/opt/readline/lib"
 CPPFLAGS ="-I/Users/$(USER)/.brew/opt/readline/include"
 
-HEADER =   include/tokenizer.h include/minishell.h include/parser.h libft/libft.h include/gc.h
+HEADER = include/minishel.h include/builtins.h include/execution.h include/expander.h include/tokenizer.h include/parser.h  
 
 LIBFT = libft/libft.a
 
@@ -27,13 +27,14 @@ OBJS = $(addsuffix .o, $(FILE))
 
 %.o : %.c $(HEADER) 
 	@echo "$(BLUE)Building project ⏳.."
-	@$(CC) $(CFLAGS) $(LDFLAGS) $(CPPFLAGS) -c -o $@ $< 
+	@$(CC) $(CFLAGS) $(CPPFLAGS)  -c -o $@ $< 
 
 all: $(NAME)
+	@echo "$(BLUE)✅ ALL DONE ✅"
 
 $(NAME): $(OBJS)
 	@make -C libft
-	@$(CC) $(CFLAGS) $(LDFLAGS) $(CPPFLAGS)  $(LIBFT) -lreadline -o $(NAME) $^
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LIBFT) -lreadline -o $(NAME) $^
 	@echo "$(BLUE)minishell ✅"
 
 
