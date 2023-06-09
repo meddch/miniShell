@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:54:55 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/08 16:44:07 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/09 15:12:38 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	ft_prompt(t_env **env)
 		lineptr = readline(prompt);
 		if (!lineptr)
 			return (ft_printf_fd(1, "exit\n"), ft_code_exit(0));
-		add_history(lineptr);
+		if (*lineptr)
+			add_history(lineptr);
 		token = tokenizer(lineptr);
 		free(lineptr);
 		tree = parser(&token);
