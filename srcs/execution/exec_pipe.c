@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 13:22:22 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 16:17:16 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/10 13:18:12 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	exec_pipe(t_tree *tree, t_env **env)
 	close(fd[WRITE_END]);
 	if (wait(&status) == pid[1])
 		check_status(status);
-	set_status(status);
 	while (wait(NULL) != -1)
 		;
 }

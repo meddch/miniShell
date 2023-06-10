@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:47:40 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 16:34:52 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/10 12:49:38 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	free_gc(t_gc **gc)
 {
 	t_gc	*tmp;
 
+	if (!gc || !*gc)
+		return ;
 	while (*gc)
 	{
 		tmp = *gc;

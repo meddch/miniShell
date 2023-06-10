@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:15:28 by azari             #+#    #+#             */
-/*   Updated: 2023/06/07 14:46:03 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/10 13:37:25 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ void	ft_delnode(t_env **env, char *var)
 	unset = ft_srchenv(*env, var);
 	if (!unset)
 		return ;
+	if (cur == unset)
+	{	
+		*env = cur->next;
+		ft_free (unset->var);
+		ft_free (unset->val);
+		return (ft_free (unset));
+	}
 	while (cur)
 	{
 		if (cur->next == unset)
