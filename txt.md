@@ -15,5 +15,5 @@
 
 <filename>	::= token WORD 
 
-
+new thing =.(.(.
 ../p
