@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azari <azari@student.1337.fr>              +#+  +:+       +#+        */
+/*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:34:33 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/07 12:05:19 by azari            ###   ########.fr       */
+/*   Updated: 2023/06/12 10:26:42 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ char	*get_non_var(char **to_check)
 	char	*hold;
 
 	tmp = *to_check;
+	if (*tmp == '$' && !*(tmp + 1))
+		{
+			tmp++;
+			*to_check = tmp;
+			return (ft_strdup("$")); 
+		}
 	while (*tmp && *tmp != '$')
 		tmp++;
 	hold = ft_strndup((*to_check), tmp);

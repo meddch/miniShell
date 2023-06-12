@@ -6,7 +6,7 @@
 /*   By: mechane <mechane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:33:04 by mechane           #+#    #+#             */
-/*   Updated: 2023/06/06 21:58:58 by mechane          ###   ########.fr       */
+/*   Updated: 2023/06/12 10:20:55 by mechane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*get_cmd_path(char *arg, t_env *env)
 	i = 0;
 	if (!arg)
 		return (NULL);
-	if (*arg && *arg == '/' && !access(arg, X_OK))
+	if (*arg && (*arg == '.' || ((*arg == '/') && !access(arg, F_OK))))
 		return (arg);
 	tmp = ft_lstchr(env, "PATH");
 	if (!tmp)
@@ -98,7 +98,11 @@ bool	is_dir(char	*file)
 	struct stat	path_stat;
 
 	stat(file, &path_stat);
+	if (*file == '.' && access(file, F_OK))
+		return (ft_printf_fd(2, "%s No such file or directory\n", file), true);
 	if (S_ISDIR(path_stat.st_mode))
 		return (ft_printf_fd(2, " %s : is a directory\n", file), true);
+	if (*file == '.' && !access(file, F_OK) && access(file,X_OK))
+		return (ft_printf_fd(2, "%s Permission denied\n", file), true);
 	return (false);
 }
