@@ -22,7 +22,7 @@ void	open_stdin(int fd[2])
 {
 	int	fd_p;
 
-	fd_p = open(ttyname(STDERR_FILENO), O_RDONLY);
+	fd_p = open(ttyname(STDIN_FILENO), O_RDONLY);
 	if (fd_p == -1)
 	{
 		write(2, "can't open stdin", 17);
